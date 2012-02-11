@@ -1,0 +1,35 @@
+- Organisation fichiers plugins => OK
+- Prise en charge templates plugins dans le dossier du thème => OK
+- Restructuration classe plugin => OK
+- Compatibilité plugin Page => OK
+- Compatibilité script d'installation => OK
+- Metadata thème => OK
+- Admin, aménagements divers => OK
+- Fonction showTheme => OK
+- Thème utilisation showTheme => OK
+- Plugin Sidebar Demo => OK
+- Sidebar => OK
+- Singleton pluginsManager => OK
+- Plugin page : suppr $runPlugin dans pageHook1() => OK
+- Classe pluginsManager : méthode static getPluginConfVal() => OK
+- Fonction getCoreConf() : accepte un paramètre optionnel => OK
+- Suppression fonction getConfVal() : voir pluginsManager::getPluginConfVal() && getcoreConf() => OK
+- Plugin page : remplaçements des appels à la fonction getConfVal() => OK
+- classe pluginsManager : isActivePlugin devient static => OK
+- Thème HTML5 => OK
+- $data['sidebarItems'] => OK
+- Install : thème HTML5 par défaut => OK
+- Classe plugin : setters setPlublicTemplate(), setAdminTemplate() => OK
+- Compatibilité thème HTML5 IE 7,8,9 => OK
+- Meta data thème JSON => OK
+- jQuery => OK
+
+- fonctions utilWriteJsonFile & utilReadJsonFile => OK
+- infos, hooks & config plugins JSON => OK
+- Modifications de la méthode de chargement des plugins => OK
+- Problème d'install des plugins suite aux modifications => OK
+- Réorganisation dossier plugin
+
+
+- Classe pluginManager : méthode static getRunplugin (renvoie l'instance de $runPlugin)
+- Classe pluginManager : méthodes gestion données (savePluginData, loadPluginData...)

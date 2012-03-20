@@ -105,13 +105,4 @@ function utilScanDir($folder, $not = array()){
 function utilPhpVersion(){
 	return substr(phpversion(), 0, 5);
 }
-
-function utilWriteJsonFile($file, $data){
-	if(@file_put_contents($file, json_encode($data), 0666)) return true;
-	return false;
-}
-
-function utilReadJsonFile($file, $assoc = true){
-	return json_decode(@file_get_contents($file), $assoc);
-}
 ?>

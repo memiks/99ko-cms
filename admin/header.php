@@ -1,8 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<!doctype html>  
+<!--[if IE 6 ]><html lang="fr" class="ie6"> <![endif]-->
+<!--[if IE 7 ]><html lang="fr" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="fr" class="ie8"> <![endif]-->
+<!--[if (gt IE 7)|!(IE)]><!-->
+<html lang="fr"><!--<![endif]-->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>99ko</title>
+	<meta charset="utf-8">	
+	<title>99ko - Cms</title>
+	<!-- meta -->
+	<meta name="description" content="Cms hyper légé!">
+	<meta name="author" content="Jonathan C.">
+	<meta name="generator" content="99Ko">
+	<!-- css -->
+	<link rel="stylesheet" href="css/style.css" media="all">
+	<link rel="stylesheet" href="css/common.css" media="all">
+	<!--[if lt IE 9]>
+		<script src="js/html5.js"></script>
+	<![endif]-->	
+	<!-- Personnalisation des liens, sidebar, contenus -->
+	<style>
+		html{background-color:#FFFFFF;color:#383838;}
+		::-moz-selection{background:#DBE6EC;color:#111111;}
+		::selection{background:#DBE6EC;color:#111111;}
+		header #logo{background-image:url(images/logo.png);}
+		a{color:#A26F6F;}
+		hr{border-top:1px solid #D7E1E6;border-bottom:1px solid #EFFAFF;}
+		header, header > nav a{background-color:#77A2A8;color:#222222;}
+		header > nav a{-webkit-text-shadow:1px 1px 0px #DBE5E8;-moz-text-shadow:1px 1px 0px #DBE5E8;text-shadow:1px 1px 0px #DBE5E8;}
+		header > nav a:hover{background:#DBE6EC;color:#111111;border-top:1px solid #DBE6EC;}
+		header > nav a.current{background:#DBE6EC;color:#111111;border-top:1px solid #DBE6EC;}
+		#copyright{display:block !important;visibility:visible !important;}
+	</style>
 	<?php showLinkTags(); ?>
 	<?php showScriptTags(); ?>
 	<script type="text/javascript">
@@ -27,28 +55,58 @@
 		obj.style.display = 'block';
 		var obj = document.getElementById('config');
 		obj.style.display = 'block';
+		var obj = document.getElementById('<?php echo $plug['id']; ?>');
+		obj.style.display = 'block';		
 	}
 	</script>
-	<?php eval(callHook('endAdminHead')); ?>
+	<?php eval(callHook('endAdminHead')); ?>	
 </head>
 <body>
-<div id="container">
-	<div id="header">
-		<h1>99Ko</h1>
-		<ul>
-			<li><a href="index.php">Accueil administration</a></li>
-			<li><a target="_blank" href="../">Voir le site</a></li>
-			<li><a href="index.php?action=logout&token=<?php echo $data['token']; ?>">Se déconnecter</a></li>
-			<li class="pluginsAccess"><select onchange="document.location.href='index.php?p='+this.value">
-				<option value="">Aller au plugin</option>
-				<?php foreach($data['plugins'] as $plug) if($plug['target'] && $plug['activate']){ ?>
-				<option value="<?php echo $plug['id']; ?>"><?php echo $plug['name']; ?></option>
-				<?php } ?>
-			</select></li>
-		</ul>
-	</div>
-	<div id="config" onclick="closePlugins();openConfig()">
-		<h2>Configuration</h2>
+
+	<header role="banner">
+		<a href="./#home" id="logo"></a>
+		
+		<nav role="navigation">
+		   <ol>
+			<li><a class="current" href="./#home">Accueil</a></li>
+			<li><a href="./#config">Configuration</a></li>
+			<li><a href="./#plugins">Plugins</a></li>
+			<?php foreach($data['plugins'] as $plug) if($plug['target'] && $plug['activate']){ ?>
+			<li><a href="index.php?p=<?php echo $plug['id']; ?>#<?php echo $plug['id']; ?>"><?php echo $plug['name']; ?></a></li>
+			<?php } ?>						
+		   </ol>		
+		</nav>
+		
+		<div id="copyright">
+		   Propulsé par <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/">99ko</a> <span class="version"><?php echo $data['99koVersion']; ?></span>.
+		</div>
+	</header>
+	<div id="content">
+	
+<section id="home">
+	<h1>99ko</h1>
+	<h2><a class="btn" id="logout" href="index.php?action=logout&token=<?php echo $data['token']; ?>">Se déconnecter</a>
+	<a class="btn" id="showSite" href="../">Voir le site</a></h2>
+	<hr>
+	<?php showMsg($data['msgSecurity'], 'error'); ?>
+	<ul>
+	  <li>Dernières Actus: 09/19/2011</li>
+	  <li>Par: Jonathan</li>
+	  <li><a href=""></a></li>
+	  <li>Email: <a href="mailto:&#97;&#100;&#109;&#105;&#110;&#64;&#57;&#57;&#46;&#111;&#114;&#103;">&#97;&#100;&#109;&#105;&#110;&#64;&#57;&#57;&#46;&#111;&#114;&#103;</a></li>
+	</ul>
+	<p>Vous utilisez la version <span class="version"><?php echo $data['99koVersion']; ?></span> de 99ko.<br />
+    <a target="_blank" href="http://99ko.tuxfamily.org">Téléchargez</a> une version plus récente, des plugins et des thèmes sur le site de 99ko.</p>
+    <script type="text/javascript">
+    showTabs();
+    </script>
+
+</section>
+
+<section id="config" onclick="closePlugins();openConfig()">
+	<h3>Configuration</h3>
+	<hr class="notop">
+
 		<form id="configForm" method="post" action="index.php?action=saveconfig&opentab=config">
 			<?php showMsg($data['msgConfig'], 'error'); ?>
 			<?php showAdminTokenField(); ?>
@@ -76,9 +134,12 @@
 			<input type="password" name="adminPwd" value="" /> confirmation : <input type="password" name="adminPwd2" value="" /></p>
 			<p><input type="submit" value="Enregistrer" /></p>
 		</form>
-	</div>
-	<div id="plugins" onclick="closeConfig();openPlugins()">
-		<h2>Plugins</h2>
+</section>
+
+<section id="plugins" onclick="closeConfig();openPlugins()">
+	<h3>Plugins</h3>
+	<hr class="notop">
+
 		<form method="post" action="index.php?action=saveplugins&opentab=plugins" id="pluginsList">
 			<?php showMsg($data['msgPlugins'], 'error'); ?>
 			<?php showAdminTokenField(); ?>
@@ -109,7 +170,8 @@
 			</table>
 			<p><input type="submit" value="Enregistrer" /></p>
 		</form>
-	</div>
-	<div id="body" onclick="closePlugins();closeConfig();">
-		<h2><?php echo $data['mainTabTitle']; ?></h2>
-		<div class="cleared"></div>
+</section>
+
+<section id="<?php echo $plug['id']; ?>" onclick="closePlugins();closeConfig();">
+	<h3><?php echo $data['mainTabTitle']; ?></h3>
+	<hr class="notop">

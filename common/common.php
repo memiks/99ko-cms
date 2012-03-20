@@ -15,7 +15,7 @@ if(!file_exists(ROOT.'data/config.txt')){
 	die();
 }
 // constantes
-define('VERSION', '1.2.0.5 b');
+define('VERSION', '1.2.0.4 b');
 define('ACTION', ((isset($_GET['action'])) ? $_GET['action'] : ''));
 // tableau des hooks
 $hooks = array();
@@ -39,7 +39,6 @@ setMagicQuotesOff();
 
 // On créé le manager de plugins via la méthode getInstance (singleton)
 $pluginsManager = pluginsManager::getInstance();
-//var_dump($pluginsManager);
 // on boucle les plugins pour charger les lib et les installer
 foreach($pluginsManager->getPlugins() as $plugin){
 	// on inclu la librairie
@@ -47,16 +46,13 @@ foreach($pluginsManager->getPlugins() as $plugin){
 	// si le plugin n'est pas installé on l'installe
 	if(!$plugin->isInstalled()) $pluginsManager->installPlugin($plugin->getName());
 	// On charge le plugin dans sa version complète et on le garde en mémoire
-	//$pluginsManager->loadPlugin($plugin->getName()/*, $plugin->getConfig()*/);
-	if($plugin->getConfigVal('activate')){
-		foreach($plugin->getHooks() as $hookName=>$function) $hooks[$hookName][] = $function;
-	}
+	$pluginsManager->loadPlugin($plugin->getName(), $plugin->getConfig());
 }
 // on boucle les plugins actifs pour alimenter le tableau des hooks
-/*foreach($pluginsManager->getPlugins() as $plugin) if($plugin->getConfigVal('activate')){
+foreach($pluginsManager->getPlugins() as $plugin) if($plugin->getConfigVal('activate')){
 	// on update le tableau des hooks
 	foreach($plugin->getHooks() as $hookName=>$function) $hooks[$hookName][] = $function;
-}*/
+}
 
 
 /*

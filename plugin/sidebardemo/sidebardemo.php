@@ -11,7 +11,7 @@ if(!defined('ROOT')) die();
 ** Retourne la configuration par défaut du plugin
 ** @return : array
 */
-/*function sidebardemoConfig(){
+function sidebardemoConfig(){
 	return array(
 		'priority' => 2, // Obligatoire
 		'activate' => 1, // Obligatoire
@@ -19,13 +19,13 @@ if(!defined('ROOT')) die();
                 'sidebarCallFunction' => "sidebardemoGetSidebarContent", // Facultatif
 		// Ajoutez ci-dessous vos propres valeurs...
 	);
-}*/
+}
 
 /*
 ** Retourne les informations relatives au plugin
 ** @return : array
 */
-/*function sidebardemoInfos(){
+function sidebardemoInfos(){
 	return array(
 		// Toute les valeurs sont obligatoires
 		'name' => 'Sidebar Demo',
@@ -35,7 +35,7 @@ if(!defined('ROOT')) die();
 		'authorWebsite' => 'http://99ko.tuxfamily.org',
 		'version' => '1.0'
 	);
-}*/
+}
 
 /*
 ** Retourne les hooks à exécuter

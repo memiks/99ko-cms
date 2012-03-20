@@ -24,12 +24,6 @@
 - Meta data thème JSON => OK
 - jQuery => OK
 
-- fonctions utilWriteJsonFile & utilReadJsonFile => OK
-- infos, hooks & config plugins JSON => OK
-- Modifications de la méthode de chargement des plugins => OK
-- Problème d'install des plugins suite aux modifications => OK
-- Réorganisation dossier plugin
-
 
 - Classe pluginManager : méthode static getRunplugin (renvoie l'instance de $runPlugin)
 - Classe pluginManager : méthodes gestion données (savePluginData, loadPluginData...)

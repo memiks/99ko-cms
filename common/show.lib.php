@@ -1,4 +1,10 @@
 <?php
+##########################################################################################################
+# 99ko http://99ko.tuxfamily.org/
+#
+# Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
+##########################################################################################################
 
 /*
 ** Fonctions d'affichage admin & front
@@ -9,15 +15,21 @@
 ** @param : $msg (message), $type (error/success)
 ** @return : string HTML
 */
-function showMsg($msg, $type){
+function showMsg($msg, $type) {
 	$class = array(
 		'error' => 'error',
 		'success' => 'success',
 	);
 	$data = '';
+	
 	eval(callHook('startShowMsg'));
-	if($msg != '') $data = '<div id="msg" class="'.$class[$type].'"><p>'.nl2br($msg).'</p></div>';
+	
+	if ($msg != '') {
+		$data = '<div id="msg" class="'.$class[$type].'"><p>'.nl2br($msg).'</p></div>';
+	}
+	
 	eval(callHook('endShowMsg'));
+	
 	echo $data;
 }
 
@@ -27,7 +39,8 @@ function showMsg($msg, $type){
 */
 function showLinkTags($format = '<link href="[file]" rel="stylesheet" type="text/css" />'){
 	global $data;
-	foreach($data['linkTags'] as $file){
+	
+	foreach ($data['linkTags'] as $file) {
 		echo str_replace('[file]', $file, $format);
 	}
 }
@@ -36,9 +49,10 @@ function showLinkTags($format = '<link href="[file]" rel="stylesheet" type="text
 ** Affiche les balises script
 ** @param : $format (format)
 */
-function showScriptTags($format = '<script type="text/javascript" src="[file]"></script>'){
+function showScriptTags($format = '<script type="text/javascript" src="[file]"></script>') {
 	global $data;
-	foreach($data['scriptTags'] as $file){
+	
+	foreach ($data['scriptTags'] as $file) {
 		echo str_replace('[file]', $file, $format);
 	}
 }
@@ -52,10 +66,13 @@ function showScriptTags($format = '<script type="text/javascript" src="[file]"><
 ** @param : $name (attribut name), $content, $width, $height, $id (attribut id), $class (attribut class)
 ** @return : string HTML
 */
-function showAdminEditor($name, $content, $width, $height, $id = 'editor', $class = 'editor'){
+function showAdminEditor($name, $content, $width, $height, $id = 'editor', $class = 'editor') {
 	eval(callHook('startShowAdminEditor'));
+	
 	$data = '<textarea style="width:'.$width.'px;height:'.$height.'px" name="'.$name.'" id="'.$id.'" class="'.$class.'">'.$content.'</textarea>';
+	
 	eval(callHook('endShowAdminEditor'));
+	
 	echo $data;
 }
 
@@ -63,11 +80,15 @@ function showAdminEditor($name, $content, $width, $height, $id = 'editor', $clas
 ** Affiche un input hidden contenant le token en session (admin)
 ** @return : string HTML
 */
-function showAdminTokenField(){
+function showAdminTokenField() {
 	global $data;
+	
 	eval(callHook('startShowAdminTokenField'));
+	
 	$output = '<input type="hidden" name="token" value="'.$data['token'].'" />';
+	
 	eval(callHook('endShowAdminTokenField'));
+	
 	echo $output;
 }
 
@@ -78,15 +99,16 @@ function showAdminTokenField(){
 /*
 ** Affiche le contenu de la meta title
 */
-function showTitleTag(){
+function showTitleTag() {
 	global $data, $runPlugin;
+	
 	echo (($data['titleTag'] == '') ? $runPlugin->getTitleTag() : $data['titleTag']);
 }
 
 /*
 ** Affiche le contenu de la meta description
 */
-function showMetaDescriptionTag(){
+function showMetaDescriptionTag() {
 	global $data, $runPlugin;
 	echo (($data['metaDescriptionTag'] == '') ? $runPlugin->getMetaDescriptionTag() : $data['metaDescriptionTag']);
 }
@@ -94,40 +116,45 @@ function showMetaDescriptionTag(){
 /*
 ** Affiche le titre H1
 */
-function showMainTitle(){
+function showMainTitle() {
 	global $data, $runPlugin;
+	
 	echo (($data['mainTitle'] == '') ? $runPlugin->getMainTitle() : $data['mainTitle']);
 }
 
 /*
 ** Affiche le nom du site
 */
-function showSiteName(){
+function showSiteName() {
 	global $data;
+	
 	echo $data['siteName'];
 }
 
 /*
 ** Affiche la description du site
 */
-function showSiteDescription(){
+function showSiteDescription() {
 	global $data;
+	
 	echo $data['siteDescription'];
 }
 
 /*
 ** Affiche l'url du site
 */
-function showSiteUrl(){
+function showSiteUrl() {
 	global $data;
+	
 	echo $data['siteUrl'];
 }
 
 /*
 ** Affiche le temps de génération
 */
-function showExecTime(){
+function showExecTime() {
 	global $time;
+	
 	echo round(microtime(true) - $time, 3);
 }
 
@@ -135,12 +162,14 @@ function showExecTime(){
 ** Affiche le menu principal
 ** @param : $format (format)
 */
-function showMainNavigation($format = '<li><a href="[target]">[label]</a></li>'){
+function showMainNavigation($format = '<li><a href="[target]">[label]</a></li>') {
 	global $data;
-	foreach($data['mainNavigation'] as $item){
+	
+	foreach ($data['mainNavigation'] as $item) {
 		$output = $format;
 		$output = str_replace('[target]', $item['target'], $output);
 		$output = str_replace('[label]', $item['label'], $output);
+		
 		echo $output;
 	}
 }
@@ -148,33 +177,46 @@ function showMainNavigation($format = '<li><a href="[target]">[label]</a></li>')
 /*
 ** Affiche le fil d'Ariane
 */
-function showBreadcrumb(){
+function showBreadcrumb() {
 	global $runPlugin, $data;
-	if(count($runPlugin->getBreadcrumb()) > 0){
+	
+	if (count($runPlugin->getBreadcrumb()) > 0) {
 		echo '<p id="breadcrumb"><a href="'.$data['siteUrl'].'">Accueil</a>';
-		foreach($runPlugin->getBreadcrumb() as $item){
+		
+		foreach ($runPlugin->getBreadcrumb() as $item) {
 			echo ' >> <a href="'.$item['target'].'">'.$item['label'].'</a>';
 		}
+		
 		echo '</p>';
 	}
 }
 
-function showTheme($format = '<a target="_blank" href="[authorWebsite]">[name]</a>'){
+/*
+** Affiche le nom du thème
+*/
+function showTheme($format = '<a target="_blank" href="[authorWebsite]">[name]</a>') {
 	global $data;
+	
 	$output = $format;
 	$output = str_replace('[authorWebsite]', $data['themeAuthorWebsite'], $output);
 	$output = str_replace('[author]', $data['themeAuthor'], $output);
 	$output = str_replace('[name]', $data['themeName'], $output);
+	
 	echo $output;
 }
 
-function showSidebarItems($format = '<div class="item" id="[id]"><p class="title">[title]</p>[content]</div>'){
+/*
+** Affiche le contenu de la sidebar
+*/
+function showSidebarItems($format = '<div class="item" id="[id]"><p class="title">[title]</p>[content]</div>') {
 	global $data;
-	foreach($data['sidebarItems'] as $item){
+	
+	foreach ($data['sidebarItems'] as $item) {
 		$output = $format;
 		$output = str_replace('[id]', $item['id'], $output);
 		$output = str_replace('[title]', $item['title'], $output);
 		$output = str_replace('[content]', $item['content'], $output);
+		
 		echo $output;
 	}
 }

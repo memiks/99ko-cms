@@ -11,7 +11,7 @@ if(!defined('ROOT')) die();
 ** Retourne la configuration par défaut du plugin
 ** @return : array
 */
-function pageConfig(){
+/*function pageConfig(){
 	return array(
 		'priority' => 1, // Obligatoire
 		'activate' => 1, // Obligatoire
@@ -19,13 +19,13 @@ function pageConfig(){
                 'sidebarCallFunction' => "", // Facultatif
 		// Ajoutez ci-dessous vos propres valeurs...
 	);
-}
+}*/
 
 /*
 ** Retourne les informations relatives au plugin
 ** @return : array
 */
-function pageInfos(){
+/*function pageInfos(){
 	return array(
 		// Toute les valeurs sont obligatoires
 		'name' => 'Page',
@@ -35,18 +35,18 @@ function pageInfos(){
 		'authorWebsite' => 'http://99ko.tuxfamily.org',
 		'version' => '1.4'
 	);
-}
+}*/
 
 /*
 ** Retourne les hooks à exécuter
 ** @return : array
 */
-function pageHooks(){
+/*function pageHooks(){
 	// si votre plugin n'utilise pas de hooks un array vide doit être retourné
 	return array(
 		'startFrontIncludePluginFile' => 'pageHook1',
 	);	
-}
+}*/
 
 /*
 ** Exécute du code lors de l'installation

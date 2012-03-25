@@ -18,81 +18,64 @@ setMagicQuotesOff();
 $error = false;
 define('DEFAULT_PLUGIN', 'page');
 
-$pluginsManager = new pluginsManager();
-
-if (isset($_GET['updateto'])) {
-	$coreConf = getCoreConf();
-
-	switch ($_GET['updateto']) {
-		case '1.0.9':
-			$append['defaultPlugin'] = 'page';
-			if(!saveConfig($coreConf, $append)) $error = true;
-			break;
+if (file_exists(ROOT.'data/')) {
+	$dirs = array();
+	$files = array();
+	$scan = array();
+	
+	$dirs[] = array(ROOT.'data/');
+	$cursor = 0;
+	
+	while ($cursor < count($dirs)) {
+		foreach ($dirs[$cursor] as $dir) {
+			$scan = array(
+				'dir' => array(),
+				'file' => array()
+			);
+			
+			foreach (scandir($dir) as $file) {
+				if ($file[0] != '.') {
+					if (is_file($dir.$file)) {
+						$scan['file'][] = $dir.$file;
+					} else if (is_dir($dir.$file)) {
+						$scan['dir'][] = $dir.$file.'/';
+					}
+				}
+			}
+			
+			$dirs[] = $scan['dir'];
+			$files[] = $scan['file'];
+		}
+		
+		$cursor += 1;
 	}
 	
-	if ($error) {
-		$data['msg'] = "Problème lors de la mise à jour";
-		$data['msgType'] = "error";
-	} else {
-		$data['msg'] = "Mise à jour effectuée";
-		$data['msgType'] = "success";
-	}
-} else {
-	if (file_exists(ROOT.'data/config.txt')) {
-		die();
-	}
+	$files = array_reverse($files);
+	$dirs = array_reverse($dirs);
 	
-	@unlink(ROOT.'.htaccess');
-	$mdp = rand(100000, 999999); //Mot de Passe aléatoire
-	if (!@file_put_contents(ROOT.'.htaccess', "Options -Indexes", 0666)) {
-		$error = true;
-	}
-
-	if (!@mkdir('data/') || !@chmod('data/', 0777)) {
-		$error = true;
-	}
-
-	if (!@mkdir('data/plugin/') || !@chmod('data/plugin/', 0777)) {
-		$error = true;
-	}
-
-	if (!@mkdir('data/upload/') || !@chmod('data/upload/', 0777)) {
-		$error = true;
-	}
-
-	$config = array(
-		'siteName' => "Démo",
-		'siteDescription' => "Un site propulsé par 99Ko",
-		'adminPwd' => sha1($mdp),
-		'theme' => 'defaulthtml5',
-		'adminEmail'=> 'you@domain.com',
-		'siteUrl' => getSiteUrl(),
-		'defaultPlugin' => 'page',
-	);
-	
-	if(		!@file_put_contents(ROOT.'data/config.txt', json_encode($config))
-		||	!@chmod('data/config.txt', 0666)) {
-		$error = true;
-	}
-
-	foreach ($pluginsManager->getPlugins() as $plugin) {
-		if ($plugin->getLibFile()) {
-			include_once($plugin->getLibFile());
-			if (!$plugin->isInstalled()) {
-				$pluginsManager->installPlugin($plugin->getName());
+	foreach ($files as $list) {
+		foreach ($list as $file) {
+			if (!@unlink($file)) {
+				$error = true;
 			}
 		}
 	}
-	
-	if ($error) {
-		$data['msg'] = "Problème lors de l'installation";
-		$data['msgType'] = "error";
-	} else {
-		$data['msg'] = "99ko est installé\nLe mot de passe admin par défaut est : $mdp\nModifiez-le dès votre première connexion\nSupprimez également le fichier install.php";
-		$data['msgType'] = "success";
-		// On supprime le fichier d'installation et on redirige sur la page d'accueil.
-		unlink('install.php');
+	foreach ($dirs as $list) {
+		foreach ($list as $dir) {
+			if (!@rmdir($dir)) {
+				$error = true;
+			}
+		}
 	}
+}
+
+if ($error) {
+	$data['msg'] = "Problème lors de la désinstallation";
+	$data['msgType'] = "error";
+} else {
+	$data['msg'] = "99ko est désinstallé";
+	$data['msgType'] = "success";
+	copy('install.back.php', 'install.php');
 }
 ?>
 
@@ -104,7 +87,7 @@ if (isset($_GET['updateto'])) {
 <html lang="fr"><!--<![endif]-->
 <head>
        <meta charset="utf-8">  
-       <title>99ko - Installation</title>
+       <title>99ko - Désinstallation</title>
        <!-- meta -->
        <meta name="description" content="Cms hyper léger!">
        <meta name="author" content="Jonathan C.">
@@ -139,9 +122,8 @@ if (isset($_GET['updateto'])) {
        
        <div id="content">      
 <section id="home">
-       <h1>Installation</h1>
-       <h2><a class="btn" id="logout" href="./admin/">Administration</a>
-       <a class="btn" id="showSite" href="./">Voir le site</a></h2>
+       <h1>Désinstallation</h1>
+       <h2><a class="btn" id="logout" href="install.php">Ré-installer</a></h2>
        <hr>
        <?php showMsg($data['msg'], $data['msgType']); ?>
 </section>

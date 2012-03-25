@@ -19,7 +19,7 @@ hr{display:block; height:0px; line-height:0px; border:0; border-top:1px solid #d
 hr.notop{margin-top:0}
 strong{font-weight:700}
 
-#content{position:absolute; right:18px; left:218px; padding-left:10px; padding-bottom:800px; min-height:100%; height:auto; z-index:1}
+#content{position:absolute; right:18px; left:218px; padding-left:10px;  min-height:100%; height:auto; z-index:1}
 header{-moz-box-shadow:0 0 6px rgba(3,3,3,0.6); -webkit-box-shadow:0 0 6px rgba(3,3,3,0.6); box-shadow:0 0 6px rgba(3,3,3,0.6); position:fixed; left:0; width:200px; height:100%; min-height:100%; z-index:100}
 header a{position:relative; z-index:100}
 
@@ -41,7 +41,7 @@ nav[role="navigation"] > ol li ol li a{display:block; padding:4px 15px 5px 0; te
 /* Contenus
 -------------------------------------------------------------------*/
 /* === CONTENT Section === */
-#home{height:800px; padding-top:200px !important}
+#home{padding-top:200px !important}
 #home li{list-style:none !important; margin-left:0 !important}
 #home p{width:500px}
 #content section{padding-top:70px}

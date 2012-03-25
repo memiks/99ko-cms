@@ -113,7 +113,7 @@ switch(ACTION){
 		}
 		if(trim($_POST['adminPwd']) != '' && $_POST['adminPwd'] == $_POST['adminPwd2']) $_SESSION['admin'] = $config['adminPwd'];
 		if(!$error){
-			header('location:index.php?opentab=config');
+			header('location:index.php?s=config');
 			die();
 		}
 		break;
@@ -130,24 +130,37 @@ switch(ACTION){
 			}
 		}
 		if(!$error){
-			header('location:index.php?opentab=plugins');
+			header('location:index.php?s=plugins');
 			die();
 		}
 		break;
 }
 // si on est pas identifie on impose le login
-if(!isset($_SESSION['admin']) || $_SESSION['admin'] != $coreConf['adminPwd']){
+if (!isset($_SESSION['admin']) || $_SESSION['admin'] != $coreConf['adminPwd']) {
 	include_once('login.php');
-}
-else{
+} else {
 	// hook
 	eval(callHook('startAdminIncludePluginFile'));
 	// on inclu les fichiers du plugin courant
-	if(isset($_GET['p']) && $runPlugin->getAdminFile()){
+	if (isset($_GET['p']) && $runPlugin->getAdminFile()) {
 		include($runPlugin->getAdminFile());
 		include($runPlugin->getAdminTemplate());
+	} else if (isset($_GET['s'])) {
+		switch ($_GET['s']) {
+			case 'config' :
+				include_once('config.php');
+				break;
+			case 'plugins' :
+				include_once('plugins.php');
+				break;
+			case 'home' :
+			default :
+				include_once('home.php');
+				break;
+		}
+	}	else {
+		include_once('home.php');
 	}
-	else include_once('home.php');
 	// hook
 	eval(callHook('endAdminIncludePluginFile'));
 }

@@ -1,4 +1,11 @@
 <?php
+##########################################################################################################
+# 99ko http://99ko.tuxfamily.org/
+#
+# Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
+##########################################################################################################
+
 if(!defined('ROOT')) die();
 include_once('util.lib.php');
 include_once('plugin.class.php');
@@ -91,6 +98,7 @@ function listThemes(){
 	}
 	return $data;
 }
+
 /*
 ** Détecte l'url de base
 ** @return : string (URL de base)
@@ -103,6 +111,11 @@ function getSiteUrl(){
 	return $siteUrl;
 }
 
+/*
+** Renvois les infos d'un thème
+** @param : string (nom du thème)
+** @return : array
+*/
 function getThemeInfos($name){
 	$data = json_decode(@file_get_contents(ROOT.'theme/'.$name.'/infos.json'), true);
 	return $data;

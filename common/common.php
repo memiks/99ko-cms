@@ -1,5 +1,12 @@
 <?php
-error_reporting(E_ALL);
+##########################################################################################################
+# 99ko http://99ko.tuxfamily.org/
+#
+# Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
+##########################################################################################################
+
+//error_reporting(E_ALL);
 if(!defined('ROOT')) die();
 
 
@@ -15,7 +22,7 @@ if(!file_exists(ROOT.'data/config.txt')){
 	die();
 }
 // constantes
-define('VERSION', '1.2.0.4 b');
+define('VERSION', '1.2.0.6-dev');
 define('ACTION', ((isset($_GET['action'])) ? $_GET['action'] : ''));
 // tableau des hooks
 $hooks = array();
@@ -39,19 +46,17 @@ setMagicQuotesOff();
 
 // On créé le manager de plugins via la méthode getInstance (singleton)
 $pluginsManager = pluginsManager::getInstance();
+
 // on boucle les plugins pour charger les lib et les installer
 foreach($pluginsManager->getPlugins() as $plugin){
 	// on inclu la librairie
 	include_once($plugin->getLibFile());
-	// si le plugin n'est pas installé on l'installe
-	if(!$plugin->isInstalled()) $pluginsManager->installPlugin($plugin->getName());
-	// On charge le plugin dans sa version complète et on le garde en mémoire
-	$pluginsManager->loadPlugin($plugin->getName(), $plugin->getConfig());
-}
-// on boucle les plugins actifs pour alimenter le tableau des hooks
-foreach($pluginsManager->getPlugins() as $plugin) if($plugin->getConfigVal('activate')){
 	// on update le tableau des hooks
-	foreach($plugin->getHooks() as $hookName=>$function) $hooks[$hookName][] = $function;
+	if ($plugin->getConfigVal('activate')) {
+		foreach ($plugin->getHooks() as $hookName=>$function) {
+			$hooks[$hookName][] = $function;
+		}
+	}
 }
 
 

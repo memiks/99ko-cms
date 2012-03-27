@@ -6,9 +6,9 @@ http://99ko.tuxfamily.org
 
 INSTALATION
 - lancez install.php
-- Mot de passe admin par défaut : demo123
+- Utiliser le Mot de passe généré lors de l'installation
 - Modifiez le mot de passe admin
-- Supprimez le fichier install.php
+- Supprimez le fichier install.php si pas supprimer automatiquement
 
 1.2.0.6-dev :
 - Patch MaxguN

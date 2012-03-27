@@ -33,7 +33,7 @@
 	<p><label>Balise meta description (facultatif)</label><br />
 	<input type="text" name="metaDescriptionTag" value="<?php echo $data['pageMetaDescriptionTag']; ?>" /></p>
 	<p><label>Position du lien dans la navigation</label><br />
-	<input type="text" name="position" value="<?php echo $data['pagePosition']; ?>" /></p>
+	<input class="small" type="text" name="position" value="<?php echo $data['pagePosition']; ?>" /></p>
 	<p><input <?php echo $data['pageIsHomepageChecked']; ?> type="checkbox" name="isHomepage" /> Utiliser comme page d'accueil<br />
 	<input <?php if($data['pageIsHidden']){ ?>checked<?php } ?> type="checkbox" name="isHidden" /> Ne pas afficher de lien vers cette page dans le menu</p>
 	<p><label>Contenu</label><br />

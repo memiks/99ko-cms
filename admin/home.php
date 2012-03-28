@@ -2,8 +2,6 @@
 
 <section id="home">
 	<h1>99ko</h1>
-	<h2><a class="btn" id="logout" href="index.php?action=logout&token=<?php echo $data['token']; ?>">Se déconnecter</a>
-	<a class="btn" id="showSite" href="../">Voir le site</a></h2>
 	<hr>
 	<?php showMsg($data['msgSecurity'], 'error'); ?>
 	<ul>

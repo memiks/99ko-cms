@@ -7,7 +7,8 @@
 		<form method="post" action="index.php?action=saveplugins" id="pluginsList">
 			<?php showMsg($data['msgPlugins'], 'error'); ?>
 			<?php showAdminTokenField(); ?>
-			<table>
+			<table class="table table-striped table-bordered table-condensed">
+			  <thead>
 				<tr>
 					<th>Nom</th>
 					<th>Description</th>
@@ -15,6 +16,8 @@
 					<th>Priorité</th>
 					<th>Activer</th>
 				</tr>
+			  </thead>
+			  <tbody>			  	
 				<?php foreach($data['plugins'] as $plug){ ?>
 				<tr>
 					<td>
@@ -28,9 +31,10 @@
 					<span class="infos">Par <?php echo $plug['author']; ?> : <?php echo $plug['authorEmail']; ?> <a href="<?php echo $plug['authorWebsite']; ?>" target="_blank"><?php echo $plug['authorWebsite']; ?></a></span></td>
 					<td><?php echo $plug['version']; ?></td>
 					<td><input class="priority" type="text" name="priority[<?php echo $plug['id']; ?>]" value="<?php echo $plug['priority']; ?>" /></td>
-					<td><input <?php if($plug['isDefaultPlugin']){ ?>style="display:none;"<?php } ?> <?php if($plug['activate']){ ?>checked<?php } ?> type="checkbox" name="activate[<?php echo $plug['id']; ?>]" /></td>
+					<td><input <?php if($plug['activate']){ ?>checked<?php } ?> type="checkbox" name="activate[<?php echo $plug['id']; ?>]"<?php if($plug['isDefaultPlugin']){ ?> disabled<?php } ?> /></td>
 				</tr>
 				<?php } ?>
+			  </tbody>					
 			</table>
 			<p><input type="submit" value="Enregistrer" /></p>
 		</form>

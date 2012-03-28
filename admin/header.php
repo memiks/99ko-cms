@@ -61,7 +61,9 @@
 			</li>
 			<?php 	}
 						} ?>						
-		   </ol>		
+		   </ol>
+	       &nbsp;<a class="btn" id="logout" href="index.php?action=logout&token=<?php echo $data['token']; ?>">Se déconnecter</a>
+	       <a class="btn" id="showSite" href="../">Voir le site</a>		   		
 		</nav>
 		
 		<div id="copyright">

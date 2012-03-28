@@ -28,7 +28,9 @@
 			<p><label>URL du site</label><br />
 			<input type="text" name="siteUrl" value="<?php echo $data['configSiteUrl']; ?>" /> (sans slash final)</p>
 			<p><label>Nouveau mot de passe admin</label><br />
-			<input type="password" name="adminPwd" value="" /> confirmation : <input type="password" name="adminPwd2" value="" /></p>
+			<input type="password" name="adminPwd" value="" /></p>
+			<p><label>confirmation</label><br />
+			<input type="password" name="adminPwd2" value="" /></p>
 			<p><input type="submit" value="Enregistrer" /></p>
 		</form>
 </section>

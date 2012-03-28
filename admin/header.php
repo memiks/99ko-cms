@@ -67,7 +67,7 @@
 		</nav>
 		
 		<div id="copyright">
-		   Propulsé par <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/">99ko</a> <span class="version"><?php echo $data['99koVersion']; ?></span>.
+		   Propulsé par <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/"><b>99ko</b></a> <span class="version"><?php echo $data['99koVersion']; ?></span>.
 		</div>
 	</header>
 	<div id="content">

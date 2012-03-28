@@ -26,6 +26,7 @@ header a{position:relative; z-index:100}
 img{border:0}
 
 #copyright{position:absolute; bottom:10px; font-size:11px; right:15px; width:200px; text-align:right; z-index:1}
+#copyright a{color:#FFF;}
 no script{display:block; position:absolute; top:238px; margin:0 auto; width:800px; bottom:0; z-index:20}
 noscript p{width:800px; font-size:20px; padding-top:20px; margin:0 auto; color:#4D4D4D}
 .small{font-size:10px; letter-spacing:0}

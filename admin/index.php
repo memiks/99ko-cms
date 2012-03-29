@@ -120,16 +120,26 @@ switch(ACTION){
 	// sauvegarde des plugins
 	case 'saveplugins':
 		$error = false;
-		foreach($pluginsManager->getPlugins() as $k=>$plug){
-			if(isset($_POST['activate'][$plug->getName()])) $plug->setConfigVal('activate', 1);
-			else $plug->setConfigVal('activate', 0);
+
+		foreach ($pluginsManager->getPlugins() as $k=>$plug) {
+			if (!$plug->getIsDefaultPlugin()) {
+				if (isset($_POST['activate'][$plug->getName()])) {
+					$plug->setConfigVal('activate', 1);
+				} else {
+					$plug->setConfigVal('activate', 0);
+				}
+			}
+			
 			$plug->setConfigVal('priority', intval($_POST['priority'][$plug->getName()]));
-			if(!$pluginsManager->savePluginConfig($plug)){
+			
+			if (!$pluginsManager->savePluginConfig($plug)) {
+				
 				$error = true;
 				$data['msgPlugins'] = "Erreur d'enregistrement de la configuration du plugin";
 			}
 		}
-		if(!$error){
+
+		if (!$error) {
 			header('location:index.php?s=plugins');
 			die();
 		}

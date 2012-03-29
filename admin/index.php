@@ -66,19 +66,20 @@ switch(ACTION){
 		$loginAttempt = (isset($_SESSION['loginAttempt'])) ? $_SESSION['loginAttempt'] : 0;
 		$loginAttempt++;
 		$_SESSION['loginAttempt'] = $loginAttempt;
-		if($loginAttempt > 4 || !isset($_SESSION['loginAttempt'])){
+
+		if ($loginAttempt > 4 || !isset($_SESSION['loginAttempt'])) {
 			$data['msg'] = "Veuillez attendre avant de faire une nouvelle tentative";
-		}
-		else{
+		} else {
 			$pwd = $coreConf['adminPwd'];
-			if(sha1(trim($_POST['adminPwd'])) == $pwd){
+			if (sha1(trim($_POST['adminPwd'])) == $pwd) {
 				$_SESSION['admin'] = $pwd;
 				$_SESSION['loginAttempt'] = 0;
 				$_SESSION['token'] = uniqid();
 				header('location:index.php');
 				die();
+			} else {
+				$data['msg'] = "Mot de passe incorrect";
 			}
-			else $data['msg'] = "Mot de passe incorrect";
 		}
 		break;
 	// logout
@@ -100,19 +101,23 @@ switch(ACTION){
 			'theme' => $_POST['theme'],
 			'defaultPlugin' => $_POST['defaultPlugin'],
 		);
-		if(trim($_POST['adminPwd']) != ''){
-			if($_POST['adminPwd'] == $_POST['adminPwd2']) $config['adminPwd'] = sha1(trim($_POST['adminPwd']));
-			else{
+
+		if (trim($_POST['adminPwd']) != '') {
+			if ($_POST['adminPwd'] == $_POST['adminPwd2']) {
+				$config['adminPwd'] = sha1(trim($_POST['adminPwd']));
+				$_SESSION['admin'] = $config['adminPwd'];
+			} else {
 				$data['msgConfig'] = "Mot de passe différent de sa confirmation";
 				$error = true;
 			}
 		}
-		if(!saveConfig($config)){
+
+		if (!saveConfig($config)) {
 			$data['msgConfig'] = "Erreur d'enregistrement de la configuration";
 			$error = true;
 		}
-		if(trim($_POST['adminPwd']) != '' && $_POST['adminPwd'] == $_POST['adminPwd2']) $_SESSION['admin'] = $config['adminPwd'];
-		if(!$error){
+		
+		if (!$error) {
 			header('location:index.php?s=config');
 			die();
 		}
@@ -145,16 +150,21 @@ switch(ACTION){
 		}
 		break;
 }
+
 // si on est pas identifie on impose le login
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] != $coreConf['adminPwd']) {
 	include_once('login.php');
 } else {
-	// hook
-	eval(callHook('startAdminIncludePluginFile'));
 	// on inclu les fichiers du plugin courant
 	if (isset($_GET['p']) && $runPlugin->getAdminFile()) {
+		// hook
+		eval(callHook('startAdminIncludePluginFile'));
+		
 		include($runPlugin->getAdminFile());
 		include($runPlugin->getAdminTemplate());
+		
+		// hook
+		eval(callHook('endAdminIncludePluginFile'));
 	} else if (isset($_GET['s'])) {
 		switch ($_GET['s']) {
 			case 'config' :
@@ -171,7 +181,5 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] != $coreConf['adminPwd']) {
 	}	else {
 		include_once('home.php');
 	}
-	// hook
-	eval(callHook('endAdminIncludePluginFile'));
 }
 ?>

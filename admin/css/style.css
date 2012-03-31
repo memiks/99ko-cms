@@ -24,6 +24,9 @@ header{-moz-box-shadow:0 0 6px rgba(3,3,3,0.6); -webkit-box-shadow:0 0 6px rgba(
 header a{position:relative; z-index:100}
 
 img{border:0}
+img#pluginConfigButton{float:right; margin-top:-20px}
+img#pluginConfigButton:hover{cursor:pointer}
+#pluginConfig{display:none}
 
 #copyright{position:absolute; bottom:10px; font-size:11px; right:15px; width:200px; text-align:right; z-index:1}
 #copyright a{color:#FFF;}

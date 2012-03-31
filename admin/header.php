@@ -73,7 +73,16 @@
 	<div id="content">
 
 <?php if (isset($_GET['p'])) { ?>
-<section id="<?php echo $plug['id']; ?>" onclick="closePlugins();closeConfig();">
+<section id="<?php echo $plug['id']; ?>">
 	<h3><?php echo $data['mainTabTitle']; ?></h3>
+	<?php if ($runPlugin->getConfigTemplate()) { ?>
+		<img id="pluginConfigButton" src="images/wrench_orange.png" />
+	<?php } ?>
 	<hr class="notop">
+	<?php if ($runPlugin->getConfigTemplate()) { ?>
+		<div id="pluginConfig">
+			<?php include_once($runPlugin->getConfigTemplate()); ?>
+			<hr class="notop">
+		</div>
+	<?php } ?>
 <?php } ?>

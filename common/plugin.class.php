@@ -177,6 +177,7 @@ class plugin{
 	private $dataPath;
 	private $publicTemplate;
 	private $adminTemplate;
+	private $configTemplate;
 	private $initConfig;
 
 	/*
@@ -201,6 +202,7 @@ class plugin{
 		$this->dataPath = (is_dir(ROOT.'data/plugin/'.$this->name)) ? ROOT.'data/plugin/'.$this->name.'/' : false;
 		$this->setPlublicTemplate('public');
 		$this->setAdminTemplate('admin');
+		$this->configTemplate = (file_exists(ROOT.'plugin/'.$this->name.'/template/config.php')) ? ROOT.'plugin/'.$this->name.'/template/config.php': false;
 		$this->initConfig = $initConfig;
 	}
 
@@ -260,6 +262,9 @@ class plugin{
 	}
 	public function getAdminTemplate(){
 		return $this->adminTemplate;
+	}
+	public function getConfigTemplate(){
+		return $this->configTemplate;
 	}
 	public function getIsValid(){
 		return $this->isValid;

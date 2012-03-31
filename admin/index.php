@@ -31,6 +31,9 @@ foreach($pluginsManager->getPlugins() as $plugin) if($plugin->getConfigVal('acti
 	if($plugin->getCssFile()) $data['linkTags'][] = $plugin->getCssFile();
 	if($plugin->getJsFile()) $data['scriptTags'][] = $plugin->getJsFile();
 }
+if (isset($_GET['p']) && $runPlugin->getConfigTemplate()) {
+	$data['scriptTags'][] = ROOT.'admin/js/plugin-config.js';
+}
 $data['linkTags'] = array_unique($data['linkTags']);
 $data['scriptTags'] = array_unique($data['scriptTags']);
 foreach($pluginsManager->getPlugins() as $k=>$plugin){

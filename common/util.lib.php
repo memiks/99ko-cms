@@ -13,7 +13,7 @@
 /*
 ** annule magic_quotes_gpc()
 */
-function setMagicQuotesOff() {
+function utilSetMagicQuotesOff() {
 	if (get_magic_quotes_gpc()) {
 		function stripslashes_gpc(&$value) {
 			$value = stripslashes($value);
@@ -160,11 +160,11 @@ function utilReadJsonFile($file, $assoc = true) {
 // $name : nom du fichier (destination)
 // $dir : chemin (destination)
 // $validation : array validations (extensions autorisées, poids fichier max...)
-function uploadFile($k, $dir, $name, $validations = array()){
+function utilUploadFile($k, $dir, $name, $validations = array()){
 }
 
 // fonction à créer : génération élement de formulaire select
-function makeSelectTag($name, $data, $selectedKe = '', $id = '', $class = ''){
+function utilMakeSelectTag($name, $data, $selectedKe = '', $id = '', $class = ''){
 	
 }
 

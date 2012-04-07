@@ -159,8 +159,13 @@ function utilReadJsonFile($file, $assoc = true) {
 // $k : $_FILES[$k]
 // $name : nom du fichier (destination)
 // $dir : chemin (destination)
-// $param : array vérifications (extensions, poids...)
-function uploadFile($k, $dir, $name, $params){
+// $validation : array validations (extensions autorisées, poids fichier max...)
+function uploadFile($k, $dir, $name, $validations = array()){
+}
+
+// fonction à créer : génération élement de formulaire select
+function makeSelectTag($name, $data, $selectedKe = '', $id = '', $class = ''){
+	
 }
 
 ?>

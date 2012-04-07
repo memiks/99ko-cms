@@ -154,4 +154,13 @@ function utilWriteJsonFile($file, $data) {
 function utilReadJsonFile($file, $assoc = true) {
 	return json_decode(@file_get_contents($file), $assoc);
 }
+
+// fontion à créer : upload de fichier avec vérifications de base
+// $k : $_FILES[$k]
+// $name : nom du fichier (destination)
+// $dir : chemin (destination)
+// $param : array vérifications (extensions, poids...)
+function uploadFile($k, $dir, $name, $params){
+}
+
 ?>

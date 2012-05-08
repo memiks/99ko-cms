@@ -14,7 +14,7 @@ if (utilPhpVersion() < '5.1.2') {
 	die("Vous devez disposer d'un serveur équipé de PHP 5.1.2 ou plus !");
 }
 
-setMagicQuotesOff();
+utilSetMagicQuotesOff();
 $error = false;
 define('DEFAULT_PLUGIN', 'page');
 

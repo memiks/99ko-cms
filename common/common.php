@@ -36,7 +36,7 @@ $themes = listThemes();
 define('DEFAULT_PLUGIN', $coreConf['defaultPlugin']);
 define('PLUGIN', ((isset($_GET['p'])) ? $_GET['p'] : DEFAULT_PLUGIN)); // voir $runPlugin
 // fix magic quotes
-setMagicQuotesOff();
+utilSetMagicQuotesOff();
 
 
 /*

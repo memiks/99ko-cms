@@ -1,4 +1,10 @@
 <?php
+##########################################################################################################
+# 99ko http://99ko.tuxfamily.org/
+#
+# Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
+##########################################################################################################
 
 /************************************************
 ** Classes responsables de la gestion des plugins
@@ -13,9 +19,7 @@ class pluginsManager{
 	** Constructeur
 	*/
 	public function __construct(){
-		//$this->plugins = array();
 		$this->plugins = $this->listPlugins();
-		//print_r($this->plugins);
 	}
 	
 	/*
@@ -24,7 +28,6 @@ class pluginsManager{
 	** @return : array (objets plugins)
 	*/
 	public function getPlugins(){
-		//if(count($this->plugins) < 1) return $this->listPlugins();
 		return $this->plugins;
 	}
 	
@@ -34,8 +37,11 @@ class pluginsManager{
 	*/
 	public function getPlugin($name){
 		foreach($this->plugins as $plugin){
-			if($plugin->getName() == $name) return $plugin;
+			if($plugin->getName() == $name) {
+				return $plugin;
+			}
 		}
+		return false;
 	}
 	
 	/*
@@ -51,24 +57,13 @@ class pluginsManager{
 	}
 	
 	/*
-	** Détermine si un plugin est installé et actif
-	** @param : string (nom du plugin)
-	** @return : true / false
-	*/
-	/*public function isActivePlugin($name){
-		$plugin = $this->getPlugin($name);
-		if($plugin->isInstalled() && $plugin->getConfigval('activate')) return true;
-		return false;
-	}*/
-	
-	/*
 	** Créée un plugin et alimente le tableau des plugins
 	** Cette méthode est appelée durant la phase de chargement / installation des plugins
 	** Il n'est pas nécessaire de la rappeler !!!!
 	** @param : string (nom du plugin), array (configuration du plugin)
 	*/
-	public function loadPlugin($name/*, $config*/){
-		$this->plugins[] = $this->createPlugin($name/*, $config*/);
+	public function loadPlugin($name){
+		$this->plugins[] = $this->createPlugin($name);
 	}
 
 	/*
@@ -81,7 +76,6 @@ class pluginsManager{
 	public function installPlugin($name){
 		@mkdir(ROOT.'data/plugin/'.$name.'/', 0777);
 		@chmod(ROOT.'data/plugin/'.$name.'/', 0777);
-		//@file_put_contents(ROOT.'data/plugin/'.$name.'/config.txt', json_encode(call_user_func($name.'Config')), 0666);
 		@file_put_contents(ROOT.'data/plugin/'.$name.'/config.txt', file_get_contents(ROOT.'plugin/'.$name.'/param/config.json'), 0666);
 		@chmod(ROOT.'data/plugin/'.$name.'/config.txt', 0666);
 		if(function_exists($name.'Install')) call_user_func($name.'Install');
@@ -99,12 +93,13 @@ class pluginsManager{
 		$data = array();
 		$dataNotSorted = array();
 		$items = utilScanDir(ROOT.'plugin/');
+		
 		foreach($items['dir'] as $dir){
 			$dataNotSorted[$dir] = json_decode(@file_get_contents(ROOT.'data/plugin/'.$dir.'/config.txt'), true);
 		}
 		$dataSorted = utilSort2DimArray($dataNotSorted, 'priority', 'num');
 		foreach($dataSorted as $plugin=>$config){
-			$data[] = $this->createPlugin($plugin/*, $config*/);
+			$data[] = $this->createPlugin($plugin);
 		}
 		return $data;
 	}
@@ -114,15 +109,18 @@ class pluginsManager{
 	** Cette méthode est appellée par la méthode listPlugins ou loadPlugin
 	** @param : string (nom du plugin), array (configuration du plugin)
 	*/
-	private function createPlugin($name/*, $config = array()*/){
-		//$infos = @call_user_func($name.'Infos');
+	private function createPlugin($name){
 		$infos = utilReadJsonFile(ROOT.'plugin/'.$name.'/param/infos.json');
 		$config = utilReadJsonFile(ROOT.'data/plugin/'.$name.'/config.txt');
 		$hooks = utilReadJsonFile(ROOT.'plugin/'.$name.'/param/hooks.json');
 		$initConfig = utilReadJsonFile(ROOT.'plugin/'.$name.'/param/config.json');
 		if(!is_array($config)) $config = array();
 		if(!is_array($hooks)) $hooks = array();
-		return new plugin($name, $config, $infos, $hooks, $initConfig);
+		$plugin = new plugin($name, $config, $infos, $hooks, $initConfig);
+		if(!$plugin->isInstalled()) {
+			$this->installPlugin($plugin->getName());
+		}
+		return $plugin;
 	}
 	
 	/*
@@ -154,7 +152,7 @@ class pluginsManager{
 	public static function isActivePlugin($pluginName){
 		$instance = self::getInstance();
 		$plugin = $instance->getPlugin($pluginName);
-		if($plugin->isInstalled() && $plugin->getConfigval('activate')) return true;
+		if($plugin && $plugin->isInstalled() && $plugin->getConfigval('activate')) return true;
 		return false;
 	}
 
@@ -179,6 +177,7 @@ class plugin{
 	private $dataPath;
 	private $publicTemplate;
 	private $adminTemplate;
+	private $configTemplate;
 	private $initConfig;
 
 	/*
@@ -201,11 +200,9 @@ class plugin{
 		$this->addToBreadcrumb($infos['name'], 'index.php?p='.$this->name);
 		if($this->isDefaultPlugin) $this->initBreadcrumb();
 		$this->dataPath = (is_dir(ROOT.'data/plugin/'.$this->name)) ? ROOT.'data/plugin/'.$this->name.'/' : false;
-		/*if(file_exists('theme/'.getCoreConf('theme').'/'.$this->name.'.php')) $this->publicTemplate = 'theme/'.getCoreConf('theme').'/'.$this->name.'.php';
-		else $this->publicTemplate = ROOT.'plugin/'.$this->name.'/template/public.php';
-		$this->adminTemplate = ROOT.'plugin/'.$this->name.'/template/admin.php';*/
 		$this->setPlublicTemplate('public');
 		$this->setAdminTemplate('admin');
+		$this->configTemplate = (file_exists(ROOT.'plugin/'.$this->name.'/template/config.php')) ? ROOT.'plugin/'.$this->name.'/template/config.php': false;
 		$this->initConfig = $initConfig;
 	}
 
@@ -265,6 +262,9 @@ class plugin{
 	}
 	public function getAdminTemplate(){
 		return $this->adminTemplate;
+	}
+	public function getConfigTemplate(){
+		return $this->configTemplate;
 	}
 	public function getIsValid(){
 		return $this->isValid;
@@ -328,15 +328,6 @@ class plugin{
 	** @return : true / false
 	*/
 	public function isInstalled(){
-		// on check si la config existe
-		//if(count($this->config) < 1) return false;
-		// on compare la config initiale avec la config actuelle
-		//$currentConfig = implode(',', array_keys($this->config));
-		//$initialConfig = implode(',', array_keys(call_user_func($this->name.'Config')));
-		//$initialConfig = implode(',', array_keys(utilReadJsonFile(ROOT.'plugin/'.$this->name.'/config.json')));
-		//if($currentConfig != $initialConfig) return false;
-		//return true;
-		//var_dump($this->initConfig);
 		$currentConfig = implode(',', array_keys($this->config));
 		$initConfig = implode(',', array_keys($this->initConfig));
 		if(count($this->config) < 1 || $currentConfig != $initConfig) return false;

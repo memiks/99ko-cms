@@ -1,86 +1,150 @@
 <?php
+##########################################################################################################
+# 99ko http://99ko.tuxfamily.org/
+#
+# Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
+##########################################################################################################
+
 define('ROOT', './');
+
 include_once(ROOT.'common/core.lib.php');
-if(utilPhpVersion() < '5.1.2') die("Vous devez disposer d'un serveur équipé de PHP 5.1.2 ou plus !");
-setMagicQuotesOff();
+
+if (utilPhpVersion() < '5.1.2') {
+	die("Vous devez disposer d'un serveur équipé de PHP 5.1.2 ou plus !");
+}
+
+utilSetMagicQuotesOff();
 $error = false;
 define('DEFAULT_PLUGIN', 'page');
+
 $pluginsManager = new pluginsManager();
-if(isset($_GET['updateto'])){
+
+if (isset($_GET['updateto'])) {
 	$coreConf = getCoreConf();
-	switch($_GET['updateto']){
+
+	switch ($_GET['updateto']) {
 		case '1.0.9':
 			$append['defaultPlugin'] = 'page';
 			if(!saveConfig($coreConf, $append)) $error = true;
 			break;
 	}
-	if($error){
+	
+	if ($error) {
 		$data['msg'] = "Problème lors de la mise à jour";
 		$data['msgType'] = "error";
-	}
-	else{
+	} else {
 		$data['msg'] = "Mise à jour effectuée";
 		$data['msgType'] = "success";
 	}
-}
-else{
-	if(file_exists(ROOT.'data/config.txt')){
+} else {
+	if (file_exists(ROOT.'data/config.txt')) {
 		die();
 	}
+	
 	@unlink(ROOT.'.htaccess');
-	if(!@file_put_contents(ROOT.'.htaccess', "Options -Indexes", 0666)) $error = true;
-	if(!@mkdir('data/', 0777)) $error = true;
-	if(!@chmod('data/', 0777)) $error = true;
-	if(!@mkdir('data/plugin/', 0777)) $error = true;
-	if(!@chmod('data/plugin/', 0777)) $error = true;
-	if(!@mkdir('data/upload/', 0777)) $error = true;
-	if(!@chmod('data/upload/', 0777)) $error = true;
+	$mdp = rand(100000, 999999); //Mot de Passe aléatoire
+	if (!@file_put_contents(ROOT.'.htaccess', "Options -Indexes", 0666)) {
+		$error = true;
+	}
+
+	if (!@mkdir('data/') || !@chmod('data/', 0777)) {
+		$error = true;
+	}
+
+	if (!@mkdir('data/plugin/') || !@chmod('data/plugin/', 0777)) {
+		$error = true;
+	}
+
+	if (!@mkdir('data/upload/') || !@chmod('data/upload/', 0777)) {
+		$error = true;
+	}
+
 	$config = array(
 		'siteName' => "Démo",
 		'siteDescription' => "Un site propulsé par 99Ko",
-		'adminPwd' => sha1('demo123'),
+		'adminPwd' => sha1($mdp),
 		'theme' => 'defaulthtml5',
 		'adminEmail'=> 'you@domain.com',
 		'siteUrl' => getSiteUrl(),
 		'defaultPlugin' => 'page',
 	);
-	if(!@file_put_contents(ROOT.'data/config.txt', json_encode($config), 0666)) $error = true;
-	if(!@chmod('data/config.txt', 0666)) $error = true;
-	foreach($pluginsManager->getPlugins() as $plugin){
-		if($plugin->getLibFile()){
+	
+	if(		!@file_put_contents(ROOT.'data/config.txt', json_encode($config))
+		||	!@chmod('data/config.txt', 0666)) {
+		$error = true;
+	}
+
+	foreach ($pluginsManager->getPlugins() as $plugin) {
+		if ($plugin->getLibFile()) {
 			include_once($plugin->getLibFile());
-			if(!$plugin->isInstalled()) $pluginsManager->installPlugin($plugin->getName());
+			if (!$plugin->isInstalled()) {
+				$pluginsManager->installPlugin($plugin->getName());
+			}
 		}
 	}
-	if($error){
+	
+	if ($error) {
 		$data['msg'] = "Problème lors de l'installation";
 		$data['msgType'] = "error";
-	}
-	else{
-		$data['msg'] = "99ko est installé\nLe mot de passe admin par défaut est : demo123\nModifiez-le dès votre première connexion\nSupprimez également le fichier install.php";
+	} else {
+		$data['msg'] = "99ko est installé\nLe mot de passe admin par défaut est : $mdp\nModifiez-le dès votre première connexion\nSupprimez également le fichier install.php";
 		$data['msgType'] = "success";
+		// On supprime le fichier d'installation et on redirige sur la page d'accueil.
+		unlink('install.php');
 	}
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+
+<!doctype html>  
+<!--[if IE 6 ]><html lang="fr" class="ie6"> <![endif]-->
+<!--[if IE 7 ]><html lang="fr" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="fr" class="ie8"> <![endif]-->
+<!--[if (gt IE 7)|!(IE)]><!-->
+<html lang="fr"><!--<![endif]-->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>99ko</title>
-	<link href="common/normalize.css" rel="stylesheet" type="text/css" />
-	<link href="admin/styles.css" rel="stylesheet" type="text/css" />
+       <meta charset="utf-8">  
+       <title>99ko - Installation</title>
+       <!-- meta -->
+       <meta name="description" content="Cms hyper léger!">
+       <meta name="author" content="Jonathan C.">
+       <meta name="generator" content="99Ko">
+       <!-- css -->
+       <link rel="stylesheet" href="admin/css/style.css" media="all">
+       <link rel="stylesheet" href="admin/css/common.css" media="all">
+       <!-- Personnalisation des liens, sidebar, contenus -->
+       <style>
+               html{background-color:#FFFFFF;color:#383838;}
+               ::-moz-selection{background:#DBE6EC;color:#111111;}
+               ::selection{background:#DBE6EC;color:#111111;}
+               aside #logo{background-image:url(admin/images/logo.png);}
+               a{color:#A26F6F;}
+               hr{border-top:1px solid #D7E1E6;border-bottom:1px solid #EFFAFF;}
+               aside, aside ol a{background-color:#77A2A8;color:#222222;}
+               aside ol a{-webkit-text-shadow:1px 1px 0px #DBE5E8;-moz-text-shadow:1px 1px 0px #DBE5E8;text-shadow:1px 1px 0px #DBE5E8;}
+               aside ol{border-top:1px solid #B4BCBF;}
+               aside ol a{border-top:1px solid #DBE5E8;border-bottom:1px solid #B4BCBF;color:#222222;}
+               aside ol a:hover{background:#DBE6EC;color:#111111;border-top:1px solid #DBE6EC;}
+               aside ol a.current{background:#DBE6EC;color:#111111;border-top:1px solid #DBE6EC;}
+               #copyright{display:block !important;visibility:visible !important;}
+       </style>
 </head>
 <body>
-<div id="container">
-	<div id="header">
-		<h1>99Ko</h1>
-	</div>
-	<div id="login">
-		<h2>Installation</h2>
-		<?php showMsg($data['msg'], $data['msgType']); ?>
-	</div>
-	<div id="footer">
-	</div>
-</div>
+ 
+       <aside>
+               <div id="copyright">
+                  Propulsé par <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/">99ko</a> <span class="version"><?php echo $data['99koVersion']; ?></span>.
+               </div>
+       </aside>
+       
+       <div id="content">      
+<section id="home">
+       <h1>Installation</h1>
+       <h2><a class="btn" id="logout" href="./admin/">Administration</a>
+       <a class="btn" id="showSite" href="./">Voir le site</a></h2>
+       <hr>
+       <?php showMsg($data['msg'], $data['msgType']); ?>
+</section>
+    </div>
 </body>
 </html>

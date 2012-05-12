@@ -6,9 +6,13 @@ http://99ko.tuxfamily.org
 
 INSTALATION
 - lancez install.php
-- Mot de passe admin par défaut : demo123
+- Utiliser le Mot de passe généré lors de l'installation
 - Modifiez le mot de passe admin
-- Supprimez le fichier install.php
+- Supprimez le fichier install.php si pas supprimer automatiquement
 
-MISE A JOUR 1.0.8 => 1.0.9
-- lancez install.php?updateto=1.0.9
+1.2.0.6-dev :
+- Patch MaxguN
+- Mise au propre du code
+- Suppression du plugin de démo  (sidebar)
+- Utilisation de la sidebar par le plugin page (je réfléchis à quelque-chose d'utile, comme pouvoir afficher le contenu d'une page cachée dans la sidebar...)
+- Nouvelle Admin par Fred

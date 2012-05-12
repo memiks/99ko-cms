@@ -2,25 +2,29 @@
 <?php include_once(ROOT.'admin/header.php') ?>
 <?php if($data['pageMode'] == 'list'){ ?>
 <?php showMsg($data['pageMsg'], $data['pageMsgType']); ?>
-<p><a href="index.php?p=page&action=edit">Ajouter</a></p>
-<table>
+<p><a class="btn" href="index.php?p=page&action=edit">Ajouter</a></p>
+<table class="table table-striped table-condensed">
+  <thead>
 	<tr>
 		<th>Nom</th>
 		<th>Adresse</th>
 		<th></th>
 		<th></th>
 	</tr>
+  </thead>
+  <tbody>
 	<?php foreach($data['pageList'] as $pageItem){ ?>
 	<tr>
 		<td><?php echo $pageItem['name']; ?></td>
 		<td><?php echo $data['configSiteUrl']; ?>/index.php?p=page&id=<?php echo $pageItem['id']; ?></td>
 		<td><?php if($pageItem['isHomepage']){ ?><img src="../plugin/page/other/house.png" alt="icon" title="Page d'accueil" /><?php } ?> <?php if($pageItem['isHidden']){ ?><img src="../plugin/page/other/bullet_orange.png" alt="icon" title="Cette page n'apparait pas dans le menu" /> <?php } ?></td>
 		<td>
-			<a href="index.php?p=page&action=edit&id=<?php echo $pageItem['id']; ?>">editer</a>
-			<?php if(!$pageItem['isHomepage']){ ?> <a href="index.php?p=page&action=del&id=<?php echo $pageItem['id']; ?>&token=<?php echo $data['token']; ?>" onclick = "if(!confirm('Supprimer cette page ?')) return false;">supprimer</a><?php } ?>
+			<a class="edit-btn" href="index.php?p=page&action=edit&id=<?php echo $pageItem['id']; ?>">éditer</a>
+			<?php if(!$pageItem['isHomepage']){ ?> <a class="del-btn" href="index.php?p=page&action=del&id=<?php echo $pageItem['id']; ?>&token=<?php echo $data['token']; ?>" onclick = "if(!confirm('Supprimer cette page ?')) return false;">supprimer</a><?php } ?>
 		</td>
 	</tr>
 	<?php } ?>
+  </tbody>
 </table>
 <?php } elseif($data['pageMode'] == 'edit'){ ?>
 <form method="post" action="index.php?p=page&action=save">
@@ -33,7 +37,7 @@
 	<p><label>Balise meta description (facultatif)</label><br />
 	<input type="text" name="metaDescriptionTag" value="<?php echo $data['pageMetaDescriptionTag']; ?>" /></p>
 	<p><label>Position du lien dans la navigation</label><br />
-	<input type="text" name="position" value="<?php echo $data['pagePosition']; ?>" /></p>
+	<input class="small" type="text" name="position" value="<?php echo $data['pagePosition']; ?>" /></p>
 	<p><input <?php echo $data['pageIsHomepageChecked']; ?> type="checkbox" name="isHomepage" /> Utiliser comme page d'accueil<br />
 	<input <?php if($data['pageIsHidden']){ ?>checked<?php } ?> type="checkbox" name="isHidden" /> Ne pas afficher de lien vers cette page dans le menu</p>
 	<p><label>Contenu</label><br />

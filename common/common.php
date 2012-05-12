@@ -22,7 +22,7 @@ if(!file_exists(ROOT.'data/config.txt')){
 	die();
 }
 // constantes
-define('VERSION', '1.2.0.6-dev');
+define('VERSION', '1.2.1');
 define('ACTION', ((isset($_GET['action'])) ? $_GET['action'] : ''));
 // tableau des hooks
 $hooks = array();

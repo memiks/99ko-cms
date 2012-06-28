@@ -15,29 +15,6 @@ include_once('show.lib.php');
 ** Fonctions internes
 */
 
-/* FONCTION DEPRECIEE !! VOIR getCoreConf() & pluginsManager::getPluginConfVal()
-** Renvoie une valeur de configuration du core ou d'un plugin
-** @param : $plugin (nom du plugin), $kConf (clé de configuration)
-** @return : string (valeur) / false
-*/
-/*function getConfVal($plugin, $kConf){
-	global $coreConf;
-	// si on demande une valeur config du core on tente de recuperer la valeur dans $coreConf
-	if($plugin == 'core' && isset($coreConf[$kConf])) return $coreConf[$kConf];
-	// sinon on lit le fichier config du core
-	if($plugin == 'core'){
-		$file = ROOT.'data/config.txt';
-		//else $file = ROOT.'data/plugin/'.$plugin.'/config.txt';
-		$config = json_decode(@file_get_contents($file), true);
-		foreach($config as $k=>$v){
-			if($k == $kConf) return $v;
-		}
-	}
-	// sinon on fait appel à la classe pluginsManager
-	else echo $kConf;return pluginsManager::getPluginConfVal($plugin, $kConf);
-	return false;
-}*/
-
 /*
 ** Renvoie la configuration complète du core ou une valeur précise
 ** @return : array

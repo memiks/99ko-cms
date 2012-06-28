@@ -201,7 +201,9 @@ class plugin{
 		$this->addToBreadcrumb($infos['name'], 'index.php?p='.$this->name);
 		if($this->isDefaultPlugin) $this->initBreadcrumb();
 		$this->dataPath = (is_dir(ROOT.'data/plugin/'.$this->name)) ? ROOT.'data/plugin/'.$this->name.'/' : false;
-		$this->setPlublicTemplate('public');
+		//$this->setPlublicTemplate('public');
+		if(file_exists('theme/'.getCoreConf('theme').'/'.$this->name.'.php')) $this->publicTemplate = 'theme/'.getCoreConf('theme').'/'.$this->name.'.php';
+		else $this->publicTemplate = ROOT.'plugin/'.$this->name.'/template/public.php';
 		$this->setAdminTemplate('admin');
 		$this->configTemplate = (file_exists(ROOT.'plugin/'.$this->name.'/template/config.php')) ? ROOT.'plugin/'.$this->name.'/template/config.php': false;
 		$this->initConfig = $initConfig;
@@ -297,10 +299,10 @@ class plugin{
 		$val = trim($val);
 		$this->mainTitle = $val;
 	}
-	public function setPlublicTemplate($fileName){
+	/*public function setPlublicTemplate($fileName){
 		if(file_exists('theme/'.getCoreConf('theme').'/'.$fileName.'.php')) $this->publicTemplate = 'theme/'.getCoreConf('theme').'/'.$fileName.'.php';
 		else $this->publicTemplate = ROOT.'plugin/'.$this->name.'/template/'.$fileName.'.php';
-	}
+	}*/
 	public function setAdminTemplate($fileName){
 		$this->adminTemplate = ROOT.'plugin/'.$this->name.'/template/'.$fileName.'.php';
 	}

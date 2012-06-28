@@ -22,7 +22,7 @@ if(!file_exists(ROOT.'data/config.txt')){
 	die();
 }
 // constantes
-define('VERSION', '1.2.2 b');
+define('VERSION', '1.2.3 b');
 define('ACTION', ((isset($_GET['action'])) ? $_GET['action'] : ''));
 // tableau des hooks
 $hooks = array();
@@ -51,6 +51,10 @@ $pluginsManager = pluginsManager::getInstance();
 foreach($pluginsManager->getPlugins() as $plugin){
 	// on inclu la librairie
 	include_once($plugin->getLibFile());
+	// installation
+	if (!$plugin->isInstalled()) {
+		$pluginsManager->installPlugin($plugin->getName());
+	}
 	// on update le tableau des hooks
 	if ($plugin->getConfigVal('activate')) {
 		foreach ($plugin->getHooks() as $hookName=>$function) {
@@ -69,8 +73,12 @@ foreach($pluginsManager->getPlugins() as $plugin){
 eval(callHook('startCreatePlugin'));
 // on cree l'instance du plugin solicite
 $runPlugin = $pluginsManager->getPlugin(PLUGIN);
+// gestion erreur 404
+if(!$runPlugin || $runPlugin->getConfigVal('activate') < 1){
+	header("HTTP/1.1 404 Not Found");
+	header("Status: 404 Not Found");
+	die();
+}
 // hook
 eval(callHook('endCreatePlugin'));
-// si le plugin solicite est inactif on stop
-if($runPlugin->getConfigVal('activate') < 1) die();
 ?>

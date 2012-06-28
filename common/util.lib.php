@@ -228,7 +228,6 @@ function utilFormatDate($date, $langFrom = 'en', $langTo = 'en'){
 	elseif($langTo == 'fr'){
 		$data = $day.'/'.$month.'/'.$year;
 	}
-	echo $data;
 	return $data;
 }
 ?>

@@ -2,7 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
 
@@ -22,7 +22,7 @@ if(!file_exists(ROOT.'data/config.txt')){
 	die();
 }
 // constantes
-define('VERSION', '1.2.1');
+define('VERSION', '1.2.2 b');
 define('ACTION', ((isset($_GET['action'])) ? $_GET['action'] : ''));
 // tableau des hooks
 $hooks = array();

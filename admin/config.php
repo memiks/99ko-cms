@@ -1,6 +1,6 @@
 <?php include_once(ROOT.'admin/header.php') ?>
 
-<section id="config">
+<section id="content">
 	<h3>Configuration</h3>
 	<hr class="notop">
 

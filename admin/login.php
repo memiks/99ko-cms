@@ -7,21 +7,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>99ko - Connexion</title>
-	<!-- meta -->	
-	<meta name="description" content="Cms hyper légé!">
-	<meta name="author" content="Jonathan C.">
-	<meta name="generator" content="99Ko">
-	<meta name="robots" content="noindex" />
-	<!-- css -->
 	<link rel="stylesheet" href="css/login.css" media="all">
 	<link rel="stylesheet" href="css/common.css" media="all">
-	<?php foreach($data['linkTags'] as $file){ ?>
-		<link href="<?php echo $file; ?>" rel="stylesheet" type="text/css" />
-	<?php } ?>	
 </head>
 <body>
 <section id="login">
-	<h2>Connexion</h2>
+	<!--<h2>Connexion</h2>-->
 
 	<div id="login_panel">
 		<?php showMsg($data['msg'], 'error'); ?>
@@ -29,21 +20,21 @@
 			<div class="login_fields">			
 				<div class="field">
 				    <?php showAdminTokenField(); ?>
-					<label for="adminPwd">Mot de passe <small><a href="#GetPassword" class="openModal">Mot de Passe oublié ?</a></small></label>
+					<label for="adminPwd">Mot de passe<!-- <small><a href="#GetPassword" class="openModal">Mot de Passe oublié ?</a></small>--></label>
 					<input type="password" name="adminPwd" id="adminPwd" tabindex="1" />			
 				</div>
 			</div> <!-- login_fields -->
 			
 			<div class="login_actions">
-				<button type="submit" class="btn" tabindex="2">Valider</button>
-				<em>Propulsé par <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/">99ko</a> <span class="version"><?php echo $data['99koVersion']; ?></span></em>
+				<input type="submit" class="btn" tabindex="2" value="Valider" />
+				<em>Just using <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/">99ko</a></em>
 			</div>
 		</form>
 	</div> <!-- #login_panel -->		
 </section> <!-- #login -->
 
 <!-- Modal  -->
-	<aside id="GetPassword" class="modal">
+	<!--<aside id="GetPassword" class="modal">
 		<div>
 			<h2>Récupération du mot de passe</h2>
 			<form>
@@ -55,6 +46,6 @@
 		</div>
 	</aside>
 	
-</div>
+</div>-->
 </body>
 </html>

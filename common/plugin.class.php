@@ -2,7 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
 
@@ -179,6 +179,7 @@ class plugin{
 	private $adminTemplate;
 	private $configTemplate;
 	private $initConfig;
+	private $navigation;
 
 	/*
 	** Constructeur
@@ -195,8 +196,8 @@ class plugin{
 		$this->libFile = (file_exists(ROOT.'plugin/'.$this->name.'/'.$this->name.'.php')) ? ROOT.'plugin/'.$this->name.'/'.$this->name.'.php' : false;
 		$this->publicFile = (file_exists(ROOT.'plugin/'.$this->name.'/public.php')) ? ROOT.'plugin/'.$this->name.'/public.php' : false;
 		$this->adminFile = (file_exists(ROOT.'plugin/'.$this->name.'/admin.php')) ? ROOT.'plugin/'.$this->name.'/admin.php' : false;
-		$this->cssFile = (file_exists(ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.css')) ? ROOT.'plugin/'.$this->name.'/'.$this->name.'.css' : false;
-		$this->jsFile = (file_exists(ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.js')) ? ROOT.'plugin/'.$this->name.'/'.$this->name.'.js' : false;
+		$this->cssFile = (file_exists(ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.css')) ? ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.css' : false;
+		$this->jsFile = (file_exists(ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.js')) ? ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.js' : false;
 		$this->addToBreadcrumb($infos['name'], 'index.php?p='.$this->name);
 		if($this->isDefaultPlugin) $this->initBreadcrumb();
 		$this->dataPath = (is_dir(ROOT.'data/plugin/'.$this->name)) ? ROOT.'data/plugin/'.$this->name.'/' : false;
@@ -204,6 +205,7 @@ class plugin{
 		$this->setAdminTemplate('admin');
 		$this->configTemplate = (file_exists(ROOT.'plugin/'.$this->name.'/template/config.php')) ? ROOT.'plugin/'.$this->name.'/template/config.php': false;
 		$this->initConfig = $initConfig;
+		$this->navigation = array();
 	}
 
 	/*
@@ -269,6 +271,9 @@ class plugin{
 	public function getIsValid(){
 		return $this->isValid;
 	}
+	public function getNavigation(){
+		return $this->navigation;
+	}
 
 	/*
 	** setters
@@ -321,6 +326,14 @@ class plugin{
 	*/
 	function initBreadcrumb(){
 		$this->breadcrumb = array();
+	}
+	
+	/*
+	** Ajoute un élément dans la navigation
+	** @param : string (intitulé du lien), string (URL du lien)
+	*/
+	function addToNavigation($label, $target){
+		$this->navigation[] = array('label' => $label, 'target' => $target);
 	}
 
 	/*

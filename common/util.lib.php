@@ -2,7 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
 
@@ -18,7 +18,6 @@ function utilSetMagicQuotesOff() {
 		function stripslashes_gpc(&$value) {
 			$value = stripslashes($value);
 		}
-
 		array_walk_recursive($_GET, 'stripslashes_gpc');
 		array_walk_recursive($_POST, 'stripslashes_gpc');
 		array_walk_recursive($_COOKIE, 'stripslashes_gpc');
@@ -38,13 +37,10 @@ function utilSort2DimArray($data, $key, $mode) {
 	} elseif($mode == 'num') {
 		$mode = SORT_NUMERIC;
 	}
-	
 	$temp = array();
-	
 	foreach ($data as $k=>$v) {
 		$temp[$k] = $v[$key];
 	}
-	
 	array_multisort($temp, $mode, $data);
 	return $data;
 }
@@ -56,15 +52,12 @@ function utilSort2DimArray($data, $key, $mode) {
 */
 function utilStrToUrl($str) {
 	$str = str_replace('&', 'et', $str);
-	
 	if ($str !== mb_convert_encoding(mb_convert_encoding($str,'UTF-32','UTF-8'),'UTF-8','UTF-32')) {
 		$str = mb_convert_encoding($str,'UTF-8');
 	}
-	
 	$str = htmlentities($str, ENT_NOQUOTES ,'UTF-8');
 	$str = preg_replace('`&([a-z]{1,2})(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig);`i','$1',$str);
 	$str = preg_replace(array('`[^a-z0-9]`i','`[-]+`'),'-',$str);
-	
 	return strtolower(trim($str,'-'));
 }
 
@@ -77,7 +70,6 @@ function utilIsEmail($email) {
 	if (preg_match("/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4}$/", $email)) {
 		return true;
 	}
-	
 	return false;
 }
 
@@ -92,7 +84,6 @@ function utilSendEmail($from, $reply, $to, $subject, $msg) {
 	$headers.= "X-Mailer: PHP/".phpversion()."\r\n";
 	$headers.= 'Content-Type: text/plain; charset="utf-8"'."\r\n";
 	$headers.= 'Content-Transfer-Encoding: 8bit';
-	
 	if (@mail($to, $subject, $msg, $headers)) {
 		return true;
 	}
@@ -116,7 +107,6 @@ function utilGetFileExtension($file) {
 function utilScanDir($folder, $not = array()) {
 	$data['dir'] = array();
 	$data['file'] = array();
-	
 	foreach (scandir($folder) as $file) {
 		if ($file[0] != '.' && !in_array($file, $not)) {
 			if (is_file($folder.$file)) {
@@ -126,7 +116,6 @@ function utilScanDir($folder, $not = array()) {
 			}
 		}
 	}
-	
 	return $data;
 }
 
@@ -155,17 +144,91 @@ function utilReadJsonFile($file, $assoc = true) {
 	return json_decode(@file_get_contents($file), $assoc);
 }
 
-// fontion à créer : upload de fichier avec vérifications de base
-// $k : $_FILES[$k]
-// $name : nom du fichier (destination)
-// $dir : chemin (destination)
-// $validation : array validations (extensions autorisées, poids fichier max...)
+/*
+** Upload un fichier
+** @param : key $_FILES, dossier upload, nom final du fichier, validations (array extensions autorisées, poids max)
+** @return : message erreur
+** Exemple :
+** $validations = array(
+		'extensions' => array('jpg'),
+		'size' => 20000,
+	);
+	 utilUploadFile('fichier', 'data/upload/', 'vacance 2012', $validations);
+*/
 function utilUploadFile($k, $dir, $name, $validations = array()){
+	if(isset($_FILES[$k]) && $_FILES[$k]['name'] != ''){
+		$extension = mb_strtolower(utilGetFileExtension($_FILES[$k]['name']));
+		if(isset($validations['extensions']) && !in_array($extension, $validations['extensions'])) return 'extension error';
+		$size = filesize($_FILES[$k]['tmp_name']);
+		if(isset($validations['size']) && $size > $validations['size']) return 'size error';
+		if(move_uploaded_file($_FILES[$k]['tmp_name'], $dir.$name.'.'.$extension)){
+			return 'success';
+		}
+		else return 'upload error';
+	}
+	return 'undefined';
 }
 
-// fonction à créer : génération élement de formulaire select
-function utilMakeSelectTag($name, $data, $selectedKe = '', $id = '', $class = ''){
-	
+/*
+** Retourne un tableau HTML
+*/
+function utilHtmlTable($cols, $vals, $params = ''){
+	$cols = explode(',', $cols);
+	$data = '<table '.$params.'><thead><tr>';
+	foreach($cols as $v){
+		$data.= '<th>'.$v.'</th>';
+	}
+	$data.= '</tr></thead><tbody>';
+	foreach($vals as $v){
+		$data.= '<tr>';
+		foreach($v as $v2){
+			$data.= '<td>'.$v2.'</td>';
+		}
+		$data.= '</tr>';
+	}
+	$data.= '</tbody><tfoot><tr>';
+	foreach($cols as $v){
+		$data.= '<th>'.$v.'</th>';
+	}
+	$data.= '</tr></tfoot></table>';
+	return $data;
 }
 
+/*
+** Retourne un élément HTML select
+*/
+function utilHtmlSelect($options, $selected = '', $params = ''){
+	$data = '<select '.$params.'>';
+	foreach($options as $k=>$v){
+		$data.= '<option '.(($k == $selected) ? 'selected="selected"' : '').' value="'.$k.'">'.$v.'</option>';
+	}
+	$data.= '</select>';
+	return $data;
+}
+
+/*
+** Formate une date
+*/
+function utilFormatDate($date, $langFrom = 'en', $langTo = 'en'){
+	$date = substr($date, 0, 10);
+	$temp = preg_split('#[-_;\. \/]#', $date);
+	if($langFrom == 'en'){
+		$year = $temp[0];
+		$month = $temp[1];
+		$day = $temp[2];
+	}
+	elseif($langFrom == 'fr'){
+		$year = $temp[2];
+		$month = $temp[1];
+		$day = $temp[0];
+	}
+	if($langTo == 'en'){
+		$data = $year.'-'.$month.'-'.$day;
+	}
+	elseif($langTo == 'fr'){
+		$data = $day.'/'.$month.'/'.$year;
+	}
+	echo $data;
+	return $data;
+}
 ?>

@@ -105,10 +105,6 @@ if (isset($_GET['updateto'])) {
 <head>
        <meta charset="utf-8">  
        <title>99ko - Installation</title>
-       <!-- meta -->
-       <meta name="description" content="Cms hyper léger!">
-       <meta name="author" content="Jonathan C.">
-       <meta name="generator" content="99Ko">
        <!-- css -->
        <link rel="stylesheet" href="admin/css/style.css" media="all">
        <link rel="stylesheet" href="admin/css/common.css" media="all">

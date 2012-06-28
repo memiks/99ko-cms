@@ -1,6 +1,6 @@
 <?php include_once(ROOT.'admin/header.php') ?>
 
-<section id="plugins" onclick="closeConfig();openPlugins()">
+<section id="content" onclick="closeConfig();openPlugins()">
 	<h3>Plugins</h3>
 	<hr class="notop">
 

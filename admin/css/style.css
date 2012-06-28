@@ -24,8 +24,8 @@ header{-moz-box-shadow:0 0 6px rgba(3,3,3,0.6); -webkit-box-shadow:0 0 6px rgba(
 header a{position:relative; z-index:100}
 
 img{border:0}
-img#pluginConfigButton{float:right; margin-top:-20px}
-img#pluginConfigButton:hover{cursor:pointer}
+#pluginConfigButton{float:right; margin-top:-20px;font-size:10px;}
+#pluginConfigButton:hover{cursor:pointer}
 #pluginConfig{display:none}
 
 #copyright{position:absolute; bottom:10px; font-size:11px; right:15px; width:200px; text-align:right; z-index:1}
@@ -35,10 +35,10 @@ noscript p{width:800px; font-size:20px; padding-top:20px; margin:0 auto; color:#
 .small{font-size:10px; letter-spacing:0}
 
 /* === HEADER & NAV Section === */
-header #logo{display:block; height:20%; max-height:200px; min-height:70px; width:200px; background-position:center center; background-repeat:no-repeat}
+header #logo{display:block; height:185px; max-height:200px; min-height:70px; width:200px; background-position:center center; background-repeat:no-repeat}
 nav[role="navigation"] > ol{font-size:12px; font-weight:700; min-height:150px; height:75%; overflow:auto}
-nav[role="navigation"] > ol li{text-align:right; padding:0}
-nav[role="navigation"] > ol a{display:block; border-top:1px solid #ddd; border-bottom:1px solid #aaa; padding:6px 15px 7px 0; text-align:right}
+nav[role="navigation"] > ol li{text-align:right; padding:0;margin-bottom:1px;}
+nav[role="navigation"] > ol a{display:block;padding:6px 15px 7px 0; text-align:right}
 nav[role="navigation"] > ol a:hover, nav[role="navigation"] > ol a.current{-webkit-text-shadow:none; -moz-text-shadow:none; text-shadow:none; text-decoration:none}
 nav[role="navigation"] > ol li ol{border-top:0; font-size:10px; min-height:10px; height:auto; overflow:auto; margin:0; display:none}
 nav[role="navigation"] > ol li ol li a{display:block; padding:4px 15px 5px 0; text-align:right}
@@ -66,9 +66,9 @@ nav[role="navigation"] > ol li ol li a{display:block; padding:4px 15px 5px 0; te
 
 /* Bouttons
 -------------------------------------------------------------------*/
-a.btn{ background:#e3e3e3;  border:1px solid #bbb;  -webkit-border-radius:3px;  -moz-border-radius:3px;  -ms-border-radius:3px;  -o-border-radius:3px;  border-radius:3px;  -webkit-box-shadow:inset 0 0 1px 1px #f6f6f6;  -moz-box-shadow:inset 0 0 1px 1px #f6f6f6;  -ms-box-shadow:inset 0 0 1px 1px #f6f6f6;  -o-box-shadow:inset 0 0 1px 1px #f6f6f6;  box-shadow:inset 0 0 1px 1px #f6f6f6;  color:#333;  font:bold 12px "helvetica neue",helvetica,arial,sans-serif;  line-height:1;  padding:5px 9px;  text-align:center;  text-shadow:0 1px 0 #fff;  width:150px}
-a.btn:hover{ background:#d9d9d9;  -webkit-box-shadow:inset 0 0 1px 1px #eaeaea;  -moz-box-shadow:inset 0 0 1px 1px #eaeaea;  -ms-box-shadow:inset 0 0 1px 1px #eaeaea;  -o-box-shadow:inset 0 0 1px 1px #eaeaea;  box-shadow:inset 0 0 1px 1px #eaeaea;  color:#222;  cursor:pointer}
-a.btn:active{ background:#d0d0d0;  -webkit-box-shadow:inset 0 0 1px 1px #e3e3e3;  -moz-box-shadow:inset 0 0 1px 1px #e3e3e3;  -ms-box-shadow:inset 0 0 1px 1px #e3e3e3;  -o-box-shadow:inset 0 0 1px 1px #e3e3e3;  box-shadow:inset 0 0 1px 1px #e3e3e3;  color:#000}
+a.btn, input[type=submit]{ cursor:pointer;background:#e3e3e3;  border:1px solid #bbb;  -webkit-border-radius:3px;  -moz-border-radius:3px;  -ms-border-radius:3px;  -o-border-radius:3px;  border-radius:3px;  -webkit-box-shadow:inset 0 0 1px 1px #f6f6f6;  -moz-box-shadow:inset 0 0 1px 1px #f6f6f6;  -ms-box-shadow:inset 0 0 1px 1px #f6f6f6;  -o-box-shadow:inset 0 0 1px 1px #f6f6f6;  box-shadow:inset 0 0 1px 1px #f6f6f6;  color:#333;  font:bold 12px "helvetica neue",helvetica,arial,sans-serif;  line-height:1;  padding:5px 9px;  text-align:center;  text-shadow:0 1px 0 #fff;  width:150px}
+/*a.btn:hover{ background:#d9d9d9;  -webkit-box-shadow:inset 0 0 1px 1px #eaeaea;  -moz-box-shadow:inset 0 0 1px 1px #eaeaea;  -ms-box-shadow:inset 0 0 1px 1px #eaeaea;  -o-box-shadow:inset 0 0 1px 1px #eaeaea;  box-shadow:inset 0 0 1px 1px #eaeaea;  color:#222;  cursor:pointer}
+a.btn:active{ background:#d0d0d0;  -webkit-box-shadow:inset 0 0 1px 1px #e3e3e3;  -moz-box-shadow:inset 0 0 1px 1px #e3e3e3;  -ms-box-shadow:inset 0 0 1px 1px #e3e3e3;  -o-box-shadow:inset 0 0 1px 1px #e3e3e3;  box-shadow:inset 0 0 1px 1px #e3e3e3;  color:#000}*/
 
 .del-btn{ font-size:12px;  margin-left:10px;  padding-left:10px;  padding-bottom:2px;  padding-right:10px;  padding-top:2px;  text-decoration:none;  background-color:#A26F6F;  color:white;  -webkit-border-radius:3px;  -moz-border-radius:3px;  border-radius:3px}
 .edit-btn{ font-size:12px;  margin-left:10px;  padding-left:10px;  padding-bottom:2px;  padding-right:10px;  padding-top:2px;  text-decoration:none;  background-color:#77A2A8;  color:white;  -webkit-border-radius:3px;  -moz-border-radius:3px;  border-radius:3px}

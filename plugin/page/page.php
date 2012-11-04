@@ -36,7 +36,7 @@ define('PAGE_DATAPATH', ROOT.'data/plugin/page/');
 $page = new page();
 
 foreach($page->getItems() as $k=>$pageItem) if(!$pageItem->getIsHidden()){
-	$temp = ($coreConf['defaultPlugin'] == 'page' && $pageItem->getIsHomepage()) ? $coreConf['siteUrl'] : 'index.php?p=page&id='.$pageItem->getId();
+	$temp = ($coreConf['defaultPlugin'] == 'page' && $pageItem->getIsHomepage()) ? $coreConf['siteUrl'] : rewriteUrl('page', array('name' => $pageItem->getName(), 'id' => $pageItem->getId()));
 	$pluginsManager->getPlugin('page')->addToNavigation($pageItem->getName(), $temp);
 }
 
@@ -93,12 +93,42 @@ class page{
 		if($obj->getIsHomepage() > 0) $this->initIshomepageVal();
 		if(@file_put_contents(PAGE_DATAPATH.$id.'.txt', json_encode($data), 0666)){
 			$this->repairPositions($obj);
+			// action sur le plugin menu
+			
+			/*if(pluginsManager::isActivePlugin('menu')){
+				$save = false;
+				$menu = new menu('');
+				$link[0] = array(
+					'label' => $obj->getName(),
+					'target' => rewriteUrl('page', array('name' => $obj->getName(), 'id' => $id)),
+					'plugin' => 'page',
+				);
+				if(!$obj->getId()) $save = true;
+				if($save) $menu->addLinks($link);
+				if($obj->getIsHidden()){
+					foreach(menu::getMenu() as $k=>$v){
+						if($v->getPlugin() == 'page' && $v->getLabel() == $obj->getName()){
+							$menu = new menu();
+							$menu->deleteLink($k);
+						}
+					}
+				}
+			}*/
 			return true;
 		}
 		return false;
 	}
 	public function del($obj){
 		if($obj->getIsHomepage() < 1 && $this->count() > 1){
+			// Action sur le plugin menu
+			if(pluginsManager::isActivePlugin('menu')){
+				foreach(menu::getMenu() as $k=>$v){
+					if($v->getPlugin() == 'page' && $v->getLabel() == $obj->getName()){
+						$menu = new menu();
+						$menu->deleteLink($k);
+					}
+				}
+			}
 			if(@unlink(PAGE_DATAPATH.$obj->getId().'.txt')) return true;
 		}
 		return false;

@@ -1,4 +1,11 @@
 <?php
+
+/*
+ * Index à réécrire mais attention à conserver certaines variables
+ * pour des raisons de compatibilités avec les plugins
+*/
+
+
 // on declare ROOT
 define('ROOT', '../');
 // on inclu le fichier common
@@ -7,6 +14,7 @@ include_once(ROOT.'common/common.php');
 if(!isset($_SESSION['token'])) $_SESSION['token'] = uniqid();
 // on check le jeton
 if(in_array(ACTION, array('save', 'del', 'saveconfig', 'saveplugins', 'login', 'logout')) && $_REQUEST['token'] != $_SESSION['token']){	
+	include_once('login.php');
 	die();
 }
 // variables de template
@@ -14,28 +22,29 @@ $data['msg'] = '';
 $data['msgConfig'] = '';
 $data['msgPlugins'] = '';
 $data['99koVersion'] = VERSION;
-$data['linkTags'][] = '';//ROOT.'common/normalize.css';
+/*$data['linkTags'][] = '';//ROOT.'common/normalize.css';
 $data['linkTags'][] = '';//'styles.css';
-$data['scriptTags'][] = ROOT.'common/jquery.js';
+$data['scriptTags'][] = ROOT.'common/jquery.js';*/
 $data['pluginName'] = $runPlugin->getInfoVal('name');
 $data['configSiteName'] = $coreConf['siteName'];
 $data['configSiteUrl'] = $coreConf['siteUrl'];
 $data['configSiteDescription'] = $coreConf['siteDescription'];
 $data['configAdminEmail'] = $coreConf['adminEmail'];
+$data['configUrlRewriting'] = $coreConf['urlRewriting'];
 $data['configThemes'] = array();
 $data['plugins'] = array();
-$data['openTab'] = (isset($_GET['opentab'])) ? ucfirst($_GET['opentab']) : '';
+//$data['openTab'] = (isset($_GET['opentab'])) ? ucfirst($_GET['opentab']) : '';
 $data['mainTabTitle'] = (isset($_GET['p'])) ? $runPlugin->getInfoVal('name') : 'Informations';
 $data['token'] = $_SESSION['token'];
-foreach($pluginsManager->getPlugins() as $plugin) if($plugin->getConfigVal('activate')){
+/*foreach($pluginsManager->getPlugins() as $plugin) if($plugin->getConfigVal('activate')){
 	if($plugin->getCssFile()) $data['linkTags'][] = $plugin->getCssFile();
 	if($plugin->getJsFile()) $data['scriptTags'][] = $plugin->getJsFile();
-}
-if (isset($_GET['p']) && $runPlugin->getConfigTemplate()) {
+}*/
+/*if (isset($_GET['p']) && $runPlugin->getConfigTemplate()) {
 	$data['scriptTags'][] = ROOT.'admin/js/plugin-config.js';
 }
 $data['linkTags'] = array_unique($data['linkTags']);
-$data['scriptTags'] = array_unique($data['scriptTags']);
+$data['scriptTags'] = array_unique($data['scriptTags']);*/
 foreach($pluginsManager->getPlugins() as $k=>$plugin){
 	$data['plugins'][$k]['id'] = $plugin->getName();
 	$data['plugins'][$k]['isDefaultPlugin'] = $plugin->getIsDefaultPlugin();
@@ -50,16 +59,23 @@ foreach($pluginsManager->getPlugins() as $k=>$plugin){
 	$data['plugins'][$k]['authorWebsite'] = $plugin->getInfoVal('authorWebsite');
 	$data['plugins'][$k]['frontFile'] = $plugin->getFrontFile();
 }
-foreach(listThemes() as $k=>$theme){
+/*foreach(listThemes() as $k=>$theme){
 	$data['configThemes'][$k]['name'] = $theme['name'];
 	$data['configThemes'][$k]['author'] = $theme['author'];
 	$data['configThemes'][$k]['authorEmail'] = $theme['authorEmail'];
 	$data['configThemes'][$k]['authorWebsite'] = $theme['authorWebsite'];
 	$data['configThemes'][$k]['selected'] = ($k == $coreConf['theme']) ? true : false;
 }
+$data['htaccess'] = @file_get_contents(ROOT.'.htaccess');
+$data['htaccess'] = htmlspecialchars($data['htaccess'], ENT_QUOTES, 'UTF-8');
+$temp = str_replace('http://', '', $coreConf['siteUrl']);
+$temp = substr(strrchr($temp, '/'), 1);
+if($temp == '') $temp = '/';
+else $temp = '/'.$temp.'/';
+$data['rewriteBase'] = $temp;*/
 // check secu
 $data['msgSecurity'] = '';
-if($coreConf['adminPwd'] == 'cbdbe4936ce8be63184d9f2e13fc249234371b9a') $data['msgSecurity'] = "Le mot de passe admin doit être modifié !\n";
+//if($coreConf['adminPwd'] == 'cbdbe4936ce8be63184d9f2e13fc249234371b9a') $data['msgSecurity'] = "Le mot de passe admin doit être modifié !\n";
 if(!file_exists('../.htaccess')) $data['msgSecurity'].= "Le fichier .htaccess est manquant !\n";
 if(file_exists('../install.php')) $data['msgSecurity'].= "Le fichier install.php doit être supprimé !\n";
 // actions
@@ -74,7 +90,8 @@ switch(ACTION){
 			$data['msg'] = "Veuillez attendre avant de faire une nouvelle tentative";
 		} else {
 			$pwd = $coreConf['adminPwd'];
-			if (sha1(trim($_POST['adminPwd'])) == $pwd) {
+			//if (sha1(trim($_POST['adminPwd'])) == $pwd) {
+			if(encrypt(trim($_POST['adminPwd'])) == $pwd){
 				$_SESSION['admin'] = $pwd;
 				$_SESSION['loginAttempt'] = 0;
 				$_SESSION['token'] = uniqid();
@@ -93,8 +110,12 @@ switch(ACTION){
 		header('location:index.php');
 		die();
 		break;
-	// sauvegarde de la configuration du core
+	/*// sauvegarde de la configuration du core
 	case 'saveconfig':
+		if (!isset($_SESSION['admin']) || $_SESSION['admin'] != $coreConf['adminPwd']) {
+			include_once('login.php');
+			die();
+		}
 		$error = false;
 		$config = array(
 			'siteName' => (trim($_POST['siteName']) != '') ? trim($_POST['siteName']) : 'Démo',
@@ -103,11 +124,13 @@ switch(ACTION){
 			'siteUrl' => (trim($_POST['siteUrl']) != '') ? trim($_POST['siteUrl']) : getSiteUrl(),
 			'theme' => $_POST['theme'],
 			'defaultPlugin' => $_POST['defaultPlugin'],
+			'urlRewriting' => (isset($_POST['urlRewriting'])) ? '1' : '0',
 		);
 
 		if (trim($_POST['adminPwd']) != '') {
 			if ($_POST['adminPwd'] == $_POST['adminPwd2']) {
-				$config['adminPwd'] = sha1(trim($_POST['adminPwd']));
+				//$config['adminPwd'] = sha1(trim($_POST['adminPwd']));
+				$config['adminPwd'] = encrypt(trim($_POST['adminPwd']));
 				$_SESSION['admin'] = $config['adminPwd'];
 			} else {
 				$data['msgConfig'] = "Mot de passe différent de sa confirmation";
@@ -116,17 +139,23 @@ switch(ACTION){
 		}
 
 		if (!saveConfig($config)) {
-			$data['msgConfig'] = "Erreur d'enregistrement de la configuration";
+			$data['msgConfig'] = "Une erreur d'écriture des données est survenue";
 			$error = true;
 		}
 		
+		@file_put_contents(ROOT.'.htaccess', $_POST['htaccess']);
 		if (!$error) {
 			header('location:index.php?s=config');
 			die();
 		}
+		else $_GET['s'] = 'config';
 		break;
 	// sauvegarde des plugins
 	case 'saveplugins':
+		if (!isset($_SESSION['admin']) || $_SESSION['admin'] != $coreConf['adminPwd']) {
+			include_once('login.php');
+			die();
+		}
 		$error = false;
 
 		foreach ($pluginsManager->getPlugins() as $k=>$plug) {
@@ -143,7 +172,7 @@ switch(ACTION){
 			if (!$pluginsManager->savePluginConfig($plug)) {
 				
 				$error = true;
-				$data['msgPlugins'] = "Erreur d'enregistrement de la configuration du plugin";
+				$data['msgPlugins'] = "Une erreur d'écriture des données est survenue";
 			}
 		}
 
@@ -151,7 +180,7 @@ switch(ACTION){
 			header('location:index.php?s=plugins');
 			die();
 		}
-		break;
+		break;*/
 }
 
 // si on est pas identifie on impose le login

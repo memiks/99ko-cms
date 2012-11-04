@@ -97,4 +97,41 @@ function getThemeInfos($name){
 	$data = json_decode(@file_get_contents(ROOT.'theme/'.$name.'/infos.json'), true);
 	return $data;
 }
+
+function rewriteUrl($plugin, $params = array()){
+	if(getCoreConf('urlRewriting')){
+		$url = $plugin.'/';
+		if(count($params) > 0){
+			foreach($params as $k=>$v){
+				$url.= utilStrToUrl($v).',';
+			}
+			$url = trim($url, ',');
+			$url.= '.html';
+		}
+	}
+	else{
+		$url = 'index.php?p='.$plugin;
+		foreach($params as $k=>$v){
+			$url.= '&'.$k.'='.utilStrToUrl($v);
+		}
+	}
+	return $url;
+}
+
+function getUrlParams(){
+	$data = array();
+	if(getCoreConf('urlRewriting')){
+		$data = explode(',', $_GET['param']);
+	}
+	else{
+		foreach($_GET as $k=>$v){
+			if($k != 'p') $data[] = $v;
+		}
+	}
+	return $data;
+}
+
+function encrypt($data){
+	return hash_hmac('sha1', $data, KEY);
+}
 ?>

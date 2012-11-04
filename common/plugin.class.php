@@ -95,7 +95,9 @@ class pluginsManager{
 		$items = utilScanDir(ROOT.'plugin/');
 		
 		foreach($items['dir'] as $dir){
-			$dataNotSorted[$dir] = json_decode(@file_get_contents(ROOT.'data/plugin/'.$dir.'/config.txt'), true);
+			// les plugins non installés ont une priorité faible
+			if(file_exists(ROOT.'data/plugin/'.$dir.'/config.txt')) $dataNotSorted[$dir] = json_decode(@file_get_contents(ROOT.'data/plugin/'.$dir.'/config.txt'), true);
+			else $dataNotSorted[$dir]['priority'] = '10';
 		}
 		$dataSorted = utilSort2DimArray($dataNotSorted, 'priority', 'num');
 		foreach($dataSorted as $plugin=>$config){
@@ -203,8 +205,10 @@ class plugin{
 		$this->dataPath = (is_dir(ROOT.'data/plugin/'.$this->name)) ? ROOT.'data/plugin/'.$this->name.'/' : false;
 		//$this->setPlublicTemplate('public');
 		if(file_exists('theme/'.getCoreConf('theme').'/'.$this->name.'.php')) $this->publicTemplate = 'theme/'.getCoreConf('theme').'/'.$this->name.'.php';
-		else $this->publicTemplate = ROOT.'plugin/'.$this->name.'/template/public.php';
-		$this->setAdminTemplate('admin');
+		elseif(file_exists(ROOT.'plugin/'.$this->name.'/template/public.php')) $this->publicTemplate = ROOT.'plugin/'.$this->name.'/template/public.php';
+		else $this->publicTemplate = false;
+		//$this->setAdminTemplate('admin');
+		$this->adminTemplate = (file_exists(ROOT.'plugin/'.$this->name.'/template/admin.php')) ? ROOT.'plugin/'.$this->name.'/template/admin.php' : false;
 		$this->configTemplate = (file_exists(ROOT.'plugin/'.$this->name.'/template/config.php')) ? ROOT.'plugin/'.$this->name.'/template/config.php': false;
 		$this->initConfig = $initConfig;
 		$this->navigation = array();
@@ -214,7 +218,7 @@ class plugin{
 	** getters
 	*/
 	public function getConfigVal($val){
-		return $this->config[$val];
+		if(isset($this->config[$val])) return $this->config[$val];
 	}
 	public function getConfig(){
 		return $this->config;
@@ -300,12 +304,11 @@ class plugin{
 		$this->mainTitle = $val;
 	}
 	/*public function setPlublicTemplate($fileName){
-		if(file_exists('theme/'.getCoreConf('theme').'/'.$fileName.'.php')) $this->publicTemplate = 'theme/'.getCoreConf('theme').'/'.$fileName.'.php';
-		else $this->publicTemplate = ROOT.'plugin/'.$this->name.'/template/'.$fileName.'.php';
-	}*/
+		$this->publicTemplate = ROOT.'plugin/'.$this->name.'/template/'.$fileName.'.php';
+	}
 	public function setAdminTemplate($fileName){
 		$this->adminTemplate = ROOT.'plugin/'.$this->name.'/template/'.$fileName.'.php';
-	}
+	}*/
 
 	/*
 	** Ajoute un élément au fil d'Ariane
@@ -332,10 +335,25 @@ class plugin{
 	
 	/*
 	** Ajoute un élément dans la navigation
-	** @param : string (intitulé du lien), string (URL du lien)
+	** @param : string (intitulé du lien), string (URL du lien), string (attribut target)
 	*/
-	function addToNavigation($label, $target){
-		$this->navigation[] = array('label' => $label, 'target' => $target);
+	function addToNavigation($label, $target, $targetAttribut = '_self'){
+		$this->navigation[] = array('label' => $label, 'target' => $target, 'targetAttribut' => $targetAttribut);
+	}
+	
+	/*
+	** Supprime un élément de la navigation
+	** @param : int (clé à supprimer)
+	*/
+	function removeToNavigation($k){
+		unset($this->navigation[$k]);
+	}
+
+	/*
+	** Initialise la navigation
+	*/
+	function initNavigation(){
+		$this->navigation = array();
 	}
 
 	/*

@@ -35,12 +35,17 @@ function showMsg($msg, $type) {
 */
 function showLinkTags($format = '<link href="[file]" rel="stylesheet" type="text/css" />'){
 	global $pluginsManager, $coreConf;
+	$data = '';
+	eval(callHook('startShowLinkTags'));
+	if(ROOT == './') $data.= str_replace('[file]', ROOT.'common/normalize.css', $format);
 	foreach($pluginsManager->getPlugins() as $k=>$plugin){
 		if ($plugin->getConfigVal('activate') && $plugin->getCssFile()){
-			echo str_replace('[file]', $plugin->getCssFile(), $format);
+			$data.= str_replace('[file]', $plugin->getCssFile(), $format);
 		}
 	}
-	if(ROOT == './') echo str_replace('[file]', ROOT.'theme/'.$coreConf['theme'].'/styles.css', $format);
+	if(ROOT == './') $data.= str_replace('[file]', ROOT.'theme/'.$coreConf['theme'].'/styles.css', $format);
+	eval(callHook('endShowLinkTags'));
+	echo $data;
 }
 
 /*
@@ -49,12 +54,17 @@ function showLinkTags($format = '<link href="[file]" rel="stylesheet" type="text
 */
 function showScriptTags($format = '<script type="text/javascript" src="[file]"></script>') {
 	global $pluginsManager, $coreConf;
-	echo str_replace('[file]', ROOT.'common/jquery.js', $format);
+	$data = '';
+	eval(callHook('startShowScriptTags'));
+	$data = str_replace('[file]', ROOT.'common/jquery.js', $format);
 	foreach($pluginsManager->getPlugins() as $k=>$plugin){
 		if ($plugin->getConfigVal('activate') && $plugin->getJsFile()){
-			echo str_replace('[file]', $plugin->getJsFile(), $format);
+			$data.= str_replace('[file]', $plugin->getJsFile(), $format);
 		}
 	}
+	if(ROOT == './') $data.= str_replace('[file]', ROOT.'theme/'.$coreConf['theme'].'/scripts.js', $format);
+	eval(callHook('endShowScriptTags'));
+	echo $data;
 }
 
 /************************************************
@@ -94,7 +104,10 @@ function showAdminTokenField() {
 */
 function showTitleTag() {
 	global $runPlugin;
-	echo $runPlugin->getTitleTag();
+	eval(callHook('startShowtitleTag'));
+	$data = $runPlugin->getTitleTag();
+	eval(callHook('endShowtitleTag'));
+	echo $data;
 }
 
 /*
@@ -102,7 +115,10 @@ function showTitleTag() {
 */
 function showMetaDescriptionTag() {
 	global $runPlugin;
-	echo $runPlugin->getMetaDescriptionTag();
+	eval(callHook('startShowMetaDescriptionTag'));
+	$data = $runPlugin->getMetaDescriptionTag();
+	eval(callHook('endShowMetaDescriptionTag'));
+	echo $data;
 }
 
 /*
@@ -110,7 +126,10 @@ function showMetaDescriptionTag() {
 */
 function showMainTitle() {
 	global $runPlugin;
-	echo $runPlugin->getMainTitle();
+	eval(callHook('startShowMainTitle'));
+	$data = $runPlugin->getMainTitle();
+	eval(callHook('endShowMainTitle'));
+	echo $data;
 }
 
 /*
@@ -118,7 +137,10 @@ function showMainTitle() {
 */
 function showSiteName() {
 	global $coreConf;
-	echo $coreConf['siteName'];
+	eval(callHook('startShowSiteName'));
+	$data = $coreConf['siteName'];
+	eval(callHook('endShowSiteName'));
+	echo $data;
 }
 
 /*
@@ -126,7 +148,10 @@ function showSiteName() {
 */
 function showSiteDescription() {
 	global $coreConf;
-	echo $coreConf['siteDescription'];
+	eval(callHook('startShowSiteDescription'));
+	$data = $coreConf['siteDescription'];
+	eval(callHook('endShowSiteDescription'));
+	echo $data;
 }
 
 /*
@@ -134,7 +159,10 @@ function showSiteDescription() {
 */
 function showSiteUrl() {
 	global $coreConf;
-	echo $coreConf['siteUrl'];
+	eval(callHook('startShowSiteUrl'));
+	$data = $coreConf['siteUrl'];
+	eval(callHook('endShowSiteUrl'));
+	echo $data;
 }
 
 /*
@@ -142,23 +170,31 @@ function showSiteUrl() {
 */
 function showExecTime() {
 	global $time;
-	echo round(microtime(true) - $time, 3);
+	eval(callHook('startShowExecTime'));
+	$data = round(microtime(true) - $time, 3);
+	eval(callHook('endShowExecTime'));
+	echo $data;
 }
 
 /*
 ** Affiche le menu principal
 ** @param : $format (format)
 */
-function showMainNavigation($format = '<li><a href="[target]">[label]</a></li>') {
+function showMainNavigation($format = '<li><a target="[targetAttribut]" href="[target]">[label]</a></li>') {
 	global $pluginsManager;
-	foreach($pluginsManager->getPlugins() as $k=>$plugin){
+	$data = '';
+	eval(callHook('startShowMainNavigation'));
+	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
 		foreach($plugin->getNavigation() as $k2=>$item){
-			$output = $format;
-			$output = str_replace('[target]', $item['target'], $output);
-			$output = str_replace('[label]', $item['label'], $output);
-			echo $output;
+			$temp = $format;
+			$temp = str_replace('[target]', $item['target'], $temp);
+			$temp = str_replace('[label]', $item['label'], $temp);
+			$temp = str_replace('[targetAttribut]', $item['targetAttribut'], $temp);
+			$data.= $temp;
 		}
 	}
+	eval(callHook('endShowMainNavigation'));
+	echo $data;
 }
 
 /*
@@ -166,13 +202,17 @@ function showMainNavigation($format = '<li><a href="[target]">[label]</a></li>')
 */
 function showBreadcrumb() {
 	global $runPlugin, $coreConf;
+	$data = '';
+	eval(callHook('startShowBreadcrumb'));
 	if (count($runPlugin->getBreadcrumb()) > 0) {
-		echo '<p id="breadcrumb"><a href="'.$coreConf['siteUrl'].'">Accueil</a>';
+		$data.= '<p id="breadcrumb"><a href="'.$coreConf['siteUrl'].'">Accueil</a>';
 		foreach ($runPlugin->getBreadcrumb() as $item) {
-			echo ' >> <a href="'.$item['target'].'">'.$item['label'].'</a>';
+			$data.= ' >> <a href="'.$item['target'].'">'.$item['label'].'</a>';
 		}
-		echo '</p>';
+		$data.= '</p>';
 	}
+	eval(callHook('endShowBreadcrumb'));
+	echo $data;
 }
 
 /*
@@ -180,11 +220,13 @@ function showBreadcrumb() {
 */
 function showTheme($format = '<a target="_blank" href="[authorWebsite]">[name]</a>') {
 	global $themes, $coreConf;
-	$output = $format;
-	$output = str_replace('[authorWebsite]', $themes[$coreConf['theme']]['authorWebsite'], $output);
-	$output = str_replace('[author]', $themes[$coreConf['theme']]['author'], $output);
-	$output = str_replace('[name]', $themes[$coreConf['theme']]['name'], $output);
-	echo $output;
+	eval(callHook('startShowTheme'));
+	$data = $format;
+	$data = str_replace('[authorWebsite]', $themes[$coreConf['theme']]['authorWebsite'], $data);
+	$data = str_replace('[author]', $themes[$coreConf['theme']]['author'], $data);
+	$data = str_replace('[name]', $themes[$coreConf['theme']]['name'], $data);
+	eval(callHook('endShowTheme'));
+	echo $data;
 }
 
 /*
@@ -192,19 +234,26 @@ function showTheme($format = '<a target="_blank" href="[authorWebsite]">[name]</
 */
 function showSidebarItems($format = '<div class="item" id="[id]"><p class="title">[title]</p>[content]</div>') {
 	global $pluginsManager;
+	$data = '';
+	eval(callHook('startShowSidebarItems'));
 	foreach($pluginsManager->getPlugins() as $k=>$plugin){
 		if($plugin->getConfigVal('sidebarTitle') != '' && $plugin->getConfigVal('sidebarCallFunction') != ''){
-			$output = $format;
-			$output = str_replace('[id]', 'sidebaritem-'.$plugin->getName(), $output);
-			$output = str_replace('[title]', $plugin->getConfigVal('sidebarTitle'), $output);
-			$output = str_replace('[content]', call_user_func($plugin->getConfigVal('sidebarCallFunction')), $output);
-			echo $output;
+			$temp = $format;
+			$temp = str_replace('[id]', 'sidebaritem-'.$plugin->getName(), $temp);
+			$temp = str_replace('[title]', $plugin->getConfigVal('sidebarTitle'), $temp);
+			$temp = str_replace('[content]', call_user_func($plugin->getConfigVal('sidebarCallFunction')), $temp);
+			$data.= $temp;
 		}
 	}
+	eval(callHook('endShowSidebarItems'));
+	echo $data;
 }
 
 function showPluginId(){
 	global $runPlugin;
-	echo $runPlugin->getName();
+	eval(callHook('startShowPluginId'));
+	$data = $runPlugin->getName();
+	eval(callHook('endShowPluginId'));
+	echo $data;
 }
 ?>

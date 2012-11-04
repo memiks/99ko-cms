@@ -11,7 +11,9 @@ select{font-family:Verdana,'Helvetica Neue',Helvetica,Arial,Geneva,sans-serif; f
 
 input[type=text],
 input[type=mail],
-input[type=password]{width: 50% }
+input[type=password],textarea{width: 50% }
+
+textarea{ height: 300px; }
 
 input[type=text]:focus, 
 input[type=mail]:focus,
@@ -20,7 +22,7 @@ textarea:focus,
 select:focus{ border:1px solid #80bfff;   -moz-box-shadow:0 0 3px #80bfff,0 1px 2px rgba(0,0,0,.15) inset;  -webkit-box-shadow:0 0 3px #80bfff,0 1px 2px rgba(0,0,0,.15) inset;  box-shadow:0 0 3px #80bfff,0 1px 2px rgba(0,0,0,.15) inset}
 /*input[type=submit], .btn{background:#333; color:#FFF; border:none; margin:0; padding:5px 9px;-moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}*/
 /*input[type=submit]:hover, .btn:hover{background:#893625; color:#FFF; border:none}*/
-a.btn, input[type=submit]{ cursor:pointer;background:#e3e3e3;  border:1px solid #bbb;  -webkit-border-radius:3px;  -moz-border-radius:3px;  -ms-border-radius:3px;  -o-border-radius:3px;  border-radius:3px;  -webkit-box-shadow:inset 0 0 1px 1px #f6f6f6;  -moz-box-shadow:inset 0 0 1px 1px #f6f6f6;  -ms-box-shadow:inset 0 0 1px 1px #f6f6f6;  -o-box-shadow:inset 0 0 1px 1px #f6f6f6;  box-shadow:inset 0 0 1px 1px #f6f6f6;  color:#333;  font:bold 12px "helvetica neue",helvetica,arial,sans-serif;  line-height:1;  padding:5px 9px;  text-align:center;  text-shadow:0 1px 0 #fff;  width:150px}
+a.btn, input[type=submit]{ cursor:pointer;background:#e3e3e3;  border:1px solid #bbb;  -webkit-border-radius:3px;  -moz-border-radius:3px;  -ms-border-radius:3px;  -o-border-radius:3px;  border-radius:3px;  -webkit-box-shadow:inset 0 0 1px 1px #f6f6f6;  -moz-box-shadow:inset 0 0 1px 1px #f6f6f6;  -ms-box-shadow:inset 0 0 1px 1px #f6f6f6;  -o-box-shadow:inset 0 0 1px 1px #f6f6f6;  box-shadow:inset 0 0 1px 1px #f6f6f6;  color:#333;  /*font:bold 12px "helvetica neue",helvetica,arial,sans-serif;*/  line-height:1;  padding:5px 9px;  text-align:center;  text-shadow:0 1px 0 #fff;  width:150px}
 /**
  * Taille des input
 */

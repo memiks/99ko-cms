@@ -10,11 +10,13 @@
 	<!-- css -->
 	<link rel="stylesheet" href="css/style.css" media="all">
 	<link rel="stylesheet" href="css/common.css" media="all">
+	<link rel="stylesheet" href="js/tinybox2/style.css" />
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/html5.js"></script>
 	<![endif]-->
 	<script type="text/javascript" src="../common/jquery.js"></script>	
 	<script type="text/javascript" src="js/plugin-config.js"></script>	
+	<script type="text/javascript" src="js/tinybox2/packed.js"></script>
 	<!-- Personnalisation des liens, sidebar, contenus -->
 	<style>
 		html{background-color:#FFFFFF;color:#383838;}
@@ -49,8 +51,8 @@
 					Accueil
 				</a>
 			</li>
-			<li><a <?php if (isset($_GET['s']) && $_GET['s'] == 'config') echo 'class="current"'; ?> href="index.php?s=config">Configuration</a></li>
-			<li><a <?php if (isset($_GET['s']) && $_GET['s'] == 'plugins') echo 'class="current"'; ?> href="index.php?s=plugins">Plugins</a></li>
+			<!--<li><a <?php if (isset($_GET['s']) && $_GET['s'] == 'config') echo 'class="current"'; ?> href="index.php?s=config">Configuration</a></li>
+			<li><a <?php if (isset($_GET['s']) && $_GET['s'] == 'plugins') echo 'class="current"'; ?> href="index.php?s=plugins">Plugins</a></li>-->
 			<?php foreach ($data['plugins'] as $plug) {
 							if ($plug['target'] && $plug['activate']) { ?>
 			<li>
@@ -72,8 +74,7 @@
 	<!--<div id="content">-->
 
 <?php if (isset($_GET['p'])) { ?>
-<!--<section id="<?php echo $plug['id']; ?>">-->
-<section id="content" class="<?php echo $plug['id']; ?>-admin">
+<section id="content" class="<?php echo $runPlugin->getName(); ?>-admin">
 	<h3><?php echo $data['mainTabTitle']; ?></h3>
 	<?php if ($runPlugin->getConfigTemplate()) { ?>
 		<!--<img id="pluginConfigButton" src="images/wrench_orange.png" />-->

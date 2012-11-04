@@ -1,0 +1,8 @@
+{
+	"name" : "Menu",
+	"description" : "Gère le menu de 99ko.",
+	"author" : "Florent Fortat",
+	"authorEmail" : "florent.fortat@maxgun.fr",
+	"authorWebsite" : "http://www.maxgun.fr/",
+	"version" : "0.3-dev0"
+}

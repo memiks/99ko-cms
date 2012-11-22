@@ -1,7 +1,7 @@
 <?php include_once(ROOT.'admin/header.php') ?>
 
-<section id="content">
-	<h3>Bienvenue dans 99ko</h3>
+<section id="home">
+	<h2>Bienvenue dans 99ko</h2>
 	<hr>
 	<?php showMsg($data['msgSecurity'], 'error'); ?>
 	<p>Vous utilisez la version <span class="version"><?php echo $data['99koVersion']; ?></span> de 99ko.<br />
@@ -11,3 +11,4 @@
 </section>
 
 <?php include_once(ROOT.'admin/footer.php') ?>
+>

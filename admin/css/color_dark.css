@@ -1,0 +1,22 @@
+/*!
+ * 99Ko
+ * http://www.99ko.org
+ *
+ * Thème administration (Color sheme)
+ * Copyright 2011-2012, Frédéric K.
+ *
+ */
+	    /*** Noir & Gris ***/
+		html{background-color:#FFFFFF;color:#383838;}
+		::-moz-selection{background:#444444;color:#DDDDDD;}
+		::selection{background:#444444;color:#DDDDDD;}
+		header #logo{background-image:url(../images/logo.png);}
+		a{color:#0000FF;}
+		hr{border-top:1px solid #EBEBEB;border-bottom:1px solid #FFFFFF;}
+		header, header > nav a{background-color:#DDDDDD;color:#222222;}
+		header > nav a{-webkit-text-shadow:1px 1px 0px #EEEEEE;-moz-text-shadow:1px 1px 0px #EEEEEE;text-shadow:1px 1px 0px #EEEEEE;}
+		header > nav a{border-top:1px solid #AAAAAA;}
+		header > nav a:hover{background:#444444;color:#DDDDDD;border-top:1px solid #444444;}
+		header > nav a.current{background:#444444;color:#DDDDDD;border-top:1px solid #444444;}
+		#copyright{display:block !important;visibility:visible !important;}
+	    #pluginConfigButton{border-color:#EBEBEB}

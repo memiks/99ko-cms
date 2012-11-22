@@ -19,7 +19,6 @@ p, ul, ol{margin:18px 0; line-height:1.5em}
 li{list-style:none}
 li.placeholder{height:70px; width:100%; font-size:16px}
 hr{display:block; height:0px; line-height:0px; border:0; border-top:1px solid #ddd; border-bottom:1px solid #aaa; margin:16px 0; padding:0}
-hr.notop{margin-top:0}
 strong{font-weight:700}
 img{border:0}
 no script{display:block; position:absolute; top:238px; margin:0 auto; width:800px; bottom:0; z-index:20}
@@ -39,25 +38,19 @@ nav[role="navigation"] > ol li ol{border-top:0; font-size:10px; min-height:10px;
 nav[role="navigation"] > ol li ol li a{display:block; padding:4px 15px 5px 0; text-align:right}
 
 /* === CONTENUS === */
-#home{padding-top:200px !important}
-#home li{list-style:none !important; margin-left:0 !important}
-#home p{width:500px}
-#content section{padding-top:70px}
-#content h1{font-size:30px; font-weight:700}
-#content h2{font-size:20px; margin-bottom:18px; font-weight:100}
-#content h3{font-size:26px; margin:18px 0 0; font-weight:100}
-#content h4{font-size:20px; margin:18px 0; font-weight:100}
-#content h5{font-size:16px; margin:18px 0; font-weight:100}
-#content h6{font-size:14px; margin:18px 0; font-weight:100}
-#content p{margin:18px 0}
-#content ol li{list-style:decimal; /*margin-left:36px*/}
-#content ul li{list-style:square; /*margin-left:36px*/}
-#content table{border-collapse:collapse}
-#content table th{font-weight:700}
-#content table th, #content table td{padding:3px; text-align:left}
-#content code, #content pre{font-family:"Courier New",Courier,monospace; font-size:12px}
-#content pre{background-image:url(imgages/pre_bg.png); line-height:19px}
-#content{position:absolute; right:18px; left:218px; padding-left:10px;  min-height:100%; height:auto; z-index:1}
+#home{padding-top:180px !important}
+section{position:absolute; right:18px; left:218px; padding-left:10px;  min-height:100%; height:auto; z-index:1}
+section h1{font-size:30px; font-weight:700}
+section h2{font-size:26px; margin:18px 0 0; font-weight:100}
+section h3{font-size:20px; margin-bottom:18px; font-weight:100}
+section p{margin:18px 0}
+section ol li{list-style:decimal; /*margin-left:36px*/}
+section ul li{list-style:square; /*margin-left:36px*/}
+section table{border-collapse:collapse}
+section table th{font-weight:700}
+section table th, section table td{padding:3px; text-align:left}
+section code, section pre{font-family:"Courier New",Courier,monospace; font-size:12px}
+section pre{background-image:url(imgages/pre_bg.png); line-height:19px}
 
 /* === PLUGINS === */
 #pluginConfigButton{float:right; margin-top:-20px;font-size:10px;}
@@ -76,37 +69,16 @@ a.btn:active{ background:#d0d0d0;  -webkit-box-shadow:inset 0 0 1px 1px #e3e3e3;
 .edit-btn{ font-size:12px;  margin-left:10px;  padding-left:10px;  padding-bottom:2px;  padding-right:10px;  padding-top:2px;  text-decoration:none;  background-color:#77A2A8;  color:white;  -webkit-border-radius:3px;  -moz-border-radius:3px;  border-radius:3px}
 
 /* === TABLES === */
-table{ max-width:100%;  border-collapse:collapse;  border-spacing:0;  background-color:transparent}
-.table{ width:100%;  margin-bottom:18px; border-radius: 4px}
-.table th, 
-.table td{ padding:8px;  line-height:18px;  text-align:left;  vertical-align:top;  border-top:1px solid #ddd}
-.table th{ font-weight:bold}
-.table thead th{ vertical-align:bottom}
-.table colgroup+thead tr:first-child th, 
-.table colgroup+thead tr:first-child td, 
-.table thead:first-child tr:first-child th, 
-.table thead:first-child tr:first-child td{ border-top:0}
-.table tbody+tbody{ border-top:2px solid #ddd}
-.table-condensed th, 
-.table-condensed td{ padding:4px 5px}
-.table-bordered{ border:1px solid #ddd;  border-left:0;  border-collapse:separate;  *border-collapse:collapsed;  -webkit-border-radius:4px;  -moz-border-radius:4px;  border-radius:4px}
-.table-bordered th, 
-.table-bordered td{ border-left:1px solid #ddd}
-.table-bordered thead:first-child tr:first-child th, 
-.table-bordered tbody:first-child tr:first-child th, 
-.table-bordered tbody:first-child tr:first-child td{ border-top:0}
-.table-bordered thead:first-child tr:first-child th:first-child, 
-.table-bordered tbody:first-child tr:first-child td:first-child{ -webkit-border-radius:4px 0 0 0;  -moz-border-radius:4px 0 0 0;  border-radius:4px 0 0 0}
-.table-bordered thead:first-child tr:first-child th:last-child, 
-.table-bordered tbody:first-child tr:first-child td:last-child{ -webkit-border-radius:0 4px 0 0;  -moz-border-radius:0 4px 0 0;  border-radius:0 4px 0 0}
-.table-bordered thead:last-child tr:last-child th:first-child, 
-.table-bordered tbody:last-child tr:last-child td:first-child{ -webkit-border-radius:0 0 0 4px;  -moz-border-radius:0 0 0 4px;  border-radius:0 0 0 4px}
-.table-bordered thead:last-child tr:last-child th:last-child, 
-.table-bordered tbody:last-child tr:last-child td:last-child{ -webkit-border-radius:0 0 4px 0;  -moz-border-radius:0 0 4px 0;  border-radius:0 0 4px 0}
-.table-striped tbody tr:nth-child(odd) td, 
-.table-striped tbody tr:nth-child(odd) th{ background-color:#f9f9f9}
-.table tbody tr:hover td, 
-.table tbody tr:hover th{ background-color:#f5f5f5}
+table{ max-width:100%;  border-collapse:collapse;  border-spacing:0;  background-color:transparent; width:100%;  margin-bottom:18px; border-radius: 4px}
+table th, 
+table td{ padding:8px;  line-height:18px;  text-align:left;  vertical-align:top;  border-top:1px solid #ddd}
+table th{ font-weight:bold}
+table thead th{ vertical-align:bottom}
+table thead:first-child tr:first-child th, 
+table thead:first-child tr:first-child td{ border-top:0}
+table tbody+tbody{ border-top:2px solid #ddd}
+table tbody tr:hover td, 
+table tbody tr:hover th{ background-color:#f5f5f5}
 
 /* === STYLE IMPRESSION === */
 @media print{ *{background:transparent !important; color:black !important; text-shadow:none !important; filter:none !important; -ms-filter:none !important}

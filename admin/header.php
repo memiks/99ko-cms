@@ -59,20 +59,23 @@
 		   Just using <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/"><b>99ko</b></a> <span class="version"><?php echo $data['99koVersion']; ?></span>.
 		</div>
 	</header>
-	<!--<div id="content">-->
 
 <?php if (isset($_GET['p'])) { ?>
-<section id="content" class="<?php echo $runPlugin->getName(); ?>-admin">
+<section class="<?php echo $runPlugin->getName(); ?>-admin">
 	<h3><?php echo $data['mainTabTitle']; ?></h3>
 	<?php if ($runPlugin->getConfigTemplate()) { ?>
 		<!--<img id="pluginConfigButton" src="images/wrench_orange.png" />-->
 		<a href="javascript:" class="btn" id="pluginConfigButton">Configuration du plugin</a>
 	<?php } ?>
-	<hr class="notop">
+	<hr />
 	<?php if ($runPlugin->getConfigTemplate()) { ?>
 		<div id="pluginConfig">
 			<?php include_once($runPlugin->getConfigTemplate()); ?>
 			<hr class="notop">
+		</div>
+	<?php } ?>
+<?php } ?>
+r class="notop">
 		</div>
 	<?php } ?>
 <?php } ?>

@@ -1,16 +1,19 @@
+@charset "UTF-8";
 /*!
  * 99Ko
  * http://www.99ko.org
  *
  * Thème administration
- * Copyright 2011-2012, Frédéric K.
- * Last Update 19/01/2012
+ * Copyright 2011-2012, Frédéric Kaplon
+ * Last Update 22/11/2012
+ *
  */
+ /* === RESET === */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit; vertical-align:baseline}
 html{font-size:101%; font-family:Arial,verdana,arial,sans-serif; font-size:12px; -webkit-text-size-adjust:none; color:#6F6F6F; background-color:#efefef}
 body{min-height:100%; height:auto; width:100%}
 footer, header, section{display:block}
-a{color:#6F6F6F; text-decoration:none; cursor:pointer}
+a{text-decoration:none; cursor:pointer}
 a:hover{text-decoration:underline}
 p, ul, ol{margin:18px 0; line-height:1.5em}
 li{list-style:none}
@@ -18,33 +21,24 @@ li.placeholder{height:70px; width:100%; font-size:16px}
 hr{display:block; height:0px; line-height:0px; border:0; border-top:1px solid #ddd; border-bottom:1px solid #aaa; margin:16px 0; padding:0}
 hr.notop{margin-top:0}
 strong{font-weight:700}
-
-#content{position:absolute; right:18px; left:218px; padding-left:10px;  min-height:100%; height:auto; z-index:1}
-header{-moz-box-shadow:0 0 6px rgba(3,3,3,0.6); -webkit-box-shadow:0 0 6px rgba(3,3,3,0.6); box-shadow:0 0 6px rgba(3,3,3,0.6); position:fixed; left:0; width:200px; height:100%; min-height:100%; z-index:100}
-header a{position:relative; z-index:100}
-
 img{border:0}
-img#pluginConfigButton{float:right; margin-top:-20px}
-img#pluginConfigButton:hover{cursor:pointer}
-#pluginConfig{display:none}
-
-#copyright{position:absolute; bottom:10px; font-size:11px; right:15px; width:200px; text-align:right; z-index:1}
-#copyright a{color:#FFF;}
 no script{display:block; position:absolute; top:238px; margin:0 auto; width:800px; bottom:0; z-index:20}
 noscript p{width:800px; font-size:20px; padding-top:20px; margin:0 auto; color:#4D4D4D}
 .small{font-size:10px; letter-spacing:0}
 
-/* === HEADER & NAV Section === */
-header #logo{display:block; height:20%; max-height:200px; min-height:70px; width:200px; background-position:center center; background-repeat:no-repeat}
+/* === HEADER & NAVIGATION === */
+header[role=banner] #logo{background:url(../images/logo.png) no-repeat center center; display:block; height:185px; max-height:200px; min-height:70px; width:200px;}
+header{-moz-box-shadow:0 0 6px rgba(3,3,3,0.6); -webkit-box-shadow:0 0 6px rgba(3,3,3,0.6); box-shadow:0 0 6px rgba(3,3,3,0.6); position:fixed; left:0; width:200px; height:100%; min-height:100%; z-index:100}
+header a{position:relative; z-index:100; text-indent: -1000px}
+/* menu */
 nav[role="navigation"] > ol{font-size:12px; font-weight:700; min-height:150px; height:75%; overflow:auto}
-nav[role="navigation"] > ol li{text-align:right; padding:0}
-nav[role="navigation"] > ol a{display:block; border-top:1px solid #ddd; border-bottom:1px solid #aaa; padding:6px 15px 7px 0; text-align:right}
+nav[role="navigation"] > ol li{text-align:right; padding:0;margin-bottom:1px;}
+nav[role="navigation"] > ol a{display:block;padding:6px 15px 7px 0; text-align:right}
 nav[role="navigation"] > ol a:hover, nav[role="navigation"] > ol a.current{-webkit-text-shadow:none; -moz-text-shadow:none; text-shadow:none; text-decoration:none}
 nav[role="navigation"] > ol li ol{border-top:0; font-size:10px; min-height:10px; height:auto; overflow:auto; margin:0; display:none}
 nav[role="navigation"] > ol li ol li a{display:block; padding:4px 15px 5px 0; text-align:right}
-/* Contenus
--------------------------------------------------------------------*/
-/* === CONTENT Section === */
+
+/* === CONTENUS === */
 #home{padding-top:200px !important}
 #home li{list-style:none !important; margin-left:0 !important}
 #home p{width:500px}
@@ -62,18 +56,26 @@ nav[role="navigation"] > ol li ol li a{display:block; padding:4px 15px 5px 0; te
 #content table th{font-weight:700}
 #content table th, #content table td{padding:3px; text-align:left}
 #content code, #content pre{font-family:"Courier New",Courier,monospace; font-size:12px}
-#content pre{background-image:url(img/pre_bg.png); line-height:19px}
+#content pre{background-image:url(imgages/pre_bg.png); line-height:19px}
+#content{position:absolute; right:18px; left:218px; padding-left:10px;  min-height:100%; height:auto; z-index:1}
 
-/* Bouttons
--------------------------------------------------------------------*/
-a.btn{ background:#e3e3e3;  border:1px solid #bbb;  -webkit-border-radius:3px;  -moz-border-radius:3px;  -ms-border-radius:3px;  -o-border-radius:3px;  border-radius:3px;  -webkit-box-shadow:inset 0 0 1px 1px #f6f6f6;  -moz-box-shadow:inset 0 0 1px 1px #f6f6f6;  -ms-box-shadow:inset 0 0 1px 1px #f6f6f6;  -o-box-shadow:inset 0 0 1px 1px #f6f6f6;  box-shadow:inset 0 0 1px 1px #f6f6f6;  color:#333;  font:bold 12px "helvetica neue",helvetica,arial,sans-serif;  line-height:1;  padding:5px 9px;  text-align:center;  text-shadow:0 1px 0 #fff;  width:150px}
-a.btn:hover{ background:#d9d9d9;  -webkit-box-shadow:inset 0 0 1px 1px #eaeaea;  -moz-box-shadow:inset 0 0 1px 1px #eaeaea;  -ms-box-shadow:inset 0 0 1px 1px #eaeaea;  -o-box-shadow:inset 0 0 1px 1px #eaeaea;  box-shadow:inset 0 0 1px 1px #eaeaea;  color:#222;  cursor:pointer}
+/* === PLUGINS === */
+#pluginConfigButton{float:right; margin-top:-20px;font-size:10px;}
+#pluginConfigButton:hover{cursor:pointer}
+#pluginConfig{display:none}
+
+/* === FOOTER & COPYRIGHT === */
+#copyright{position:absolute; bottom:10px; font-size:11px; right:15px; width:200px; text-align:right; z-index:1; display:block !important;visibility:visible !important;}
+
+/* === BOUTTONS === */
+a.btn, input[type=submit]{ cursor:pointer;background:#e3e3e3;  border:1px solid #bbb;  -webkit-border-radius:3px;  -moz-border-radius:3px;  -ms-border-radius:3px;  -o-border-radius:3px;  border-radius:3px;  -webkit-box-shadow:inset 0 0 1px 1px #f6f6f6;  -moz-box-shadow:inset 0 0 1px 1px #f6f6f6;  -ms-box-shadow:inset 0 0 1px 1px #f6f6f6;  -o-box-shadow:inset 0 0 1px 1px #f6f6f6;  box-shadow:inset 0 0 1px 1px #f6f6f6;  color:#333; line-height:1;  padding:5px 9px;  text-align:center;  text-shadow:0 1px 0 #fff;  width:150px}
+a.btn:hover{ background:#d9d9d9;  -webkit-box-shadow:inset 0 0 1px 1px #eaeaea;  -moz-box-shadow:inset 0 0 1px 1px #eaeaea;  -ms-box-shadow:inset 0 0 1px 1px #eaeaea;  -o-box-shadow:inset 0 0 1px 1px #eaeaea;  box-shadow:inset 0 0 1px 1px #eaeaea;  color:#222; cursor:pointer; text-decoration: none}
 a.btn:active{ background:#d0d0d0;  -webkit-box-shadow:inset 0 0 1px 1px #e3e3e3;  -moz-box-shadow:inset 0 0 1px 1px #e3e3e3;  -ms-box-shadow:inset 0 0 1px 1px #e3e3e3;  -o-box-shadow:inset 0 0 1px 1px #e3e3e3;  box-shadow:inset 0 0 1px 1px #e3e3e3;  color:#000}
 
 .del-btn{ font-size:12px;  margin-left:10px;  padding-left:10px;  padding-bottom:2px;  padding-right:10px;  padding-top:2px;  text-decoration:none;  background-color:#A26F6F;  color:white;  -webkit-border-radius:3px;  -moz-border-radius:3px;  border-radius:3px}
 .edit-btn{ font-size:12px;  margin-left:10px;  padding-left:10px;  padding-bottom:2px;  padding-right:10px;  padding-top:2px;  text-decoration:none;  background-color:#77A2A8;  color:white;  -webkit-border-radius:3px;  -moz-border-radius:3px;  border-radius:3px}
-/* Tables
--------------------------------------------------------------------*/
+
+/* === TABLES === */
 table{ max-width:100%;  border-collapse:collapse;  border-spacing:0;  background-color:transparent}
 .table{ width:100%;  margin-bottom:18px; border-radius: 4px}
 .table th, 
@@ -106,16 +108,8 @@ table{ max-width:100%;  border-collapse:collapse;  border-spacing:0;  background
 .table tbody tr:hover td, 
 .table tbody tr:hover th{ background-color:#f5f5f5}
 
-/**
- * Print styles.
-*/
-@media print{ *{background:transparent !important; color:black !important; text-shadow:none !important; filter:none !important; -ms-filter:none !important}/* Black prints 
-
-a, a:visited{color:#444 !important; text-decoration:underline}
-a[href]:after{content:"("attr(href) ")"}
-abbr[title]:after{content:"("attr(title) ")"}
-.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after{content:""}
- /* Don't show links for images, or javascript/internal links */
+/* === STYLE IMPRESSION === */
+@media print{ *{background:transparent !important; color:black !important; text-shadow:none !important; filter:none !important; -ms-filter:none !important}
 pre, block quote{border:1px solid #999; page-break-inside:avoid}
 thead{display:table-header-group}/* css-discuss.incutio.com/wiki/Printing_Tables */
 
@@ -124,7 +118,6 @@ tr, img{page-break-inside:avoid}
 p, h2, h3{orphans:3; widows:3}
 h2, h3{page-break-after:avoid}
 hr{border-top:1px solid #000 !important; border-bottom:0 !important}
-
 header{-moz-box-shadow:none; -webkit-box-shadow:none; box-shadow:none; position:absolute; left:10px; top:0; width:100%; margin-top:500px}
 nav[role="navigation"] > ol:before{content:"Table of Contents"}
 nav[role="navigation"] > ol{border:0 !important}

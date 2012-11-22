@@ -2,7 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
 
@@ -14,29 +14,6 @@ include_once('show.lib.php');
 /*
 ** Fonctions internes
 */
-
-/* FONCTION DEPRECIEE !! VOIR getCoreConf() & pluginsManager::getPluginConfVal()
-** Renvoie une valeur de configuration du core ou d'un plugin
-** @param : $plugin (nom du plugin), $kConf (clé de configuration)
-** @return : string (valeur) / false
-*/
-/*function getConfVal($plugin, $kConf){
-	global $coreConf;
-	// si on demande une valeur config du core on tente de recuperer la valeur dans $coreConf
-	if($plugin == 'core' && isset($coreConf[$kConf])) return $coreConf[$kConf];
-	// sinon on lit le fichier config du core
-	if($plugin == 'core'){
-		$file = ROOT.'data/config.txt';
-		//else $file = ROOT.'data/plugin/'.$plugin.'/config.txt';
-		$config = json_decode(@file_get_contents($file), true);
-		foreach($config as $k=>$v){
-			if($k == $kConf) return $v;
-		}
-	}
-	// sinon on fait appel à la classe pluginsManager
-	else echo $kConf;return pluginsManager::getPluginConfVal($plugin, $kConf);
-	return false;
-}*/
 
 /*
 ** Renvoie la configuration complète du core ou une valeur précise
@@ -119,5 +96,42 @@ function getSiteUrl(){
 function getThemeInfos($name){
 	$data = json_decode(@file_get_contents(ROOT.'theme/'.$name.'/infos.json'), true);
 	return $data;
+}
+
+function rewriteUrl($plugin, $params = array()){
+	if(getCoreConf('urlRewriting')){
+		$url = $plugin.'/';
+		if(count($params) > 0){
+			foreach($params as $k=>$v){
+				$url.= utilStrToUrl($v).',';
+			}
+			$url = trim($url, ',');
+			$url.= '.html';
+		}
+	}
+	else{
+		$url = 'index.php?p='.$plugin;
+		foreach($params as $k=>$v){
+			$url.= '&'.$k.'='.utilStrToUrl($v);
+		}
+	}
+	return $url;
+}
+
+function getUrlParams(){
+	$data = array();
+	if(getCoreConf('urlRewriting')){
+		$data = explode(',', $_GET['param']);
+	}
+	else{
+		foreach($_GET as $k=>$v){
+			if($k != 'p') $data[] = $v;
+		}
+	}
+	return $data;
+}
+
+function encrypt($data){
+	return hash_hmac('sha1', $data, KEY);
 }
 ?>

@@ -8,47 +8,6 @@ if(!defined('ROOT')) die();
 *******************************************************************************************************/
 
 /*
-** Retourne la configuration par défaut du plugin
-** @return : array
-*/
-/*function pageConfig(){
-	return array(
-		'priority' => 1, // Obligatoire
-		'activate' => 1, // Obligatoire
-                'sidebarTitle' => "", // Facultatif
-                'sidebarCallFunction' => "", // Facultatif
-		// Ajoutez ci-dessous vos propres valeurs...
-	);
-}*/
-
-/*
-** Retourne les informations relatives au plugin
-** @return : array
-*/
-/*function pageInfos(){
-	return array(
-		// Toute les valeurs sont obligatoires
-		'name' => 'Page',
-		'description' => 'Permet la création de pages statiques',
-		'author' => 'Jonathan Coulet',
-		'authorEmail' => 'j.coulet@gmail.com',
-		'authorWebsite' => 'http://99ko.tuxfamily.org',
-		'version' => '1.4'
-	);
-}*/
-
-/*
-** Retourne les hooks à exécuter
-** @return : array
-*/
-/*function pageHooks(){
-	// si votre plugin n'utilise pas de hooks un array vide doit être retourné
-	return array(
-		'startFrontIncludePluginFile' => 'pageHook1',
-	);	
-}*/
-
-/*
 ** Exécute du code lors de l'installation
 ** Le code présent dans cette fonction sera exécuté lors de l'installation
 ** Le contenu de cette fonction est facultatif
@@ -76,19 +35,9 @@ function pageInstall(){
 define('PAGE_DATAPATH', ROOT.'data/plugin/page/');
 $page = new page();
 
-function pageHook1(){
-	global $coreConf, $page;
-	function pageMainNavigation($siteUrl, $defaultPlugin){
-		global $page;
-		$data = '';
-		foreach($page->getItems() as $k=>$pageItem) if(!$pageItem->getIsHidden()){
-			$target = ($defaultPlugin == 'page' && $pageItem->getIsHomepage()) ? $siteUrl : 'index.php?p=page&id='.$pageItem->getId();
-			$data.= "\$data['mainNavigation'][".$pageItem->getPosition()."]['target'] = '".$target."';";
-			$data.= "\$data['mainNavigation'][".$pageItem->getPosition()."]['label'] = '".$pageItem->getName()."';";
-		}
-		return $data;
-	}
-	return pageMainNavigation($coreConf['siteUrl'], $coreConf['defaultPlugin']);
+foreach($page->getItems() as $k=>$pageItem) if(!$pageItem->getIsHidden()){
+	$temp = ($coreConf['defaultPlugin'] == 'page' && $pageItem->getIsHomepage()) ? $coreConf['siteUrl'] : rewriteUrl('page', array('name' => $pageItem->getName(), 'id' => $pageItem->getId()));
+	$pluginsManager->getPlugin('page')->addToNavigation($pageItem->getName(), $temp);
 }
 
 class page{
@@ -144,12 +93,42 @@ class page{
 		if($obj->getIsHomepage() > 0) $this->initIshomepageVal();
 		if(@file_put_contents(PAGE_DATAPATH.$id.'.txt', json_encode($data), 0666)){
 			$this->repairPositions($obj);
+			// action sur le plugin menu
+			
+			/*if(pluginsManager::isActivePlugin('menu')){
+				$save = false;
+				$menu = new menu('');
+				$link[0] = array(
+					'label' => $obj->getName(),
+					'target' => rewriteUrl('page', array('name' => $obj->getName(), 'id' => $id)),
+					'plugin' => 'page',
+				);
+				if(!$obj->getId()) $save = true;
+				if($save) $menu->addLinks($link);
+				if($obj->getIsHidden()){
+					foreach(menu::getMenu() as $k=>$v){
+						if($v->getPlugin() == 'page' && $v->getLabel() == $obj->getName()){
+							$menu = new menu();
+							$menu->deleteLink($k);
+						}
+					}
+				}
+			}*/
 			return true;
 		}
 		return false;
 	}
 	public function del($obj){
 		if($obj->getIsHomepage() < 1 && $this->count() > 1){
+			// Action sur le plugin menu
+			if(pluginsManager::isActivePlugin('menu')){
+				foreach(menu::getMenu() as $k=>$v){
+					if($v->getPlugin() == 'page' && $v->getLabel() == $obj->getName()){
+						$menu = new menu();
+						$menu->deleteLink($k);
+					}
+				}
+			}
 			if(@unlink(PAGE_DATAPATH.$obj->getId().'.txt')) return true;
 		}
 		return false;

@@ -1,0 +1,55 @@
+section.menu-admin table#linksList {
+	font-size : 12px;
+	font-family : Verdana,'Helvetica Neue',Helvetica,Arial,Geneva,sans-serif;
+}
+
+section.menu-admin table#linksList tr {
+	height : 37px;
+}
+
+section.menu-admin table#linksList td.label,
+section.menu-admin table#linksList td.target,
+section.menu-admin table#linksList td.up,
+section.menu-admin table#linksList td.down,
+section.menu-admin table#linksList td.delete {
+	height : 37px;
+	padding-top : 0;
+	padding-bottom : 0;
+	vertical-align : middle;
+}
+
+section.menu-admin table#linksList td.label input {
+	width : 150px;
+}
+
+section.menu-admin table#linksList td.target input {
+	width : 300px;
+}
+
+section.menu-admin table#linksList td.up,
+section.menu-admin table#linksList td.down,
+section.menu-admin table#linksList td.delete {
+	width : 16px;
+}
+
+section.menu-admin button#addLink {
+	margin : 0 0 15px 0;
+}
+
+section.menu-admin div.buttons {
+	margin : 15px 0;
+}
+
+section.menu-admin table#linksList tr.deleted td {
+	background-color : #ffcccc;
+}
+
+section.menu-admin table#linksList tr.added td {
+	background-color : #ccffcc;
+}
+
+section.menu-admin button.btn{ cursor:pointer;background:#e3e3e3;  border:1px solid #bbb;  -webkit-border-radius:3px;  -moz-border-radius:3px;  -ms-border-radius:3px;  -o-border-radius:3px;  border-radius:3px;  -webkit-box-shadow:inset 0 0 1px 1px #f6f6f6;  -moz-box-shadow:inset 0 0 1px 1px #f6f6f6;  -ms-box-shadow:inset 0 0 1px 1px #f6f6f6;  -o-box-shadow:inset 0 0 1px 1px #f6f6f6;  box-shadow:inset 0 0 1px 1px #f6f6f6;  color:#333;  font:bold 12px "helvetica neue",helvetica,arial,sans-serif;  line-height:1;  padding:5px 9px;  text-align:center;  text-shadow:0 1px 0 #fff;  width:150px}
+
+section.menu-admin div.buttons button.btn {
+	width : 200px;
+}

@@ -1,0 +1,8 @@
+{
+    "priority" : "2",
+    "activate" : "1",
+    "sidebarTitle" : "Archives des News",
+    "sidebarCallFunction" : "newsGetSidebarContent",
+    "label" : "News",
+    "itemsByPage" : "5"
+}

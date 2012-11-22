@@ -2,7 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
 
@@ -22,19 +22,22 @@ if(!file_exists(ROOT.'data/config.txt')){
 	die();
 }
 // constantes
-define('VERSION', '1.2.1');
-define('ACTION', ((isset($_GET['action'])) ? $_GET['action'] : ''));
+define('VERSION', '1.2.5');
+define('ACTION', ((isset($_GET['action'])) ? $_GET['action'] : '')); // inutile : voir $urlParams
+include(ROOT.'data/key.php');
 // tableau des hooks
 $hooks = array();
 // on inclu les librairies
 include_once(ROOT.'common/core.lib.php');
 // on charge la config du core
 $coreConf = getCoreConf();
+// on récupère les paramètres de l'URL
+$urlParams = getUrlParams();
 // Chargement des thèmes
 $themes = listThemes();
 //constantes
 define('DEFAULT_PLUGIN', $coreConf['defaultPlugin']);
-define('PLUGIN', ((isset($_GET['p'])) ? $_GET['p'] : DEFAULT_PLUGIN)); // voir $runPlugin
+define('PLUGIN', ((isset($_GET['p'])) ? $_GET['p'] : DEFAULT_PLUGIN)); // inutile : voir $runPlugin
 // fix magic quotes
 utilSetMagicQuotesOff();
 
@@ -51,6 +54,10 @@ $pluginsManager = pluginsManager::getInstance();
 foreach($pluginsManager->getPlugins() as $plugin){
 	// on inclu la librairie
 	include_once($plugin->getLibFile());
+	// installation
+	if (!$plugin->isInstalled()) {
+		$pluginsManager->installPlugin($plugin->getName());
+	}
 	// on update le tableau des hooks
 	if ($plugin->getConfigVal('activate')) {
 		foreach ($plugin->getHooks() as $hookName=>$function) {
@@ -69,8 +76,12 @@ foreach($pluginsManager->getPlugins() as $plugin){
 eval(callHook('startCreatePlugin'));
 // on cree l'instance du plugin solicite
 $runPlugin = $pluginsManager->getPlugin(PLUGIN);
+// gestion erreur 404
+if(!$runPlugin || $runPlugin->getConfigVal('activate') < 1){
+	header("HTTP/1.1 404 Not Found");
+	header("Status: 404 Not Found");
+	die();
+}
 // hook
 eval(callHook('endCreatePlugin'));
-// si le plugin solicite est inactif on stop
-if($runPlugin->getConfigVal('activate') < 1) die();
 ?>

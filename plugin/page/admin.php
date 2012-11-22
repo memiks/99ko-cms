@@ -3,6 +3,7 @@ if(!defined('ROOT')) die();
 $data['pageMode'] = '';
 $data['pageMsg'] = '';
 $data['pageMsgType'] = '';
+$data['pageChangeOrder'] = (pluginsManager::isActivePlugin('menu')) ? false : true;
 switch(ACTION){
 	case 'save':
 		if($_POST['id'] != '') $pageItem = $page->create($_POST['id']);
@@ -62,5 +63,12 @@ switch(ACTION){
 			$data['pageList'][$k]['content'] = $pageItem->getContent();
 			$data['pageList'][$k]['isHidden'] = $pageItem->getIsHidden();
 		}
+		/*if(pluginsManager::isActivePlugin('menu')){
+			if(menu::checkChanges() || pluginsManager::getPluginConfVal('menu', 'changed')){
+				$data['pageMsg'] = "Problème d'incohérence de données entre le plugin Page et le plugin Menu.
+				Le plugin Menu requiert un enregistrement des modifications.";
+				$data['pageMsgType'] = 'error';	
+			}
+		}*/
 }
 ?>

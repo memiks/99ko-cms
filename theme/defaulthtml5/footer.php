@@ -2,7 +2,7 @@
             <section id="sidebar">
                 <nav id="main">
                     <ul>
-                            <?php showMainNavigation(); ?>
+			<?php showMainNavigation(); ?>
                     </ul>
                 </nav>
 		<?php showSidebarItems('<div class="item" id="[id]"><h2 class="title">[title]</h2>[content]</div>'); ?>

@@ -1,0 +1,30 @@
+#content.news .item{
+    margin-bottom: 50px;
+}
+
+#content.news .item .date{
+    font-style: italic;
+}
+
+#content.news .pagination{
+    font-size: 12px;
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none inside;
+    float: right;
+}
+
+#content.news .pagination li{
+    float: left;
+    margin-right: 5px;
+}
+
+#content.news .pagination a{
+    display: block;
+    text-decoration: none;
+    color: #928c8c;
+    margin: 0;
+    padding: 5px;
+    background: #f3f3f3;
+    border: 1px solid #e9e9e9;
+}

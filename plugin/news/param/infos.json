@@ -1,0 +1,8 @@
+{
+    "name" : "News",
+    "description" : "Gestion de news",
+    "author" : "Jonathan Coulet",
+    "authorEmail" : "j.coulet@gmail.com",
+    "authorWebsite" : "http://99ko.tuxfamily.org",
+    "version" : "1.6"
+}

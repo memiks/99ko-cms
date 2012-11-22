@@ -2,13 +2,13 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
 
-/*
-** Fonctions d'affichage admin & front
-*/
+/************************************************
+** Fonction chargées de l'affichage (public & admin)
+************************************************/
 
 /*
 ** Affiche un message (error/success) système
@@ -21,15 +21,11 @@ function showMsg($msg, $type) {
 		'success' => 'success',
 	);
 	$data = '';
-	
 	eval(callHook('startShowMsg'));
-	
 	if ($msg != '') {
 		$data = '<div id="msg" class="'.$class[$type].'"><p>'.nl2br($msg).'</p></div>';
 	}
-	
 	eval(callHook('endShowMsg'));
-	
 	echo $data;
 }
 
@@ -38,11 +34,18 @@ function showMsg($msg, $type) {
 ** @param : $format (format)
 */
 function showLinkTags($format = '<link href="[file]" rel="stylesheet" type="text/css" />'){
-	global $data;
-	
-	foreach ($data['linkTags'] as $file) {
-		echo str_replace('[file]', $file, $format);
+	global $pluginsManager, $coreConf;
+	$data = '';
+	eval(callHook('startShowLinkTags'));
+	if(ROOT == './') $data.= str_replace('[file]', ROOT.'common/normalize.css', $format);
+	foreach($pluginsManager->getPlugins() as $k=>$plugin){
+		if ($plugin->getConfigVal('activate') && $plugin->getCssFile()){
+			$data.= str_replace('[file]', $plugin->getCssFile(), $format);
+		}
 	}
+	if(ROOT == './') $data.= str_replace('[file]', ROOT.'theme/'.$coreConf['theme'].'/styles.css', $format);
+	eval(callHook('endShowLinkTags'));
+	echo $data;
 }
 
 /*
@@ -50,16 +53,23 @@ function showLinkTags($format = '<link href="[file]" rel="stylesheet" type="text
 ** @param : $format (format)
 */
 function showScriptTags($format = '<script type="text/javascript" src="[file]"></script>') {
-	global $data;
-	
-	foreach ($data['scriptTags'] as $file) {
-		echo str_replace('[file]', $file, $format);
+	global $pluginsManager, $coreConf;
+	$data = '';
+	eval(callHook('startShowScriptTags'));
+	$data = str_replace('[file]', ROOT.'common/jquery.js', $format);
+	foreach($pluginsManager->getPlugins() as $k=>$plugin){
+		if ($plugin->getConfigVal('activate') && $plugin->getJsFile()){
+			$data.= str_replace('[file]', $plugin->getJsFile(), $format);
+		}
 	}
+	if(ROOT == './') $data.= str_replace('[file]', ROOT.'theme/'.$coreConf['theme'].'/scripts.js', $format);
+	eval(callHook('endShowScriptTags'));
+	echo $data;
 }
 
-/*
-** Fonctions d'affichage admin
-*/
+/************************************************
+** Fonction chargées de l'affichage (admin)
+************************************************/
 
 /*
 ** Affiche l'editeur HTML
@@ -68,11 +78,8 @@ function showScriptTags($format = '<script type="text/javascript" src="[file]"><
 */
 function showAdminEditor($name, $content, $width, $height, $id = 'editor', $class = 'editor') {
 	eval(callHook('startShowAdminEditor'));
-	
 	$data = '<textarea style="width:'.$width.'px;height:'.$height.'px" name="'.$name.'" id="'.$id.'" class="'.$class.'">'.$content.'</textarea>';
-	
 	eval(callHook('endShowAdminEditor'));
-	
 	echo $data;
 }
 
@@ -82,71 +89,80 @@ function showAdminEditor($name, $content, $width, $height, $id = 'editor', $clas
 */
 function showAdminTokenField() {
 	global $data;
-	
 	eval(callHook('startShowAdminTokenField'));
-	
 	$output = '<input type="hidden" name="token" value="'.$data['token'].'" />';
-	
 	eval(callHook('endShowAdminTokenField'));
-	
 	echo $output;
 }
 
-/*
-** Fonctions d'affichage front
-*/
+/************************************************
+** Fonction chargées de l'affichage (public)
+************************************************/
 
 /*
 ** Affiche le contenu de la meta title
 */
 function showTitleTag() {
-	global $data, $runPlugin;
-	
-	echo (($data['titleTag'] == '') ? $runPlugin->getTitleTag() : $data['titleTag']);
+	global $runPlugin;
+	eval(callHook('startShowtitleTag'));
+	$data = $runPlugin->getTitleTag();
+	eval(callHook('endShowtitleTag'));
+	echo $data;
 }
 
 /*
 ** Affiche le contenu de la meta description
 */
 function showMetaDescriptionTag() {
-	global $data, $runPlugin;
-	echo (($data['metaDescriptionTag'] == '') ? $runPlugin->getMetaDescriptionTag() : $data['metaDescriptionTag']);
+	global $runPlugin;
+	eval(callHook('startShowMetaDescriptionTag'));
+	$data = $runPlugin->getMetaDescriptionTag();
+	eval(callHook('endShowMetaDescriptionTag'));
+	echo $data;
 }
 
 /*
 ** Affiche le titre H1
 */
 function showMainTitle() {
-	global $data, $runPlugin;
-	
-	echo (($data['mainTitle'] == '') ? $runPlugin->getMainTitle() : $data['mainTitle']);
+	global $runPlugin;
+	eval(callHook('startShowMainTitle'));
+	$data = $runPlugin->getMainTitle();
+	eval(callHook('endShowMainTitle'));
+	echo $data;
 }
 
 /*
 ** Affiche le nom du site
 */
 function showSiteName() {
-	global $data;
-	
-	echo $data['siteName'];
+	global $coreConf;
+	eval(callHook('startShowSiteName'));
+	$data = $coreConf['siteName'];
+	eval(callHook('endShowSiteName'));
+	echo $data;
 }
 
 /*
 ** Affiche la description du site
 */
 function showSiteDescription() {
-	global $data;
-	
-	echo $data['siteDescription'];
+	global $coreConf;
+	eval(callHook('startShowSiteDescription'));
+	$data = $coreConf['siteDescription'];
+	eval(callHook('endShowSiteDescription'));
+	echo $data;
 }
 
 /*
 ** Affiche l'url du site
 */
 function showSiteUrl() {
-	global $data;
-	
-	echo $data['siteUrl'];
+	global $coreConf;
+	eval(callHook('startShowSiteUrl'));
+	$data = $coreConf['siteUrl'];
+	eval(callHook('endShowSiteUrl'));
+	echo $data;
 }
 
 /*
@@ -154,70 +170,90 @@ function showSiteUrl() {
 */
 function showExecTime() {
 	global $time;
-	
-	echo round(microtime(true) - $time, 3);
+	eval(callHook('startShowExecTime'));
+	$data = round(microtime(true) - $time, 3);
+	eval(callHook('endShowExecTime'));
+	echo $data;
 }
 
 /*
 ** Affiche le menu principal
 ** @param : $format (format)
 */
-function showMainNavigation($format = '<li><a href="[target]">[label]</a></li>') {
-	global $data;
-	
-	foreach ($data['mainNavigation'] as $item) {
-		$output = $format;
-		$output = str_replace('[target]', $item['target'], $output);
-		$output = str_replace('[label]', $item['label'], $output);
-		
-		echo $output;
+function showMainNavigation($format = '<li><a target="[targetAttribut]" href="[target]">[label]</a></li>') {
+	global $pluginsManager;
+	$data = '';
+	eval(callHook('startShowMainNavigation'));
+	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
+		foreach($plugin->getNavigation() as $k2=>$item){
+			$temp = $format;
+			$temp = str_replace('[target]', $item['target'], $temp);
+			$temp = str_replace('[label]', $item['label'], $temp);
+			$temp = str_replace('[targetAttribut]', $item['targetAttribut'], $temp);
+			$data.= $temp;
+		}
 	}
+	eval(callHook('endShowMainNavigation'));
+	echo $data;
 }
 
 /*
 ** Affiche le fil d'Ariane
 */
 function showBreadcrumb() {
-	global $runPlugin, $data;
-	
+	global $runPlugin, $coreConf;
+	$data = '';
+	eval(callHook('startShowBreadcrumb'));
 	if (count($runPlugin->getBreadcrumb()) > 0) {
-		echo '<p id="breadcrumb"><a href="'.$data['siteUrl'].'">Accueil</a>';
-		
+		$data.= '<p id="breadcrumb"><a href="'.$coreConf['siteUrl'].'">Accueil</a>';
 		foreach ($runPlugin->getBreadcrumb() as $item) {
-			echo ' >> <a href="'.$item['target'].'">'.$item['label'].'</a>';
+			$data.= ' >> <a href="'.$item['target'].'">'.$item['label'].'</a>';
 		}
-		
-		echo '</p>';
+		$data.= '</p>';
 	}
+	eval(callHook('endShowBreadcrumb'));
+	echo $data;
 }
 
 /*
 ** Affiche le nom du thème
 */
 function showTheme($format = '<a target="_blank" href="[authorWebsite]">[name]</a>') {
-	global $data;
-	
-	$output = $format;
-	$output = str_replace('[authorWebsite]', $data['themeAuthorWebsite'], $output);
-	$output = str_replace('[author]', $data['themeAuthor'], $output);
-	$output = str_replace('[name]', $data['themeName'], $output);
-	
-	echo $output;
+	global $themes, $coreConf;
+	eval(callHook('startShowTheme'));
+	$data = $format;
+	$data = str_replace('[authorWebsite]', $themes[$coreConf['theme']]['authorWebsite'], $data);
+	$data = str_replace('[author]', $themes[$coreConf['theme']]['author'], $data);
+	$data = str_replace('[name]', $themes[$coreConf['theme']]['name'], $data);
+	eval(callHook('endShowTheme'));
+	echo $data;
 }
 
 /*
 ** Affiche le contenu de la sidebar
 */
 function showSidebarItems($format = '<div class="item" id="[id]"><p class="title">[title]</p>[content]</div>') {
-	global $data;
-	
-	foreach ($data['sidebarItems'] as $item) {
-		$output = $format;
-		$output = str_replace('[id]', $item['id'], $output);
-		$output = str_replace('[title]', $item['title'], $output);
-		$output = str_replace('[content]', $item['content'], $output);
-		
-		echo $output;
+	global $pluginsManager;
+	$data = '';
+	eval(callHook('startShowSidebarItems'));
+	foreach($pluginsManager->getPlugins() as $k=>$plugin){
+		if($plugin->getConfigVal('sidebarTitle') != '' && $plugin->getConfigVal('sidebarCallFunction') != ''){
+			$temp = $format;
+			$temp = str_replace('[id]', 'sidebaritem-'.$plugin->getName(), $temp);
+			$temp = str_replace('[title]', $plugin->getConfigVal('sidebarTitle'), $temp);
+			$temp = str_replace('[content]', call_user_func($plugin->getConfigVal('sidebarCallFunction')), $temp);
+			$data.= $temp;
+		}
 	}
+	eval(callHook('endShowSidebarItems'));
+	echo $data;
+}
+
+function showPluginId(){
+	global $runPlugin;
+	eval(callHook('startShowPluginId'));
+	$data = $runPlugin->getName();
+	eval(callHook('endShowPluginId'));
+	echo $data;
 }
 ?>

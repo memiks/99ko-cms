@@ -1,0 +1,41 @@
+hr { border:none; border-bottom:1px solid #9F9E8B; margin:15px 0 15px 0; }
+.menu ul {float: left; list-style: none; margin-top: 9px;}
+.menu ul li { float: left; padding: 10px 0 8px 0;}
+.menu li a { padding: 5px 15px; text-transform: uppercase; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
+#navbar {float: left; width: 500px;}
+/* Recherche */
+#searchform { float: right; width: 350px;}
+.searchinput {background: url(../images/search_input.png); width: 252px; height: 29px; border: 0; padding: 10px 5px 10px 40px; font-size: 18px; position: relative; outline: none; color: #666; font-style: italic;}
+#searchrole {position: relative;}
+.gobutton {background: url(images/go_button.png) no-repeat  top right; border: 0; width: 64px; height: 49px; text-indent: -9999px; outline: none; cursor:pointer; position: absolute; margin-top: 2px; margin-left: -10px;}
+.gobutton:hover { background: url(../images/go_button.png) repeat-x 0 -51px; border: none; outline:none; }
+.gobutton:active {background: url(../images/go_button.png) repeat-x 0 -99px; border: none; outline:none; }
+
+/* Actualitées */
+.actualite { width: 940px; margin-bottom: 30px;}
+#access { margin-bottom: 50px; overflow: hidden;}
+#archives { float: left; width: 300px; color: #444; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
+#archives a { margin-top: 3px; color:#658BAF;}
+#archives h2{ border-bottom: 1px solid #9F9E8B;}
+#archives li{list-style:none; padding-bottom: 8px; border-bottom: 1px solid #9F9E8B;}
+#elem { float: right; width: 600px; }
+#elem h2 { border-bottom: 1px solid #9F9E8B; padding-bottom: 8px;}
+span.plus { padding:5px 10px; background:#658BAF; -moz-border-radius:3px; -webkit-border-radius:3px; -border-radius:3px; border: 1px solid #2B71AF; -moz-box-shadow: 0px 1px 0px #2B71AF; -webkit-box-shadow: 0px 1px 0px #2B71AF; box-shadow: 0px 1px 0px #f1f1e7; margin-bottom:5px; top: 10px; float:right; color:ffffff; }
+.glyf { float: left; padding-right: 5px; margin-top: -2px;}
+
+/* Contact */
+#contact label {display: block;}
+#contact input[type=text] { width: 300px; height: 20px; padding: 5px; font-size: 18px; color: #666; border: 1px solid #9F9E8B; background: rgba(255, 255, 255, 0.3); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9); -moz-border-radius:3px; -webkit-border-radius:3px; -border-radius:3px; border: 1px solid #9c9b85; -moz-box-shadow: 0px 1px 0px #f1f1e7; -webkit-box-shadow: 0px 1px 0px #f1f1e7; box-shadow: 0px 1px 0px #f1f1e7;}
+#contact input[type=text]:focus,
+#contact input[type=password]:focus,
+#contact textarea:focus {
+	border-color:#093c75;
+	-moz-box-shadow:0 0 3px #0459b7;
+	-webkit-box-shadow:0 0 3px #0459b7;
+	outline:none; /* Pour enlever le contour jaune lorsque l'on sélectionne un input dans Chrome */
+}
+#commentmove {float: right; width: 600px; margin-top: -208px;}
+#contact textarea {width: 590px; height: 158px; padding: 5px; font-size: 14px; color: #666; border: 1px solid #9F9E8B; background: rgba(255, 255, 255, 0.3); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9); -moz-border-radius:3px; -webkit-border-radius:3px; -border-radius:3px; border: 1px solid #9c9b85; -moz-box-shadow: 0px 1px 0px #f1f1e7; -webkit-box-shadow: 0px 1px 0px #f1f1e7; box-shadow: 0px 1px 0px #f1f1e7;}
+#contact input[type=submit] { padding:5px 10px; background:#dddccb; -moz-border-radius:3px; -webkit-border-radius:3px; -border-radius:3px; border: 1px solid #9c9b85; -moz-box-shadow: 0px 1px 0px #f1f1e7; -webkit-box-shadow: 0px 1px 0px #f1f1e7; box-shadow: 0px 1px 0px #f1f1e7; cursor: pointer; color: #57564b;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9); text-transform: uppercase;}
+#contact input[type=submit]:hover { background: #edece4;}
+#contact input[type=submit]:active {background: #c1c0af;}

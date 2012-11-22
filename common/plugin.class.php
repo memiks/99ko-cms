@@ -2,7 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
 
@@ -95,7 +95,9 @@ class pluginsManager{
 		$items = utilScanDir(ROOT.'plugin/');
 		
 		foreach($items['dir'] as $dir){
-			$dataNotSorted[$dir] = json_decode(@file_get_contents(ROOT.'data/plugin/'.$dir.'/config.txt'), true);
+			// les plugins non installés ont une priorité faible
+			if(file_exists(ROOT.'data/plugin/'.$dir.'/config.txt')) $dataNotSorted[$dir] = json_decode(@file_get_contents(ROOT.'data/plugin/'.$dir.'/config.txt'), true);
+			else $dataNotSorted[$dir]['priority'] = '10';
 		}
 		$dataSorted = utilSort2DimArray($dataNotSorted, 'priority', 'num');
 		foreach($dataSorted as $plugin=>$config){
@@ -179,6 +181,7 @@ class plugin{
 	private $adminTemplate;
 	private $configTemplate;
 	private $initConfig;
+	private $navigation;
 
 	/*
 	** Constructeur
@@ -195,22 +198,27 @@ class plugin{
 		$this->libFile = (file_exists(ROOT.'plugin/'.$this->name.'/'.$this->name.'.php')) ? ROOT.'plugin/'.$this->name.'/'.$this->name.'.php' : false;
 		$this->publicFile = (file_exists(ROOT.'plugin/'.$this->name.'/public.php')) ? ROOT.'plugin/'.$this->name.'/public.php' : false;
 		$this->adminFile = (file_exists(ROOT.'plugin/'.$this->name.'/admin.php')) ? ROOT.'plugin/'.$this->name.'/admin.php' : false;
-		$this->cssFile = (file_exists(ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.css')) ? ROOT.'plugin/'.$this->name.'/'.$this->name.'.css' : false;
-		$this->jsFile = (file_exists(ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.js')) ? ROOT.'plugin/'.$this->name.'/'.$this->name.'.js' : false;
+		$this->cssFile = (file_exists(ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.css')) ? ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.css' : false;
+		$this->jsFile = (file_exists(ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.js')) ? ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.js' : false;
 		$this->addToBreadcrumb($infos['name'], 'index.php?p='.$this->name);
 		if($this->isDefaultPlugin) $this->initBreadcrumb();
 		$this->dataPath = (is_dir(ROOT.'data/plugin/'.$this->name)) ? ROOT.'data/plugin/'.$this->name.'/' : false;
-		$this->setPlublicTemplate('public');
-		$this->setAdminTemplate('admin');
+		//$this->setPlublicTemplate('public');
+		if(file_exists('theme/'.getCoreConf('theme').'/'.$this->name.'.php')) $this->publicTemplate = 'theme/'.getCoreConf('theme').'/'.$this->name.'.php';
+		elseif(file_exists(ROOT.'plugin/'.$this->name.'/template/public.php')) $this->publicTemplate = ROOT.'plugin/'.$this->name.'/template/public.php';
+		else $this->publicTemplate = false;
+		//$this->setAdminTemplate('admin');
+		$this->adminTemplate = (file_exists(ROOT.'plugin/'.$this->name.'/template/admin.php')) ? ROOT.'plugin/'.$this->name.'/template/admin.php' : false;
 		$this->configTemplate = (file_exists(ROOT.'plugin/'.$this->name.'/template/config.php')) ? ROOT.'plugin/'.$this->name.'/template/config.php': false;
 		$this->initConfig = $initConfig;
+		$this->navigation = array();
 	}
 
 	/*
 	** getters
 	*/
 	public function getConfigVal($val){
-		return $this->config[$val];
+		if(isset($this->config[$val])) return $this->config[$val];
 	}
 	public function getConfig(){
 		return $this->config;
@@ -269,6 +277,9 @@ class plugin{
 	public function getIsValid(){
 		return $this->isValid;
 	}
+	public function getNavigation(){
+		return $this->navigation;
+	}
 
 	/*
 	** setters
@@ -292,13 +303,12 @@ class plugin{
 		$val = trim($val);
 		$this->mainTitle = $val;
 	}
-	public function setPlublicTemplate($fileName){
-		if(file_exists('theme/'.getCoreConf('theme').'/'.$fileName.'.php')) $this->publicTemplate = 'theme/'.getCoreConf('theme').'/'.$fileName.'.php';
-		else $this->publicTemplate = ROOT.'plugin/'.$this->name.'/template/'.$fileName.'.php';
+	/*public function setPlublicTemplate($fileName){
+		$this->publicTemplate = ROOT.'plugin/'.$this->name.'/template/'.$fileName.'.php';
 	}
 	public function setAdminTemplate($fileName){
 		$this->adminTemplate = ROOT.'plugin/'.$this->name.'/template/'.$fileName.'.php';
-	}
+	}*/
 
 	/*
 	** Ajoute un élément au fil d'Ariane
@@ -321,6 +331,29 @@ class plugin{
 	*/
 	function initBreadcrumb(){
 		$this->breadcrumb = array();
+	}
+	
+	/*
+	** Ajoute un élément dans la navigation
+	** @param : string (intitulé du lien), string (URL du lien), string (attribut target)
+	*/
+	function addToNavigation($label, $target, $targetAttribut = '_self'){
+		$this->navigation[] = array('label' => $label, 'target' => $target, 'targetAttribut' => $targetAttribut);
+	}
+	
+	/*
+	** Supprime un élément de la navigation
+	** @param : int (clé à supprimer)
+	*/
+	function removeToNavigation($k){
+		unset($this->navigation[$k]);
+	}
+
+	/*
+	** Initialise la navigation
+	*/
+	function initNavigation(){
+		$this->navigation = array();
 	}
 
 	/*

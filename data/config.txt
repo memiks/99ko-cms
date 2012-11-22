@@ -1,0 +1,1 @@
+{"siteName":"D\u00e9mo","siteDescription":"Un site propuls\u00e9 par 99Ko","adminPwd":"117848d459c490a983d4741136e30c6770649426","theme":"defaulthtml5","adminEmail":"you@domain.com","siteUrl":"http:\/\/localhost\/99ko_1.2.5","defaultPlugin":"page","urlRewriting":"0"}

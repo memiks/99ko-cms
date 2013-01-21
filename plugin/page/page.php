@@ -253,4 +253,9 @@ class pageItem{
 		return $this->metaDescriptionTag;
 	}
 }
+
+function pageContent($id){
+	global $page;
+	return $page->create($id)->getContent();
+}
 ?>

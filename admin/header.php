@@ -19,7 +19,7 @@
 	<script type="text/javascript" src="../common/jquery.js"></script>	
 	<script type="text/javascript" src="js/plugin-config.js"></script>	
 	<script type="text/javascript" src="js/tinybox2/packed.js"></script>
-
+	
 	<?php showLinkTags(); ?>
 	<?php showScriptTags(); ?>
 	
@@ -30,48 +30,33 @@
 <body>
 
 	<header role="banner">
-		<a href="./index.php" id="logo" title="Accueil du panel">99Ko</a>
+		<a href="./" class="logo"></a>
 		
 		<nav role="navigation">
 		   <ol>
-			<li>
-				<a <?php if (!isset($_GET['s']) && !isset($_GET['p']) || isset($_GET['s']) && $_GET['s'] == 'home') echo 'class="current"'; ?> href="index.php">
-					Accueil
-				</a>
-			</li>
-			<!--<li><a <?php if (isset($_GET['s']) && $_GET['s'] == 'config') echo 'class="current"'; ?> href="index.php?s=config">Configuration</a></li>
-			<li><a <?php if (isset($_GET['s']) && $_GET['s'] == 'plugins') echo 'class="current"'; ?> href="index.php?s=plugins">Plugins</a></li>-->
-			<?php foreach ($data['plugins'] as $plug) {
-							if ($plug['target'] && $plug['activate']) { ?>
-			<li>
-				<a <?php if (isset($_GET['p']) && $_GET['p'] == $plug['id']) echo 'class="current"'; ?> href="index.php?p=<?php echo $plug['id']; ?>">
-					<?php echo $plug['name']; ?>
-				</a>
-			</li>
-			<?php 	}
-						} ?>						
+			<?php foreach($navigation as $k=>$v){ ?>
+			<li><a class="<?php if($v['isActive']){ ?>current<?php } ?>" href="<?php echo $v['url']; ?>"><?php echo $v['label']; ?></a></li>
+			<?php } ?>
 		   </ol>
-	       &nbsp;<a class="btn" id="logout" href="index.php?action=logout&token=<?php echo $data['token']; ?>">Se déconnecter</a>
+	       &nbsp;<a class="btn" id="logout" href="index.php?action=logout&token=<?php echo $token; ?>">Se déconnecter</a>
 	       <a target="_blank" class="btn" id="showSite" href="../">Voir le site</a>		   		
 		</nav>
 		
 		<div id="copyright">
-		   Just using <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/"><b>99ko</b></a> <?php echo $data['99koVersion']; ?>
+		   Just using <a target="_blank" href="http://99ko.tuxfamily.org/"><b>99ko</b></a> <?php echo $version; ?>
 		</div>
 	</header>
 
-<?php if (isset($_GET['p'])) { ?>
-<section class="<?php echo $runPlugin->getName(); ?>-admin">
-	<h2><?php echo $data['mainTabTitle']; ?></h2>
-	<?php if ($runPlugin->getConfigTemplate()) { ?>
-		<!--<img id="pluginConfigButton" src="images/wrench_orange.png" />-->
+
+<section id="content" class="<?php echo $pluginName; ?>-admin">
+	<h2><?php echo $pageTitle; ?></h2>
+	<?php if($pluginConfigTemplate){ ?>
 		<a href="javascript:" class="btn" id="pluginConfigButton">Configuration du plugin</a>
 	<?php } ?>
-	<hr />
-	<?php if ($runPlugin->getConfigTemplate()) { ?>
+	<hr class="notop">
+	<?php if($pluginConfigTemplate){ ?>
 		<div id="pluginConfig">
-			<?php include_once($runPlugin->getConfigTemplate()); ?>
-			<hr />
+			<?php include_once($pluginConfigTemplate); ?>
+			<hr class="notop">
 		</div>
 	<?php } ?>
-<?php } ?>

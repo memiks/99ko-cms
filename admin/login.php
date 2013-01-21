@@ -15,7 +15,7 @@
 	<!--<h2>Connexion</h2>-->
 
 	<div id="login_panel">
-		<?php showMsg($data['msg'], 'error'); ?>
+		<?php showMsg($msg, 'error'); ?>
 		<form method="post" action="index.php?action=login">
 			<div class="login_fields">			
 				<div class="field">

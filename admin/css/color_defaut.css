@@ -2,8 +2,8 @@
  * 99Ko
  * http://www.99ko.org
  *
- * Thème administration (Color sheme)
- * Copyright 2011-2012, Frédéric K.
+ * Thème administration (Color Scheme)
+ * Copyright 2011-2013, Frédéric Kaplon
  *
  */
 	    /*** Bleu & Vert ***/
@@ -16,5 +16,5 @@
 		header > nav a{-webkit-text-shadow:1px 1px 0px #DBE5E8;-moz-text-shadow:1px 1px 0px #DBE5E8;text-shadow:1px 1px 0px #DBE5E8;}
 		header > nav a:hover{background:#DBE6EC;color:#111111}
 		header > nav a.current{background:#DBE6EC;color:#111111}
-		#copyright a{color:#FFF;}
+		#copyright a{color:rgba(255,255,255,1)}
 		#pluginConfigButton{border-color:#D7E1E6}

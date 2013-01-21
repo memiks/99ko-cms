@@ -10,7 +10,7 @@
 	<!-- css -->
 	<link rel="stylesheet" href="css/style.css" media="all">
 	<link rel="stylesheet" href="css/common.css" media="all">
-	<!-- Personnalisation des liens, sidebar, contenus -->	
+	<!-- Personnalisation des liens, sidebar, contenu -->	
 	<link rel="stylesheet" href="css/color_defaut.css" />
 	<link rel="stylesheet" href="js/tinybox2/style.css" />
 	<!--[if lt IE 9]>
@@ -56,7 +56,7 @@
 		</nav>
 		
 		<div id="copyright">
-		   Just using <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/"><b>99ko</b></a> <span class="version"><?php echo $data['99koVersion']; ?></span>.
+		   Just using <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/"><b>99ko</b></a> <?php echo $data['99koVersion']; ?>
 		</div>
 	</header>
 

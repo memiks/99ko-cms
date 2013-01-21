@@ -62,7 +62,7 @@
 
 <?php if (isset($_GET['p'])) { ?>
 <section class="<?php echo $runPlugin->getName(); ?>-admin">
-	<h3><?php echo $data['mainTabTitle']; ?></h3>
+	<h2><?php echo $data['mainTabTitle']; ?></h2>
 	<?php if ($runPlugin->getConfigTemplate()) { ?>
 		<!--<img id="pluginConfigButton" src="images/wrench_orange.png" />-->
 		<a href="javascript:" class="btn" id="pluginConfigButton">Configuration du plugin</a>
@@ -71,11 +71,7 @@
 	<?php if ($runPlugin->getConfigTemplate()) { ?>
 		<div id="pluginConfig">
 			<?php include_once($runPlugin->getConfigTemplate()); ?>
-			<hr class="notop">
-		</div>
-	<?php } ?>
-<?php } ?>
-r class="notop">
+			<hr />
 		</div>
 	<?php } ?>
 <?php } ?>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?php showSiteLang(); ?>">
     <head>
         <meta charset="utf-8" />
 	<title><?php showTitleTag(); ?></title>

@@ -6,7 +6,7 @@
 <html lang="fr"><!--<![endif]-->
 <head>
 	<meta charset="utf-8">
-	<title>99ko - Connexion</title>
+	<title>99ko - <?php $translate->__('Login'); ?></title>
 	<link rel="stylesheet" href="css/login.css" media="all">
 	<link rel="stylesheet" href="css/common.css" media="all">
 </head>
@@ -20,14 +20,14 @@
 			<div class="login_fields">			
 				<div class="field">
 				    <?php showAdminTokenField(); ?>
-					<label for="adminPwd">Mot de passe<!-- <small><a href="#GetPassword" class="openModal">Mot de Passe oublié ?</a></small>--></label>
+					<label for="adminPwd"><?php $translate->__('Password'); ?><!-- <small><a href="#GetPassword" class="openModal">Mot de Passe oublié ?</a></small>--></label>
 					<input type="password" name="adminPwd" id="adminPwd" tabindex="1" />			
 				</div>
 			</div> <!-- login_fields -->
 			
 			<div class="login_actions">
-				<input type="submit" class="btn" tabindex="2" value="Valider" />
-				<em>Just using <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/">99ko</a></em>
+				<input type="submit" class="btn" tabindex="2" value="<?php $translate->__('Go'); ?>" />
+				<em><?php $translate->__('Just using'); ?> <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/">99ko</a></em>
 			</div>
 		</form>
 	</div> <!-- #login_panel -->		

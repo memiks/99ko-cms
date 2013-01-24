@@ -36,6 +36,22 @@
 		</span><br />
 		<?php } ?>
 	</p>
+	<p><label>Language</label><br />
+					<select name="siteLang" id="siteLang">
+						<?php
+							$langs = scandir('./lang');
+							array_shift($langs);
+							array_shift($langs);
+							unset($langs[array_search('.DS_Store', $langs)]);
+							
+							foreach($langs as $lang){
+							    $langfile = strpos($lang, '.');
+							    $language = substr($lang, 0, $langfile);			    
+								echo '<option value="' . $language . '">' . $language . '</option>';
+							}
+						?>
+					</select>
+	</p>	
 	<p><label>Plugin par défaut</label><br />
 	<select name="defaultPlugin">
 		<?php foreach($plugins as $k=>$v) if($v['target'] && $v['activate'] && $v['frontFile']){ ?>

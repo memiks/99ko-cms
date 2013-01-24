@@ -166,6 +166,17 @@ function showSiteUrl() {
 }
 
 /*
+** Affiche la langue du site
+*/
+function showSiteLang() {
+	global $coreConf;
+	eval(callHook('startShowSiteLang'));
+	$data = $coreConf['siteLang'];
+	eval(callHook('endShowSiteLang'));
+	echo $data;
+}
+
+/*
 ** Affiche le temps de génération
 */
 function showExecTime() {

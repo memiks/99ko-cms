@@ -75,6 +75,18 @@ function listThemes(){
 	}
 	return $data;
 }
+/*
+** liste le dossier lang
+** @return : array
+*/
+function listLangs(){
+	$data = array();
+	$langs = utilScanDir(ROOT.'admin/lang');							
+	foreach($langs['dir'] as $file){
+		$data[$file] = $file;
+	}
+	return $data;
+}
 
 /*
 ** Détecte l'url de base

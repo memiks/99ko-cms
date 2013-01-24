@@ -1,0 +1,13 @@
+Login=Connexion
+Password=Mot de passe
+Go=Valider
+Just using=Just using
+Backend=Administration
+Logout=Se déconnecter
+Back to Website=Voir le site
+plugin configuration=Configuration du plugin
+Download a more recent version, plugins and themes on the site official.<br />In case of problem with 99ko, go to the support forum.=Téléchargez une version plus récente, des plugins et des thèmes sur le site officiel.<br />En cas de problème avec 99ko, rendez-vous sur le forum d'entraide.
+Official site=Site officiel
+Board=Forum
+Home=Accueil
+Welcome to 99ko=Bienvenue dans 99ko

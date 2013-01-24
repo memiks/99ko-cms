@@ -28,13 +28,21 @@ include(ROOT.'data/key.php');
 // tableau des hooks
 $hooks = array();
 // on inclu les librairies
-include_once(ROOT.'common/core.lib.php');
+include_once(ROOT.'common/core.lib.php');		
 // on charge la config du core
 $coreConf = getCoreConf();
 // on récupère les paramètres de l'URL
 $urlParams = getUrlParams();
 // Chargement des thèmes
 $themes = listThemes();
+// Chargement des langs
+$langs = listLangs();
+// On charge la langue
+require_once(ROOT.'common/translation.class.php');
+    if(isset($_GET['lang']))
+	    $translate = new Translator($_GET['lang']);
+    else
+	     $translate = new Translator(getCoreConf('siteLang'));
 //constantes
 define('DEFAULT_PLUGIN', $coreConf['defaultPlugin']);
 define('PLUGIN', ((isset($_GET['p'])) ? $_GET['p'] : DEFAULT_PLUGIN)); // inutile : voir $runPlugin

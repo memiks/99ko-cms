@@ -21,6 +21,10 @@ switch(ACTION){
 			$themes[$k]['authorWebsite'] = $theme['authorWebsite'];
 			$themes[$k]['selected'] = ($k == $coreConf['theme']) ? true : false;
 		}
+		$langs = array();
+		foreach(listLangs() as $k=>$lang){
+			$langs[$k]['selected'] = ($k == $coreConf['siteLang']) ? true : false;
+		}		
 		$plugins = array();
 		foreach($pluginsManager->getPlugins() as $k=>$v){
 			$plugins[$k]['id'] = $v->getName();
@@ -38,6 +42,7 @@ switch(ACTION){
 			'adminEmail' => (utilIsEmail(trim($_POST['adminEmail']))) ? trim($_POST['adminEmail']) : 'you@domain.com',
 			'siteUrl' => (trim($_POST['siteUrl']) != '') ? trim($_POST['siteUrl']) : getSiteUrl(),
 			'theme' => $_POST['theme'],
+			'siteLang' => $_POST['siteLang'],
 			'defaultPlugin' => $_POST['defaultPlugin'],
 			'urlRewriting' => (isset($_POST['urlRewriting'])) ? '1' : '0',
 		);

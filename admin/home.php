@@ -2,9 +2,9 @@
 
 
 	<?php showMsg($msg, 'error'); ?>
-	<p>99Ko v. <?php echo $version; ?></p>
-    <p><?php $translate->__('Download a more recent version, plugins and themes on the site official.<br />In case of problem with 99ko, go to the support forum.'); ?></p>
-	<p><a class="btn" href="http://99ko.tuxfamily.org" target="_blank"><?php $translate->__('Official site'); ?></a> <a class="btn" href="http://99ko.tuxfamily.org/forum" target="_blank"><?php $translate->__('Board'); ?></a></p>
+	<p><?php echo lang('Version %s', $version); ?></p>
+    <p><?php echo $lang['99koInfos']; ?></p>
+	<p><a class="btn" href="http://99ko.tuxfamily.org" target="_blank"><?php echo $lang['OfficialSite']; ?></a> <a class="btn" href="http://99ko.tuxfamily.org/forum" target="_blank"><?php echo $lang['Board']; ?></a></p>
 
 
 <?php include_once(ROOT.'admin/footer.php') ?>

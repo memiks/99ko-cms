@@ -81,7 +81,7 @@ function listThemes(){
 */
 function listLangs(){
 	$data = array();
-	$langs = utilScanDir(ROOT.'admin/lang');							
+	$langs = utilScanDir(ROOT.'common/lang');							
 	foreach($langs['dir'] as $file){
 		$data[$file] = $file;
 	}
@@ -145,5 +145,19 @@ function getUrlParams(){
 
 function encrypt($data){
 	return hash_hmac('sha1', $data, KEY);
+}
+/*
+** Formate les phrases
+*/
+function lang($format)
+{
+	global $lang;
+	$argList = func_get_args();
+	$wordList = array();
+	foreach(explode(' ', $format) as $word)
+	{
+		$wordList[] = isset($lang[$word])? $lang[$word] : $word;
+	}
+	return vsprintf(implode($lang['useSpace']? ' ' : '', $wordList), array_slice($argList, 1));
 }
 ?>

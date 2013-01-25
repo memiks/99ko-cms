@@ -37,12 +37,10 @@ $urlParams = getUrlParams();
 $themes = listThemes();
 // Chargement des langs
 $langs = listLangs();
-// On charge la langue
-require_once(ROOT.'common/translation.class.php');
-    if(isset($_GET['lang']))
-	    $translate = new Translator($_GET['lang']);
-    else
-	     $translate = new Translator(getCoreConf('siteLang'));
+// On charge la langue du core
+require ROOT.'common/lang/' .getCoreConf('siteLang'). '.php';
+// On charge la langue des plugins
+
 //constantes
 define('DEFAULT_PLUGIN', $coreConf['defaultPlugin']);
 define('PLUGIN', ((isset($_GET['p'])) ? $_GET['p'] : DEFAULT_PLUGIN)); // inutile : voir $runPlugin

@@ -4,10 +4,10 @@
 <form id="configForm" method="post" action="index.php?p=configmanager&action=save">
 	<?php showMsg($msg, 'error'); ?>
 	<?php showAdminTokenField(); ?>
-	<p><a href="javascript:" class="btn" id="advancedConfigurationButton">Configuration avançée</a></p>
+	<p><a href="javascript:" class="btn" id="advancedConfigurationButton"><?php echo $lang['AdvancedConfiguration']; ?></a></p>
 	<div id="advancedConfiguration">
-		<?php showMsg("Ne modifiez pas les paramètres avancés si vous n'êtes pas sur de ce que vous faites. ", "error"); ?>
-		<p><label>URL du site (sans slash final)</label><br />
+		<?php showMsg($lang['AdvancedConfigurationWarning'], "error"); ?>
+		<p><label><?php echo $lang['SiteUrl']; ?></label><br />
 		<input type="text" name="siteUrl" value="<?php echo $coreConf['siteUrl']; ?>" /></p>
 		<p><label>Réécriture d'URL</label><br />
 		<input id="urlRewriting" type="checkbox" onclick="updateHtaccess('<?php echo $rewriteBase; ?>');" <?php if($coreConf['urlRewriting']){ ?>checked<?php } ?> name="urlRewriting" /> Activer
@@ -39,7 +39,7 @@
 	<p><label>Language</label><br />
 					<select name="siteLang" id="siteLang">
 						<?php
-							$langs = scandir('./lang');
+							$langs = scandir(ROOT.'common/lang');
 							array_shift($langs);
 							array_shift($langs);
 							unset($langs[array_search('.DS_Store', $langs)]);

@@ -37,9 +37,9 @@ $urlParams = getUrlParams();
 $themes = listThemes();
 // Chargement des langs
 $langs = listLangs();
+
 // On charge la langue du core
 require ROOT.'common/lang/' .getCoreConf('siteLang'). '.php';
-// On charge la langue des plugins
 
 //constantes
 define('DEFAULT_PLUGIN', $coreConf['defaultPlugin']);
@@ -55,11 +55,12 @@ utilSetMagicQuotesOff();
 
 // On créé le manager de plugins via la méthode getInstance (singleton)
 $pluginsManager = pluginsManager::getInstance();
-
 // on boucle les plugins pour charger les lib et les installer
 foreach($pluginsManager->getPlugins() as $plugin){
 	// on inclu la librairie
 	include_once($plugin->getLibFile());
+    // on inclu la langue
+	include_once($plugin->getLangFile());	
 	// installation
 	if (!$plugin->isInstalled()) {
 		$pluginsManager->installPlugin($plugin->getName());
@@ -71,7 +72,6 @@ foreach($pluginsManager->getPlugins() as $plugin){
 		}
 	}
 }
-
 
 /*
 ** Création de l'objet $runPLugin (plugin solicité)

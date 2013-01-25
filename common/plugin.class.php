@@ -171,6 +171,7 @@ class plugin{
 	private $metaDescriptionTag;
 	private $mainTitle;
 	private $libFile;
+	private $langFile;
 	private $publicFile;
 	private $adminFile;
 	private $cssFile;
@@ -196,6 +197,7 @@ class plugin{
 		$this->setTitleTag($infos['name']);
 		$this->setMainTitle($infos['name']);
 		$this->libFile = (file_exists(ROOT.'plugin/'.$this->name.'/'.$this->name.'.php')) ? ROOT.'plugin/'.$this->name.'/'.$this->name.'.php' : false;
+		$this->langFile = (file_exists(ROOT.'plugin/'.$this->name.'/lang/'.getCoreConf('siteLang').'.php')) ? ROOT.'plugin/'.$this->name.'/lang/'.getCoreConf('siteLang').'.php' : false;
 		$this->publicFile = (file_exists(ROOT.'plugin/'.$this->name.'/public.php')) ? ROOT.'plugin/'.$this->name.'/public.php' : false;
 		$this->adminFile = (file_exists(ROOT.'plugin/'.$this->name.'/admin.php')) ? ROOT.'plugin/'.$this->name.'/admin.php' : false;
 		$this->cssFile = (file_exists(ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.css')) ? ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.css' : false;
@@ -247,6 +249,9 @@ class plugin{
 	public function getLibFile(){
 		return $this->libFile;
 	}
+	public function getLangFile(){
+		return $this->langFile;
+	}	
 	public function getPublicFile(){
 		return $this->publicFile;
 	}

@@ -39,7 +39,7 @@ $themes = listThemes();
 $langs = listLangs();
 
 // On charge la langue du core
-$lang = json_decode(file_get_contents(ROOT.'common/lang/' .getCoreConf('siteLang'). '.json'), true);
+$lang = utilReadJsonFile(ROOT.'common/lang/' .getCoreConf('siteLang'). '.json');
 //require ROOT.'common/lang/' .getCoreConf('siteLang'). '.php';
 
 //constantes

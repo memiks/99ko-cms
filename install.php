@@ -9,9 +9,12 @@
 define('ROOT', './');
 
 include_once(ROOT.'common/core.lib.php');
+$languages_array = array('en', 'fr');
+// On charge la langue du core
+$lang = utilReadJsonFile(ROOT.'common/lang/fr.json');
 
 if (utilPhpVersion() < '5.1.2') {
-	die("Vous devez disposer d'un serveur équipé de PHP 5.1.2 ou plus !");
+	die($lang['PhpVersion']);
 }
 
 utilSetMagicQuotesOff();
@@ -62,15 +65,15 @@ if (isset($_GET['updateto'])) {
 	}
 	
 	if ($error) {
-		$data['msg'] = "Problème lors de la mise à jour";
+		$data['msg'] = $lang['UpdateFail'];
 		$data['msgType'] = "error";
 	} else {
-		$data['msg'] = "Mise à jour effectuée";
+		$data['msg'] = $lang['UpdateSuccess'];
 		$data['msgType'] = "success";
 	}
 	
 	if ($resetPassword) {
-		$data['msg'] .= "\nLe mot de passe admin a été réinitialisé : " . $mdp;
+		$data['msg'] .= $lang['resetPassword']. $mdp;
 	}
 } else {
 	if (file_exists(ROOT.'data/config.txt')) {
@@ -144,10 +147,10 @@ if (isset($_GET['updateto'])) {
 	}
 	
 	if ($error) {
-		$data['msg'] = "Problème lors de l'installation";
+		$data['msg'] = $lang['InstallFail'];
 		$data['msgType'] = "error";
 	} else {
-		$data['msg'] = "99ko est installé\nLe mot de passe admin par défaut est : $mdp\nModifiez-le dès votre première connexion\nSupprimez également le fichier install.php";
+		$data['msg'] = $lang['InstallSuccess']. '<b>' .$mdp. '</b><br />'.$lang['ChangePwd'];
 		$data['msgType'] = "success";
 		// On supprime le fichier d'installation et on redirige sur la page d'accueil.
 		//unlink('install.php');
@@ -163,18 +166,24 @@ if (isset($_GET['updateto'])) {
 <html lang="fr"><!--<![endif]-->
 <head>
        <meta charset="utf-8">  
-       <title>99ko - Installation</title>
+       <title>99ko - <?php echo $lang['Install']; ?></title>
        <!-- css -->
        <link rel="stylesheet" href="admin/css/style.css" media="all">
        <link rel="stylesheet" href="admin/css/common.css" media="all">
-       <!-- Personnalisation des liens, sidebar, contenus -->
-       <style>
-               html{background-color:#FFFFFF;color:#383838;}
-               ::-moz-selection{background:#DBE6EC;color:#111111;}
-               ::selection{background:#DBE6EC;color:#111111;}
-               aside #logo{background-image:url(admin/images/logo.png);}
-               a{color:#A26F6F;}
-               hr{border-top:1px solid #D7E1E6;border-bottom:1px solid #EFFAFF;}
+       <!-- Personnalisation des liens, sidebar, contenu -->	
+	   <link rel="stylesheet" href="css/color_defaut.css" />
+</head>
+<body>	   
+       <div id="content">      
+          <section id="home">
+             <?php showMsg($data['msg'], $data['msgType']); ?>
+             <br /><a class="btn" href="index.php"><?php echo $lang['BackToWebsite']; ?></a> 
+             <a class="btn" href="admin/"><?php echo $lang['Backend']; ?></a>
+          </section>
+       </div>
+</body>
+</html>
+d #EFFAFF;}
                aside, aside ol a{background-color:#77A2A8;color:#222222;}
                aside ol a{-webkit-text-shadow:1px 1px 0px #DBE5E8;-moz-text-shadow:1px 1px 0px #DBE5E8;text-shadow:1px 1px 0px #DBE5E8;}
                aside ol{border-top:1px solid #B4BCBF;}

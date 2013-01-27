@@ -39,7 +39,8 @@ $themes = listThemes();
 $langs = listLangs();
 
 // On charge la langue du core
-require ROOT.'common/lang/' .getCoreConf('siteLang'). '.php';
+$lang = json_decode(file_get_contents(ROOT.'common/lang/' .getCoreConf('siteLang'). '.json'), true);
+//require ROOT.'common/lang/' .getCoreConf('siteLang'). '.php';
 
 //constantes
 define('DEFAULT_PLUGIN', $coreConf['defaultPlugin']);

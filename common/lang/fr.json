@@ -1,0 +1,22 @@
+{
+
+"Login": "Connexion",
+"Password": "Mot de passe",
+"Go": "Valider",
+"JustUsing": "Just using",
+"Backend": "Administration",
+"Logout": "Se déconnecter",
+"BackToWebsite": "Voir le site",
+"PluginConfiguration": "Configuration du plugin",
+"Version": "Vous utilisez <b>99ko</b> Version",
+"99koInfos": "Téléchargez une version plus récente, des plugins et des thèmes sur le site officiel.<br />En cas de problème avec 99ko, rendez-vous sur le forum d'entraide.",
+"OfficialSite": "Site officiel",
+"Board": "Forum",
+"Home": "Accueil",
+"WelcomeTo": "Bienvenue dans 99ko",
+"loginAttempt": "Veuillez attendre avant de faire une nouvelle tentative",
+"icorrectPwd": "Mot de passe incorrect",
+"missingHtaccess": "Le fichier .htaccess est manquant !",
+"installPresent": "Le fichier install.php doit être supprimé !"
+
+}

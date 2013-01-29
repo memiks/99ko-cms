@@ -164,10 +164,10 @@ if (isset($_GET['updateto'])) {
        <meta charset="utf-8">  
        <title>99ko - Installation</title>
        <!-- css -->
-       <link rel="stylesheet" href="admin/css/style.css" media="all">
-       <link rel="stylesheet" href="admin/css/common.css" media="all">
+       <!--<link rel="stylesheet" href="admin/css/style.css" media="all">-->
+       <!--<link rel="stylesheet" href="admin/css/common.css" media="all">-->
        <!-- Personnalisation des liens, sidebar, contenus -->
-       <style>
+       <!--<style>
                html{background-color:#FFFFFF;color:#383838;}
                ::-moz-selection{background:#DBE6EC;color:#111111;}
                ::selection{background:#DBE6EC;color:#111111;}
@@ -181,7 +181,12 @@ if (isset($_GET['updateto'])) {
                aside ol a:hover{background:#DBE6EC;color:#111111;border-top:1px solid #DBE6EC;}
                aside ol a.current{background:#DBE6EC;color:#111111;border-top:1px solid #DBE6EC;}
                #copyright{display:block !important;visibility:visible !important;}
-       </style>
+       </style>-->
+	<!-- css -->
+	<link rel="stylesheet" href="admin/css/style.css" media="all">
+	<link rel="stylesheet" href="admin/css/common.css" media="all">
+	<!-- Personnalisation des liens, sidebar, contenu -->	
+	<link rel="stylesheet" href="css/color_defaut.css" />
 </head>
 <body>
  

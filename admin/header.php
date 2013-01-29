@@ -8,8 +8,13 @@
 	<meta charset="utf-8">	
 	<title>99ko - Administration</title>
 	<!-- css -->
+	<!--<link rel="stylesheet" href="css/style.css" media="all">
+	<link rel="stylesheet" href="css/common.css" media="all">-->
+	<!-- css -->
 	<link rel="stylesheet" href="css/style.css" media="all">
 	<link rel="stylesheet" href="css/common.css" media="all">
+	<!-- Personnalisation des liens, sidebar, contenu -->	
+	<link rel="stylesheet" href="css/color_defaut.css" />
 	<link rel="stylesheet" href="js/tinybox2/style.css" />
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/html5.js"></script>
@@ -18,7 +23,7 @@
 	<script type="text/javascript" src="js/plugin-config.js"></script>	
 	<script type="text/javascript" src="js/tinybox2/packed.js"></script>
 	<!-- Personnalisation des liens, sidebar, contenus -->
-	<style>
+	<!--<style>
 		html{background-color:#FFFFFF;color:#383838;}
 		::-moz-selection{background:#DBE6EC;color:#111111;}
 		::selection{background:#DBE6EC;color:#111111;}
@@ -31,7 +36,7 @@
 		header > nav a.current{background:#DBE6EC;color:#111111}
 		#copyright{display:block !important;visibility:visible !important;}
 		#pluginConfigButton{border-color:#D7E1E6}
-	</style>
+	</style>-->
 	<?php showLinkTags(); ?>
 	<?php showScriptTags(); ?>
 	

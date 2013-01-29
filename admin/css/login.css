@@ -3,11 +3,11 @@
  * http://www.99ko.org
  *
  * Thème administration (Connexion)
- * Copyright 2011-2012, Frédéric K.
+ * Copyright 2011-2013, Frédéric Kaplon
  *
  */
 section{display:block}
-a{color:#A26F6F;}
+a{color:#fff;}
 body{background:#FFF; font:12px/1.7em arial,sans-serif; margin:75px}
 
 #login{width:300px; position:absolute; left:50%; margin-left:-150px}
@@ -21,7 +21,8 @@ body{background:#FFF; font:12px/1.7em arial,sans-serif; margin:75px}
 #login_panel .field label small{position:absolute; right:10px; top:-2px}
 #login_panel .field label small a{color:#999}
 #login .login_actions{background:#77A2A8; width:auto; padding:12px 15px; border-top:1px dotted #CCC}
-#login .login_actions em{float:right; margin-right:15px}
+#login .login_actions em{float:right; right:8px; padding-top:10px; text-transform: uppercase; font-size: 0.8em}
+#login .login_actions em a{text-decoration: none; font-weight: bold; padding-left:3px; font-size: 1.1em}
 /*!
  *  Modal box
  */

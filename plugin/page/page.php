@@ -121,14 +121,14 @@ class page{
 	public function del($obj){
 		if($obj->getIsHomepage() < 1 && $this->count() > 1){
 			// Action sur le plugin menu
-			if(pluginsManager::isActivePlugin('menu')){
+			/*if(pluginsManager::isActivePlugin('menu')){
 				foreach(menu::getMenu() as $k=>$v){
 					if($v->getPlugin() == 'page' && $v->getLabel() == $obj->getName()){
 						$menu = new menu();
 						$menu->deleteLink($k);
 					}
 				}
-			}
+			}*/
 			if(@unlink(PAGE_DATAPATH.$obj->getId().'.txt')) return true;
 		}
 		return false;

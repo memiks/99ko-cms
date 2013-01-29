@@ -1,121 +1,86 @@
+@charset "UTF-8";
 /*!
  * 99Ko
  * http://www.99ko.org
  *
  * Thème administration
- * Copyright 2011-2012, Frédéric K.
- * Last Update 19/01/2012
+ * Copyright 2011-2013, Frédéric Kaplon
+ * Last Update 21/01/2013
+ *
  */
+ /* === RESET === */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit; vertical-align:baseline}
 html{font-size:101%; font-family:Arial,verdana,arial,sans-serif; font-size:12px; -webkit-text-size-adjust:none; color:#6F6F6F; background-color:#efefef}
 body{min-height:100%; height:auto; width:100%}
 footer, header, section{display:block}
-a{color:#6F6F6F; text-decoration:none; cursor:pointer}
+a{text-decoration:none; cursor:pointer}
 a:hover{text-decoration:underline}
 p, ul, ol{margin:18px 0; line-height:1.5em}
 li{list-style:none}
 li.placeholder{height:70px; width:100%; font-size:16px}
 hr{display:block; height:0px; line-height:0px; border:0; border-top:1px solid #ddd; border-bottom:1px solid #aaa; margin:16px 0; padding:0}
-hr.notop{margin-top:0}
 strong{font-weight:700}
-
-#content{position:absolute; right:18px; left:218px; padding-left:10px;  min-height:100%; height:auto; z-index:1}
-header{-moz-box-shadow:0 0 6px rgba(3,3,3,0.6); -webkit-box-shadow:0 0 6px rgba(3,3,3,0.6); box-shadow:0 0 6px rgba(3,3,3,0.6); position:fixed; left:0; width:200px; height:100%; min-height:100%; z-index:100}
-header a{position:relative; z-index:100}
-
 img{border:0}
-#pluginConfigButton{float:right; margin-top:-20px;font-size:10px;}
-#pluginConfigButton:hover{cursor:pointer}
-#pluginConfig{display:none}
-
-#copyright{position:absolute; bottom:10px; font-size:11px; right:15px; width:200px; text-align:right; z-index:1}
-#copyright a{color:#FFF;}
 no script{display:block; position:absolute; top:238px; margin:0 auto; width:800px; bottom:0; z-index:20}
 noscript p{width:800px; font-size:20px; padding-top:20px; margin:0 auto; color:#4D4D4D}
 .small{font-size:10px; letter-spacing:0}
 
-/* === HEADER & NAV Section === */
-header #logo{display:block; height:185px; max-height:200px; min-height:70px; width:200px; background-position:center center; background-repeat:no-repeat}
+/* === HEADER & NAVIGATION === */
+header[role=banner] #logo{background:url(../images/logo.png) no-repeat center center; display:block; height:185px; max-height:200px; min-height:70px; width:200px; opacity:0.8}
+header[role=banner] #logo:hover{opacity:1}
+header{-moz-box-shadow:0 0 6px rgba(3,3,3,0.6); -webkit-box-shadow:0 0 6px rgba(3,3,3,0.6); box-shadow:0 0 6px rgba(3,3,3,0.6); position:fixed; left:0; width:200px; height:100%; min-height:100%; z-index:100}
+header a{position:relative; z-index:100; text-indent: -1000px}
+/* menu */
 nav[role="navigation"] > ol{font-size:12px; font-weight:700; min-height:150px; height:75%; overflow:auto}
 nav[role="navigation"] > ol li{text-align:right; padding:0;margin-bottom:1px;}
 nav[role="navigation"] > ol a{display:block;padding:6px 15px 7px 0; text-align:right}
 nav[role="navigation"] > ol a:hover, nav[role="navigation"] > ol a.current{-webkit-text-shadow:none; -moz-text-shadow:none; text-shadow:none; text-decoration:none}
 nav[role="navigation"] > ol li ol{border-top:0; font-size:10px; min-height:10px; height:auto; overflow:auto; margin:0; display:none}
 nav[role="navigation"] > ol li ol li a{display:block; padding:4px 15px 5px 0; text-align:right}
-/* Contenus
--------------------------------------------------------------------*/
-/* === CONTENT Section === */
-#home{padding-top:200px !important}
-#home li{list-style:none !important; margin-left:0 !important}
-#home p{width:500px}
-#content section{padding-top:70px}
-#content h1{font-size:30px; font-weight:700}
-#content h2{font-size:20px; margin-bottom:18px; font-weight:100}
-#content h3{font-size:26px; margin:18px 0 0; font-weight:100}
-#content h4{font-size:20px; margin:18px 0; font-weight:100}
-#content h5{font-size:16px; margin:18px 0; font-weight:100}
-#content h6{font-size:14px; margin:18px 0; font-weight:100}
-#content p{margin:18px 0}
-#content ol li{list-style:decimal; /*margin-left:36px*/}
-#content ul li{list-style:square; /*margin-left:36px*/}
-#content table{border-collapse:collapse}
-#content table th{font-weight:700}
-#content table th, #content table td{padding:3px; text-align:left}
-#content code, #content pre{font-family:"Courier New",Courier,monospace; font-size:12px}
-#content pre{background-image:url(img/pre_bg.png); line-height:19px}
 
-/* Bouttons
--------------------------------------------------------------------*/
-a.btn, input[type=submit]{ cursor:pointer;background:#e3e3e3;  border:1px solid #bbb;  -webkit-border-radius:3px;  -moz-border-radius:3px;  -ms-border-radius:3px;  -o-border-radius:3px;  border-radius:3px;  -webkit-box-shadow:inset 0 0 1px 1px #f6f6f6;  -moz-box-shadow:inset 0 0 1px 1px #f6f6f6;  -ms-box-shadow:inset 0 0 1px 1px #f6f6f6;  -o-box-shadow:inset 0 0 1px 1px #f6f6f6;  box-shadow:inset 0 0 1px 1px #f6f6f6;  color:#333;  /*font:bold 12px "helvetica neue",helvetica,arial,sans-serif;*/  line-height:1;  padding:5px 9px;  text-align:center;  text-shadow:0 1px 0 #fff;  width:150px}
-/*a.btn:hover{ background:#d9d9d9;  -webkit-box-shadow:inset 0 0 1px 1px #eaeaea;  -moz-box-shadow:inset 0 0 1px 1px #eaeaea;  -ms-box-shadow:inset 0 0 1px 1px #eaeaea;  -o-box-shadow:inset 0 0 1px 1px #eaeaea;  box-shadow:inset 0 0 1px 1px #eaeaea;  color:#222;  cursor:pointer}
-a.btn:active{ background:#d0d0d0;  -webkit-box-shadow:inset 0 0 1px 1px #e3e3e3;  -moz-box-shadow:inset 0 0 1px 1px #e3e3e3;  -ms-box-shadow:inset 0 0 1px 1px #e3e3e3;  -o-box-shadow:inset 0 0 1px 1px #e3e3e3;  box-shadow:inset 0 0 1px 1px #e3e3e3;  color:#000}*/
+/* === CONTENU === */
+#home{padding-top:180px !important}
+section{position:absolute; right:18px; left:218px; padding-left:10px;  min-height:100%; height:auto; z-index:1}
+section h1{font-size:30px; font-weight:700}
+section h2{font-size:26px; margin:18px 0 0; font-weight:100}
+section h3{font-size:20px; margin-bottom:18px; font-weight:100}
+section p{margin:18px 0}
+section ol li{list-style:decimal; /*margin-left:36px*/}
+section ul li{list-style:square; /*margin-left:36px*/}
+section table{border-collapse:collapse}
+section table th{font-weight:700}
+section table th, section table td{padding:3px; text-align:left}
+section code, section pre{font-family:"Courier New",Courier,monospace; font-size:12px}
+section pre{background-image:url(imgages/pre_bg.png); line-height:19px}
 
-.del-btn{ font-size:12px;  margin-left:10px;  padding-left:10px;  padding-bottom:2px;  padding-right:10px;  padding-top:2px;  text-decoration:none;  background-color:#A26F6F;  color:white;  -webkit-border-radius:3px;  -moz-border-radius:3px;  border-radius:3px}
-.edit-btn{ font-size:12px;  margin-left:10px;  padding-left:10px;  padding-bottom:2px;  padding-right:10px;  padding-top:2px;  text-decoration:none;  background-color:#77A2A8;  color:white;  -webkit-border-radius:3px;  -moz-border-radius:3px;  border-radius:3px}
-/* Tables
--------------------------------------------------------------------*/
-table{ max-width:100%;  border-collapse:collapse;  border-spacing:0;  background-color:transparent}
-.table{ width:100%;  margin-bottom:18px; border-radius: 4px}
-.table th, 
-.table td{ padding:8px;  line-height:18px;  text-align:left;  vertical-align:top;  border-top:1px solid #ddd}
-.table th{ font-weight:bold}
-.table thead th{ vertical-align:bottom}
-.table colgroup+thead tr:first-child th, 
-.table colgroup+thead tr:first-child td, 
-.table thead:first-child tr:first-child th, 
-.table thead:first-child tr:first-child td{ border-top:0}
-.table tbody+tbody{ border-top:2px solid #ddd}
-.table-condensed th, 
-.table-condensed td{ padding:4px 5px}
-.table-bordered{ border:1px solid #ddd;  border-left:0;  border-collapse:separate;  *border-collapse:collapsed;  -webkit-border-radius:4px;  -moz-border-radius:4px;  border-radius:4px}
-.table-bordered th, 
-.table-bordered td{ border-left:1px solid #ddd}
-.table-bordered thead:first-child tr:first-child th, 
-.table-bordered tbody:first-child tr:first-child th, 
-.table-bordered tbody:first-child tr:first-child td{ border-top:0}
-.table-bordered thead:first-child tr:first-child th:first-child, 
-.table-bordered tbody:first-child tr:first-child td:first-child{ -webkit-border-radius:4px 0 0 0;  -moz-border-radius:4px 0 0 0;  border-radius:4px 0 0 0}
-.table-bordered thead:first-child tr:first-child th:last-child, 
-.table-bordered tbody:first-child tr:first-child td:last-child{ -webkit-border-radius:0 4px 0 0;  -moz-border-radius:0 4px 0 0;  border-radius:0 4px 0 0}
-.table-bordered thead:last-child tr:last-child th:first-child, 
-.table-bordered tbody:last-child tr:last-child td:first-child{ -webkit-border-radius:0 0 0 4px;  -moz-border-radius:0 0 0 4px;  border-radius:0 0 0 4px}
-.table-bordered thead:last-child tr:last-child th:last-child, 
-.table-bordered tbody:last-child tr:last-child td:last-child{ -webkit-border-radius:0 0 4px 0;  -moz-border-radius:0 0 4px 0;  border-radius:0 0 4px 0}
-.table-striped tbody tr:nth-child(odd) td, 
-.table-striped tbody tr:nth-child(odd) th{ background-color:#f9f9f9}
-.table tbody tr:hover td, 
-.table tbody tr:hover th{ background-color:#f5f5f5}
+/* === PLUGINS === */
+#pluginConfigButton{float:right; margin-top:-20px;font-size:10px;}
+#pluginConfigButton:hover{cursor:pointer}
+#pluginConfig{display:none}
 
-/**
- * Print styles.
-*/
-@media print{ *{background:transparent !important; color:black !important; text-shadow:none !important; filter:none !important; -ms-filter:none !important}/* Black prints 
+/* === FOOTER & COPYRIGHT === */
+#copyright{ padding:5px 10px; background:rgba(0,0,0,0.2); text-shadow:rgba(0,0,0,0.4) 0 1px 0; -webkit-border-radius:20px; -moz-border-radius:20px; -ms-border-radius:20px; -o-border-radius:20px; border-radius:20px; -webkit-box-shadow:rgba(0,0,0,0.2) 0 1px 2px inset,rgba(255,255,255,0.4) 0 1px 0; -moz-box-shadow:rgba(0,0,0,0.2) 0 1px 2px inset,rgba(255,255,255,0.4) 0 1px 0; box-shadow:rgba(0,0,0,0.2) 0 1px 2px inset,rgba(255,255,255,0.4) 0 1px 0; max-width:270px; line-height:25px; background:rgba(0,0,0,0.1); -webkit-border-radius:6px; -moz-border-radius:6px; -ms-border-radius:6px; -o-border-radius:6px; border-radius:6px; text-align:center; position:absolute;bottom:10px;font-size:11px;text-transform:uppercase;width:150px;left:15px;text-align:center;z-index:1;display:block !important;visibility:visible !important}
 
-a, a:visited{color:#444 !important; text-decoration:underline}
-a[href]:after{content:"("attr(href) ")"}
-abbr[title]:after{content:"("attr(title) ")"}
-.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after{content:""}
- /* Don't show links for images, or javascript/internal links */
+/* === BOUTTONS === */
+a.del-btn{ text-decoration: none; font-size:12px;  margin-left:10px;  padding-left:10px;  padding-bottom:2px;  padding-right:10px;  padding-top:2px;  text-decoration:none;  background-color:#A26F6F;  color:white;  -webkit-border-radius:3px;  -moz-border-radius:3px;  border-radius:3px}
+a.del-btn:hover{ background-color:#ef8888; color:black}
+a.edit-btn{ text-decoration: none; font-size:12px;  margin-left:10px;  padding-left:10px;  padding-bottom:2px;  padding-right:10px;  padding-top:2px;  text-decoration:none;  background-color:#77A2A8;  color:white;  -webkit-border-radius:3px;  -moz-border-radius:3px;  border-radius:3px}
+a.edit-btn:hover{ background-color:#57dfef; color:black}
+
+/* === TABLES === */
+table{ max-width:100%;  border-collapse:collapse;  border-spacing:0;  background-color:transparent; width:100%;  margin-bottom:18px; border-radius: 4px}
+table th, 
+table td{ padding:8px;  line-height:18px;  text-align:left;  vertical-align:top;  border-top:1px solid #ddd}
+table th{ font-weight:bold}
+table thead th{ vertical-align:bottom}
+table thead:first-child tr:first-child th, 
+table thead:first-child tr:first-child td{ border-top:0}
+table tbody+tbody{ border-top:2px solid #ddd}
+table tbody tr:hover td, 
+table tbody tr:hover th{ background-color:#f5f5f5}
+
+/* === STYLE IMPRESSION === */
+@media print{ *{background:transparent !important; color:black !important; text-shadow:none !important; filter:none !important; -ms-filter:none !important}
 pre, block quote{border:1px solid #999; page-break-inside:avoid}
 thead{display:table-header-group}/* css-discuss.incutio.com/wiki/Printing_Tables */
 
@@ -124,7 +89,6 @@ tr, img{page-break-inside:avoid}
 p, h2, h3{orphans:3; widows:3}
 h2, h3{page-break-after:avoid}
 hr{border-top:1px solid #000 !important; border-bottom:0 !important}
-
 header{-moz-box-shadow:none; -webkit-box-shadow:none; box-shadow:none; position:absolute; left:10px; top:0; width:100%; margin-top:500px}
 nav[role="navigation"] > ol:before{content:"Table of Contents"}
 nav[role="navigation"] > ol{border:0 !important}

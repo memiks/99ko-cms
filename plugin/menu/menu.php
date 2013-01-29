@@ -34,18 +34,27 @@ function menuCheckLinks($check = '') {
 		}
 	}
 	
-	if ($check == 'menu') {
+	if ($check == 'menu' || $check == 'pluginsmanager') {
 		foreach ($pluginsManager->getPlugins() as $plugin) {
-			if ($plugin->getName() != 'menu') {
+			if ($plugin->getName() != 'menu' && $plugin->getName() != 'pluginsmanager') {
 				menuCheckLinks($plugin->getName());
 			}
 		}
 	} else {
-		$plugin = $pluginsManager->getPlugin($check);
-		$links = $plugin->getNavigation();
+		if ($pluginsManager->isActivePlugin($check)) {
+			$plugin = $pluginsManager->getPlugin($check);
+			$links = $plugin->getNavigation();
 		
-		if (menu::updateLinks($check, $links)) {
-			menu::saveMenu();
+			if (menu::updateLinks($check, $links)) {
+				menu::saveMenu();
+			}
+		} else {
+			$plugin = $pluginsManager->getPlugin($check);
+			$links = array();
+		
+			if (menu::updateLinks($check, $links)) {
+				menu::saveMenu();
+			}
 		}
 	}
 }

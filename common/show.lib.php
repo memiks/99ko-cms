@@ -38,7 +38,7 @@ function showLinkTags($format = '<link href="[file]" rel="stylesheet" type="text
 	$data = '';
 	eval(callHook('startShowLinkTags'));
 	if(ROOT == './') $data.= str_replace('[file]', ROOT.'common/normalize.css', $format);
-	foreach($pluginsManager->getPlugins() as $k=>$plugin){
+	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
 		if ($plugin->getConfigVal('activate') && $plugin->getCssFile()){
 			$data.= str_replace('[file]', $plugin->getCssFile(), $format);
 		}
@@ -57,7 +57,7 @@ function showScriptTags($format = '<script type="text/javascript" src="[file]"><
 	$data = '';
 	eval(callHook('startShowScriptTags'));
 	$data = str_replace('[file]', ROOT.'common/jquery.js', $format);
-	foreach($pluginsManager->getPlugins() as $k=>$plugin){
+	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
 		if ($plugin->getConfigVal('activate') && $plugin->getJsFile()){
 			$data.= str_replace('[file]', $plugin->getJsFile(), $format);
 		}
@@ -236,7 +236,7 @@ function showSidebarItems($format = '<div class="item" id="[id]"><p class="title
 	global $pluginsManager;
 	$data = '';
 	eval(callHook('startShowSidebarItems'));
-	foreach($pluginsManager->getPlugins() as $k=>$plugin){
+	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
 		if($plugin->getConfigVal('sidebarTitle') != '' && $plugin->getConfigVal('sidebarCallFunction') != ''){
 			$temp = $format;
 			$temp = str_replace('[id]', 'sidebaritem-'.$plugin->getName(), $temp);

@@ -51,12 +51,12 @@ switch(ACTION){
 				$config['adminPwd'] = encrypt(trim($_POST['adminPwd']));
 				$_SESSION['admin'] = $config['adminPwd'];
 			} else {
-				$msg = "Le mot de passe est différent de sa confirmation.";
+				$msg = $lang['PasswordMismatch'];
 				$error = true;
 			}
 		}
 		if(!saveConfig($config)){
-			$msg = "Une erreur est survenue lors de l'enregistrement des modifications.";
+			$msg = $lang['SaveError'];
 			$error = true;
 		}
 		@file_put_contents(ROOT.'.htaccess', $_POST['htaccess']);

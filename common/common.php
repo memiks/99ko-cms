@@ -40,7 +40,6 @@ $langs = listLangs();
 
 // On charge la langue du core
 $lang = utilReadJsonFile(ROOT.'common/lang/' .getCoreConf('siteLang'). '.json');
-//require ROOT.'common/lang/' .getCoreConf('siteLang'). '.php';
 
 //constantes
 define('DEFAULT_PLUGIN', $coreConf['defaultPlugin']);

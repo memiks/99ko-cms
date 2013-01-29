@@ -9,7 +9,7 @@
 define('ROOT', './');
 
 include_once(ROOT.'common/core.lib.php');
-$languages_array = array('en', 'fr');
+$languages_array = array('en', 'fr'); // Dans le cas d'un sélecteur de langue, inutile pour le moment
 // On charge la langue du core
 $lang = utilReadJsonFile(ROOT.'common/lang/fr.json');
 
@@ -181,34 +181,5 @@ if (isset($_GET['updateto'])) {
              <a class="btn" href="admin/"><?php echo $lang['Backend']; ?></a>
           </section>
        </div>
-</body>
-</html>
-d #EFFAFF;}
-               aside, aside ol a{background-color:#77A2A8;color:#222222;}
-               aside ol a{-webkit-text-shadow:1px 1px 0px #DBE5E8;-moz-text-shadow:1px 1px 0px #DBE5E8;text-shadow:1px 1px 0px #DBE5E8;}
-               aside ol{border-top:1px solid #B4BCBF;}
-               aside ol a{border-top:1px solid #DBE5E8;border-bottom:1px solid #B4BCBF;color:#222222;}
-               aside ol a:hover{background:#DBE6EC;color:#111111;border-top:1px solid #DBE6EC;}
-               aside ol a.current{background:#DBE6EC;color:#111111;border-top:1px solid #DBE6EC;}
-               #copyright{display:block !important;visibility:visible !important;}
-       </style>
-</head>
-<body>
- 
-       <!--<aside>
-               <div id="copyright">
-                  Propulsé par <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/">99ko</a> <span class="version"><?php echo $data['99koVersion']; ?></span>.
-               </div>
-       </aside>-->
-       
-       <div id="content">      
-<section id="home">
-       <!--<h1>Installation</h1>
-       <h2><a class="btn" id="logout" href="./admin/">Administration</a>
-       <a class="btn" id="showSite" href="./">Voir le site</a></h2>
-       <hr>-->
-       <?php showMsg($data['msg'], $data['msgType']); ?>
-</section>
-    </div>
 </body>
 </html>

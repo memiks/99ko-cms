@@ -23,7 +23,7 @@ switch ($language){
         break;        
     default:
         // Langue par défaut si pas listé
-        $lang = utilReadJsonFile(ROOT.'common/lang/en.json');
+        $lang = utilReadJsonFile(ROOT.'common/lang/fr.json');
         break;
 }
 

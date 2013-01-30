@@ -19,7 +19,7 @@
 	<script src="../common/jquery.js"></script>	
 	<script src="js/plugin-config.js"></script>	
 	<script src="js/tinybox2/packed.js"></script>
-	<script>$(document).ready(function(){$("#msg").fadeOut(3000);});</script>
+	<!--script>$(document).ready(function(){$("#msg").fadeOut(3000);});</script-->
 	
 	<?php showLinkTags(); ?>
 	<?php showScriptTags(); ?>

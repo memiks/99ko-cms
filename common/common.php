@@ -6,7 +6,7 @@
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
 
-//error_reporting(E_ALL);
+error_reporting(E_ALL);
 if(!defined('ROOT')) die();
 
 

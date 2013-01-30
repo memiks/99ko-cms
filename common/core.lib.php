@@ -6,7 +6,7 @@
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
 
-if(!defined('ROOT')) die();
+if (!defined('ROOT')) die();
 include_once('util.lib.php');
 include_once('plugin.class.php');
 include_once('show.lib.php');
@@ -19,10 +19,10 @@ include_once('show.lib.php');
 ** Renvoie la configuration complète du core ou une valeur précise
 ** @return : array
 */
-function getCoreConf($k = ''){
+function getCoreConf($k = '') {
 	global $coreConf;
 	$data = ($coreConf) ? $coreConf : json_decode(@file_get_contents(ROOT.'data/config.txt'), true);
-	if($k != '') return $data[$k];
+	if ($k != '') return $data[$k];
 	else return $data;
 }
 
@@ -30,13 +30,13 @@ function getCoreConf($k = ''){
 ** Enregistre la configuration du core
 ** @param : $val (valeur a updater), $append (tableau de nouvelles valeurs)
 */
-function saveConfig($val, $append = array()){
+function saveConfig($val, $append = array()) {
 	$config = json_decode(@file_get_contents(ROOT.'data/config.txt'), true);
 	$config = array_merge($config, $append);
-	foreach($config as $k=>$v){
-		if(isset($val[$k])) $config[$k] = $val[$k];
+	foreach ($config as $k=>$v) {
+		if (isset($val[$k])) $config[$k] = $val[$k];
 	}
-	if(@file_put_contents(ROOT.'data/config.txt', json_encode($config), 0666)) return true;
+	if (@file_put_contents(ROOT.'data/config.txt', json_encode($config), 0666)) return true;
 	return false;
 }
 
@@ -45,10 +45,10 @@ function saveConfig($val, $append = array()){
 ** @param : $hook
 ** @return : string (PHP)
 */
-function callHook($hookName){
+function callHook($hookName) {
 	global $hooks;
 	$return = '';
-	if(isset($hooks[$hookName])) foreach($hooks[$hookName] as $function){
+	if (isset($hooks[$hookName])) foreach ($hooks[$hookName] as $function) {
 		$return.= call_user_func($function);
 	}
 	return $return;
@@ -58,7 +58,7 @@ function callHook($hookName){
 ** Ajoute un hook
 ** @param : $hookName (nom du hook), $function (fonction a executer)
 */
-function addHook($hookName, $function){
+function addHook($hookName, $function) {
 	global $hooks;
 	$hooks[$hookName][] = $function;
 }
@@ -67,10 +67,10 @@ function addHook($hookName, $function){
 ** liste le dossier theme
 ** @return : array
 */
-function listThemes(){
+function listThemes() {
 	$data = array();
 	$items = utilScanDir(ROOT.'theme/');
-	foreach($items['dir'] as $file){
+	foreach ($items['dir'] as $file) {
 		$data[$file] = getThemeInfos($file);
 	}
 	return $data;
@@ -79,10 +79,10 @@ function listThemes(){
 ** liste le dossier lang
 ** @return : array
 */
-function listLangs(){
+function listLangs() {
 	$data = array();
 	$langs = utilScanDir(ROOT.'common/lang');							
-	foreach($langs['dir'] as $file){
+	foreach ($langs['dir'] as $file) {
 		$data[$file] = $file;
 	}
 	return $data;
@@ -92,11 +92,11 @@ function listLangs(){
 ** Détecte l'url de base
 ** @return : string (URL de base)
 */
-function getSiteUrl(){
+function getSiteUrl() {
 	$siteUrl = str_replace(array('install.php', '/admin/index.php'), array('', ''), $_SERVER['SCRIPT_NAME']);
 	$siteUrl = 'http://'.$_SERVER['HTTP_HOST'].$siteUrl;
 	$pos = mb_strlen($siteUrl)-1;
-	if($siteUrl[$pos] == '/') $siteUrl = substr($siteUrl, 0, -1);
+	if ($siteUrl[$pos] == '/') $siteUrl = substr($siteUrl, 0, -1);
 	return $siteUrl;
 }
 
@@ -105,23 +105,22 @@ function getSiteUrl(){
 ** @param : string (nom du thème)
 ** @return : array
 */
-function getThemeInfos($name){
+function getThemeInfos($name) {
 	$data = json_decode(@file_get_contents(ROOT.'theme/'.$name.'/infos.json'), true);
 	return $data;
 }
 
-function rewriteUrl($plugin, $params = array()){
-	if(getCoreConf('urlRewriting')){
+function rewriteUrl($plugin, $params = array()) {
+	if (getCoreConf('urlRewriting')) {
 		$url = $plugin.'/';
-		if(count($params) > 0){
+		if (count($params) > 0) {
 			foreach($params as $k=>$v){
 				$url.= utilStrToUrl($v).',';
 			}
 			$url = trim($url, ',');
 			$url.= '.html';
 		}
-	}
-	else{
+	} else {
 		$url = 'index.php?p='.$plugin;
 		foreach($params as $k=>$v){
 			$url.= '&'.$k.'='.utilStrToUrl($v);
@@ -130,12 +129,11 @@ function rewriteUrl($plugin, $params = array()){
 	return $url;
 }
 
-function getUrlParams(){
+function getUrlParams() {
 	$data = array();
-	if(getCoreConf('urlRewriting')){
+	if (getCoreConf('urlRewriting')) {
 		$data = explode(',', $_GET['param']);
-	}
-	else{
+	} else {
 		foreach($_GET as $k=>$v){
 			if($k != 'p') $data[] = $v;
 		}
@@ -143,21 +141,28 @@ function getUrlParams(){
 	return $data;
 }
 
-function encrypt($data){
+function encrypt($data) {
 	return hash_hmac('sha1', $data, KEY);
 }
+
 /*
 ** Formate les phrases
 */
-function lang($format)
-{
+function lang($text, $namespace = '_default') {
 	global $lang;
 	$argList = func_get_args();
-	$wordList = array();
-	foreach(explode(' ', $format) as $word)
-	{
-		$wordList[] = isset($lang[$word])? $lang[$word] : $word;
+	$text = $text;
+	$offset = 2;
+
+	if (!array_key_exists($namespace, $lang)) {
+		$namespace = '_default';
+		$offset = 1;
 	}
-	return vsprintf(implode($lang['useSpace']? ' ' : '', $wordList), array_slice($argList, 1));
+
+	if (array_key_exists($text, $lang[$namespace])) {
+		$text = $lang[$namespace][$text];
+	}
+
+	return vsprintf($text, array_slice($argList, $offset));
 }
 ?>

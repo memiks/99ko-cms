@@ -12,23 +12,16 @@ include_once(ROOT.'common/core.lib.php');
 
 // On détecte la langue du navigateur est charge la langue du core
 $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-switch ($language){
-    case "fr":
-        // Langue Française
-        $lang = utilReadJsonFile(ROOT.'common/lang/fr.json');
-        break;
-    case "en":
-        // Langue Anglaise
-        $lang = utilReadJsonFile(ROOT.'common/lang/en.json');
-        break;        
-    default:
-        // Langue par défaut si pas listé
-        $lang = utilReadJsonFile(ROOT.'common/lang/fr.json');
-        break;
+$lang = array();
+if (file_exists(ROOT . 'common/lang/' . $language . '.json')) {
+	$lang['_default'] = utilReadJsonFile(ROOT . 'common/lang/' . $language . '.json');
+} else {
+	$language = 'fr';
+	$lang['_default'] = utilReadJsonFile(ROOT . 'common/lang/fr.json');
 }
 
 if (utilPhpVersion() < '5.1.2') {
-	die($lang['PhpVersion']);
+	die(lang('You must have a server equipped with PHP 5.1.2 or more !'));
 }
 
 utilSetMagicQuotesOff();
@@ -79,15 +72,15 @@ if (isset($_GET['updateto'])) {
 	}
 	
 	if ($error) {
-		$data['msg'] = $lang['UpdateFail'];
+		$data['msg'] = lang('Problem while updating');
 		$data['msgType'] = "error";
 	} else {
-		$data['msg'] = $lang['UpdateSuccess'];
+		$data['msg'] = lang('Update successful');
 		$data['msgType'] = "success";
 	}
 	
 	if ($resetPassword) {
-		$data['msg'] .= $lang['resetPassword']. $mdp;
+		$data['msg'] .= lang('The admin password has been reset :') . $mdp;
 	}
 } else {
 	if (file_exists(ROOT.'data/config.txt')) {
@@ -161,10 +154,12 @@ if (isset($_GET['updateto'])) {
 	}
 	
 	if ($error) {
-		$data['msg'] = $lang['InstallFail'];
+		$data['msg'] = lang('Problem when installing');
 		$data['msgType'] = "error";
 	} else {
-		$data['msg'] = $lang['InstallSuccess']. '<b>' .$mdp. '</b><br />'.$lang['ChangePwd'].'<br /><br /><a class="btn" href="index.php">'.$lang['BackToWebsite'].'</a><a class="btn" href="admin/">'.$lang['Backend'].'</a>';
+		$data['msg'] = lang('99ko is installed') . '<br />' . lang('The default admin password is : ') . '<b>' . $mdp . '</b><br />'.
+										lang('Change it at your first connection') . '<br />' . lang('Also, delete the install.php file') . '<br /><br />'.
+										'<a class="btn" href="index.php">' . lang('Back to website').'</a><a class="btn" href="admin/">' . lang('Backend') . '</a>';
 		$data['msgType'] = "success";
 		// On supprime le fichier d'installation et on redirige sur la page d'accueil.
 		//unlink('install.php');
@@ -173,14 +168,14 @@ if (isset($_GET['updateto'])) {
 ?>
 
 <!doctype html>  
-<!--[if IE 6 ]><html lang="fr" class="ie6"> <![endif]-->
-<!--[if IE 7 ]><html lang="fr" class="ie7"> <![endif]-->
-<!--[if IE 8 ]><html lang="fr" class="ie8"> <![endif]-->
+<!--[if IE 6 ]><html lang="<?php echo $language; ?>" class="ie6"> <![endif]-->
+<!--[if IE 7 ]><html lang="<?php echo $language; ?>" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="<?php echo $language; ?>" class="ie8"> <![endif]-->
 <!--[if (gt IE 7)|!(IE)]><!-->
-<html lang="fr"><!--<![endif]-->
+<html lang="<?php echo $language; ?>"><!--<![endif]-->
 <head>
        <meta charset="utf-8">  
-       <title>99ko - <?php echo $lang['Install']; ?></title>
+       <title>99ko - <?php echo lang('Installation'); ?></title>
        <!-- css -->
        <link rel="stylesheet" href="admin/css/install.css" media="all">
 </head>

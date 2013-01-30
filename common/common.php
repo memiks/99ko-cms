@@ -37,9 +37,10 @@ $urlParams = getUrlParams();
 $themes = listThemes();
 // Chargement des langs
 $langs = listLangs();
+$lang = array();
 
 // On charge la langue du core
-$lang = utilReadJsonFile(ROOT.'common/lang/' .getCoreConf('siteLang'). '.json');
+$lang['_default'] = utilReadJsonFile(ROOT.'common/lang/' .getCoreConf('siteLang'). '.json');
 
 //constantes
 define('DEFAULT_PLUGIN', $coreConf['defaultPlugin']);

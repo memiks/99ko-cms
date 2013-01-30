@@ -164,7 +164,7 @@ if (isset($_GET['updateto'])) {
 		$data['msg'] = $lang['InstallFail'];
 		$data['msgType'] = "error";
 	} else {
-		$data['msg'] = $lang['InstallSuccess']. '<b>' .$mdp. '</b><br />'.$lang['ChangePwd'];
+		$data['msg'] = $lang['InstallSuccess']. '<b>' .$mdp. '</b><br />'.$lang['ChangePwd'].'<br /><br /><a class="btn" href="index.php">'.$lang['BackToWebsite'].'</a><a class="btn" href="admin/">'.$lang['Backend'].'</a>';
 		$data['msgType'] = "success";
 		// On supprime le fichier d'installation et on redirige sur la page d'accueil.
 		//unlink('install.php');
@@ -182,17 +182,12 @@ if (isset($_GET['updateto'])) {
        <meta charset="utf-8">  
        <title>99ko - <?php echo $lang['Install']; ?></title>
        <!-- css -->
-       <link rel="stylesheet" href="admin/css/style.css" media="all">
-       <link rel="stylesheet" href="admin/css/common.css" media="all">
-       <!-- Personnalisation des liens, sidebar, contenu -->	
-	   <link rel="stylesheet" href="css/color_defaut.css" />
+       <link rel="stylesheet" href="admin/css/install.css" media="all">
 </head>
 <body>	   
-       <div id="content">      
+       <div id="container">      
           <section id="home">
              <?php showMsg($data['msg'], $data['msgType']); ?>
-             <br /><a class="btn" href="index.php"><?php echo $lang['BackToWebsite']; ?></a> 
-             <a class="btn" href="admin/"><?php echo $lang['Backend']; ?></a>
           </section>
        </div>
 </body>

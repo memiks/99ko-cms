@@ -39,12 +39,13 @@
 	<p><label><?php echo $lang['siteLang']; ?></label><br />
 					<select name="siteLang" id="siteLang">
 						<?php
-							$traductions = utilScanDir(ROOT.'common/lang/', array('.DS_Store'))['file'];
-							
-							foreach($traductions as $traduction){
+							$traductions = utilScanDir(ROOT.'common/lang/', array('.DS_Store'));
+							foreach($traductions['file'] as $traduction){
 							    $langfile = strpos($traduction, '.');
-							    $language = substr($traduction, 0, $langfile);			    
+							    $language = substr($traduction, 0, $langfile);	
+							    //echo '<option value="' . $language . '"' . ((if($language == $coreConf['siteLang'])) ? ' selected="selected"') . '>' . $language . '</option>';		    
 								echo '<option value="' . $language . '">' . $language . '</option>';
+								//if($language == $coreConf['siteLang']) echo 'selected';
 							}
 						?>
 					</select>

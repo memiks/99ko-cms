@@ -39,10 +39,7 @@
 	<p><label><?php echo $lang['siteLang']; ?></label><br />
 					<select name="siteLang" id="siteLang">
 						<?php
-							$traductions = scandir(ROOT.'common/lang');
-							array_shift($traductions);
-							array_shift($traductions);
-							unset($traductions[array_search('.DS_Store', $traductions)]);
+							$traductions = utilScanDir(ROOT.'common/lang/', array('.DS_Store'))['file'];
 							
 							foreach($traductions as $traduction){
 							    $langfile = strpos($traduction, '.');

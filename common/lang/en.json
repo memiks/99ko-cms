@@ -17,7 +17,7 @@
 "loginAttempt": "Please wait before retrying",
 "icorrectPwd": "Incorrect password",
 "missingHtaccess": "The .htaccess file is missing!",
-"installPresent": "The install.php file must be deleted!"
+"installPresent": "The install.php file must be deleted!",
 "Install" : "Installation",
 "PhpVersion" : "You must have a server equipped with PHP 5.1.2 or more!",
 "UpdateFail" : "Problem when updating",

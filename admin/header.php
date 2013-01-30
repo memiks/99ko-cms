@@ -16,9 +16,10 @@
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/html5.js"></script>
 	<![endif]-->
-	<script type="text/javascript" src="../common/jquery.js"></script>	
-	<script type="text/javascript" src="js/plugin-config.js"></script>	
-	<script type="text/javascript" src="js/tinybox2/packed.js"></script>
+	<script src="../common/jquery.js"></script>	
+	<script src="js/plugin-config.js"></script>	
+	<script src="js/tinybox2/packed.js"></script>
+	<script>$(document).ready(function(){$("#msg").fadeOut(3000);});</script>
 	
 	<?php showLinkTags(); ?>
 	<?php showScriptTags(); ?>

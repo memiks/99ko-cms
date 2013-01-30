@@ -9,9 +9,23 @@
 define('ROOT', './');
 
 include_once(ROOT.'common/core.lib.php');
-$languages_array = array('en', 'fr'); // Dans le cas d'un sélecteur de langue, inutile pour le moment
-// On charge la langue du core
-$lang = utilReadJsonFile(ROOT.'common/lang/fr.json');
+
+// On détecte la langue du navigateur est charge la langue du core
+$language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+switch ($language){
+    case "fr":
+        // Langue Française
+        $lang = utilReadJsonFile(ROOT.'common/lang/fr.json');
+        break;
+    case "en":
+        // Langue Anglaise
+        $lang = utilReadJsonFile(ROOT.'common/lang/en.json');
+        break;        
+    default:
+        // Langue par défaut si pas listé
+        $lang = utilReadJsonFile(ROOT.'common/lang/en.json');
+        break;
+}
 
 if (utilPhpVersion() < '5.1.2') {
 	die($lang['PhpVersion']);

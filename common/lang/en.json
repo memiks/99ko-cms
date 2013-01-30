@@ -1,5 +1,5 @@
 {
-
+"useSpace" : true,
 "Login": "Login",
 "Password": "Password",
 "Go": "Go",
@@ -18,5 +18,12 @@
 "icorrectPwd": "Incorrect password",
 "missingHtaccess": "The .htaccess file is missing!",
 "installPresent": "The install.php file must be deleted!"
-
+"Install" : "Installation",
+"PhpVersion" : "You must have a server equipped with PHP 5.1.2 or more!",
+"UpdateFail" : "Problem when updating",
+"UpdateSuccess" : "Updated",
+"resetPassword" : "The admin password has been reset:",
+"InstallFail" : "Problem when installing",
+"InstallSuccess" : "99 ko is installed<br />the default admin password is: ",
+"ChangePwd" : "Change it as soon as your first connection<br /> also delete the install.php file"
 }

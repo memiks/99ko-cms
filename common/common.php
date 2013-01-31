@@ -61,7 +61,7 @@ foreach($pluginsManager->getPlugins() as $plugin){
 	// on inclu la librairie
 	include_once($plugin->getLibFile());
     // on inclu la langue
-	include_once($plugin->getLangFile());	
+	$lang[$plugin->getName()] = $plugin->getLang();	
 	// installation
 	if (!$plugin->isInstalled()) {
 		$pluginsManager->installPlugin($plugin->getName());

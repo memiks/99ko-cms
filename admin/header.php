@@ -66,7 +66,7 @@
 
 
 <section id="content" class="<?php echo $pluginName; ?>-admin">
-	<h3><?php echo $pageTitle; ?></h3>
+	<h2><?php echo $pageTitle; ?></h2>
 	<?php if($pluginConfigTemplate){ ?>
 		<a href="javascript:" class="btn" id="pluginConfigButton">Configuration du plugin</a>
 	<?php } ?>

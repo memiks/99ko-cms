@@ -10,7 +10,7 @@ switch(ACTION){
 		else $pageItem = new pageItem();
 		$pageItem->setName($_POST['name']);
 		$pageItem->setIsHomepage((isset($_POST['isHomepage'])) ? 1 : 0);
-		$pageItem->setPosition($_POST['position']);
+		if(!pluginsManager::isActivePlugin('menu')) $pageItem->setPosition($_POST['position']);
 		$pageItem->setContent($_POST['content']);
 		$pageItem->setFile($_POST['file']);
 		$pageItem->setIsHidden((isset($_POST['isHidden'])) ? 1 : 0);

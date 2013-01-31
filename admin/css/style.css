@@ -40,18 +40,18 @@ nav[role="navigation"] > ol li ol li a{display:block; padding:4px 15px 5px 0; te
 
 /* === CONTENU === */
 #home{padding-top:180px !important}
-section{position:absolute; right:18px; left:218px; padding-left:10px;  min-height:100%; height:auto; z-index:1}
-section h1{font-size:30px; font-weight:700}
-section h2{font-size:26px; margin:18px 0 0; font-weight:100}
-section h3{font-size:20px; margin-bottom:18px; font-weight:100}
-section p{margin:18px 0}
-section ol li{list-style:decimal; /*margin-left:36px*/}
-section ul li{list-style:square; /*margin-left:36px*/}
-section table{border-collapse:collapse}
-section table th{font-weight:700}
-section table th, section table td{padding:3px; text-align:left}
-section code, section pre{font-family:"Courier New",Courier,monospace; font-size:12px}
-section pre{background-image:url(imgages/pre_bg.png); line-height:19px}
+section#content{position:absolute; right:18px; left:218px; padding-left:10px;  min-height:100%; height:auto; z-index:1}
+section#content h1{font-size:30px; font-weight:700}
+section#content h2{font-size:26px; margin:18px 0 0; font-weight:100}
+section#content h3{font-size:20px; margin-bottom:18px; font-weight:100}
+section#content p{margin:18px 0}
+section#content ol li{list-style:decimal; /*margin-left:36px*/}
+section#content ul li{list-style:square; /*margin-left:36px*/}
+section#content table{border-collapse:collapse}
+section#content table th{font-weight:700}
+section#content table th, section#content table td{padding:3px; text-align:left}
+section#content code, section#content pre{font-family:"Courier New",Courier,monospace; font-size:12px}
+section#content pre{background-image:url(imgages/pre_bg.png); line-height:19px}
 
 /* === PLUGINS === */
 #pluginConfigButton{float:right; margin-top:-20px;font-size:10px;}

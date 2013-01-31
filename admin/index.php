@@ -1,4 +1,12 @@
 <?php
+##########################################################################################################
+# 99ko http://99ko.tuxfamily.org/
+#
+# Copyright (c) 2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
+# Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
+##########################################################################################################
+
 // on declare ROOT
 define('ROOT', '../');
 // on inclu le fichier common
@@ -30,6 +38,9 @@ $pluginConfigTemplate = (!isset($_GET['p'])) ? false :$runPlugin->getConfigTempl
 $pageTitle = (!isset($_GET['p'])) ? 'Bienvenue dans 99ko' : $runPlugin->getInfoVal('name');
 // Actions
 if(ACTION == 'login'){
+	if (isset($_SESSION['msg_install'])) {
+		unset($_SESSION['msg_install']);
+	}
 	$loginAttempt = (isset($_SESSION['loginAttempt'])) ? $_SESSION['loginAttempt'] : 0;
 	$loginAttempt++;
 	$_SESSION['loginAttempt'] = $loginAttempt;

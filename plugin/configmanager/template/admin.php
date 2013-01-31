@@ -43,11 +43,8 @@
 						<?php
 							$traductions = utilScanDir(ROOT.'common/lang/', array('.DS_Store'));
 							foreach($traductions['file'] as $traduction){
-							    $langfile = strpos($traduction, '.');
-							    $language = substr($traduction, 0, $langfile);	
-							    //echo '<option value="' . $language . '"' . ((if($language == $coreConf['siteLang'])) ? ' selected="selected"') . '>' . $language . '</option>';		    
-								echo '<option value="' . $language . '">' . $language . '</option>';
-								//if($language == $coreConf['siteLang']) echo 'selected';
+								$language = substr($traduction, 0, strpos($traduction, '.'));
+								echo '<option value="' . $language . '"' . (($language == $coreConf['siteLang']) ? ' selected' : '') . '>' . $language . '</option>';
 							}
 						?>
 					</select>

@@ -134,7 +134,7 @@ if (isset($_GET['updateto'])) {
 		'theme' => 'defaulthtml5',
 		'adminEmail'=> 'you@domain.com',
 		'siteUrl' => getSiteUrl(),
-		'siteLang' => 'fr',
+		'siteLang' => $language,
 		'defaultPlugin' => 'page',
 		'urlRewriting' => '0',
 	);

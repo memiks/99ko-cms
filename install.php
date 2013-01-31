@@ -183,79 +183,10 @@ if (isset($_GET['updateto'])) {
 	 <![endif]-->	       
 </head>
 <body>	    
-     <div id="container"> 
-
-    <!-- Progress bar -->
-    <div id="progress_bar" class="ui-progress-bar ui-container">
-      <div class="ui-progress" style="width: 79%;">
-        <span class="ui-label" style="display:none;"><?php echo lang('Installation'); ?> <b class="value">79%</b></span>
-      </div>
-    </div>
-    <!-- /Progress bar -->
-              
+     <div id="container">              
         <section id="home" style="display: none;">
            <?php showMsg($data['msg'], $data['msgType']); ?>
         </section>
      </div>
-<!-- scripts -->
-<script src="common/jquery.js"></script> 
-<script>
-(function( $ ){
-  $.fn.animateProgress = function(progress, callback) {    
-    return this.each(function() {
-      $(this).animate({
-        width: progress+'%'
-      }, {
-        duration: 1000,        
-        // swing or linear
-        easing: 'swing',
-        // this gets called every step of the animation, and updates the label
-        step: function( progress ){
-          var labelEl = $('.ui-label', this),
-              valueEl = $('.value', labelEl);
-          
-          if (Math.ceil(progress) < 20 && $('.ui-label', this).is(":visible")) {
-            labelEl.hide();
-          }else{
-            if (labelEl.is(":hidden")) {
-              labelEl.fadeIn();
-            };
-          }         
-          if (Math.ceil(progress) == 100) {
-            labelEl.text('<?php echo lang('Done'); ?>');
-            setTimeout(function() {
-              labelEl.fadeOut();
-            }, 1000);
-          }else{
-            valueEl.text(Math.ceil(progress) + '%');
-          }
-        },
-        complete: function(scope, i, elem) {
-          if (callback) {
-            callback.call(this, i, elem );
-          };
-        }
-      });
-    });
-  };
-})( jQuery );
-$(function() {
-  // On cache le label au démarrage
-  $('#progress_bar .ui-progress .ui-label').hide();
-  // Valeur initiale définie
-  $('#progress_bar .ui-progress').css('width', '7%');
-  // Simulation de la progression
-  $('#progress_bar .ui-progress').animateProgress(43, function() {
-    $(this).animateProgress(79, function() {
-      setTimeout(function() {
-        $('#progress_bar .ui-progress').animateProgress(100, function() {
-          $('#home').fadeIn();/*.slideDown()*/
-          $('#progress_bar').fadeOut();
-        });
-      }, 500);
-    });
-  });
-});	     
-</script>     
 </body>
 </html>

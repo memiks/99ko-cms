@@ -184,7 +184,7 @@ if (isset($_GET['updateto'])) {
 </head>
 <body>	    
      <div id="container">              
-        <section id="home" style="display: none;">
+        <section id="home">
            <?php showMsg($data['msg'], $data['msgType']); ?>
         </section>
      </div>

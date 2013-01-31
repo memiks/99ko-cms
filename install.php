@@ -2,12 +2,12 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2012-2013 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
-# / Frédéric Kaplon (frederic@kaplon.fr)
+# Copyright (c) 2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
 # Copyright (c) 2010-2011 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
 
+session_start();
 define('ROOT', './');
 include_once(ROOT.'common/core.lib.php');
 if (utilPhpVersion() < '5.1.2') {
@@ -149,9 +149,12 @@ if (isset($_GET['updateto'])) {
 		$data['msg'] = "Problème lors de l'installation";
 		$data['msgType'] = "error";
 	} else {
-		$data['msg'] = "99ko est installé\nLe mot de passe admin par défaut est : $mdp\nModifiez-le dès votre première connexion\nSupprimez également le fichier install.php\n\n<a class='btn' href='./admin/'>Administration ( mot de passe par défaut : ".$mdp." )</a> <a class='btn' href='./'>Voir le site</a>";
+		$data['msg'] = "99ko est installé\nLe mot de passe admin par défaut est : $mdp\nModifiez-le dès votre première connexion\nSupprimez également le fichier install.php";
 		$data['msgType'] = "success";
 		eval(callHook('installSuccess'));
+
+		$_SESSION['msg_install'] = $data['msg'];
+		header('location:admin/index.php');
 	}
 }
 ?>

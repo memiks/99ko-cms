@@ -189,8 +189,6 @@ class plugin{
 	** Constructeur
 	*/
 	public function __construct($name, $config = array(), $infos = array(), $hooks = array(), $initConfig = array()){
-		echo 'Building ' . $name . ' with hooks';
-		print_r($hooks);
 		$this->name = $name;
 		$this->config = $config;
 		$this->infos = $infos;
@@ -256,7 +254,7 @@ class plugin{
 	public function getLangFile(){
 		return $this->langFile;
 	}
-	public function getLangFile(){
+	public function getLang(){
 		return $this->lang;
 	}
 	public function getPublicFile(){

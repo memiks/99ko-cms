@@ -1,6 +1,8 @@
 <?php include_once(ROOT.'admin/header.php') ?>
 
 
+	<!--<h3>Bienvenue dans 99ko</h3>
+	<hr>-->
 	<?php showMsg($msg, 'error'); ?>
 	<p>Vous utilisez la version <span class="version"><?php echo $version; ?></span> de 99ko.<br />
     Téléchargez une version plus récente, des plugins et des thèmes sur le site officiel.<br />

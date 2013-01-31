@@ -17,10 +17,9 @@
 	<tr>
 		<td><?php if($pageItem['isHomepage']){ ?><img src="../plugin/page/other/house.png" alt="icon" title="Page d'accueil" /><?php } ?> <?php if($pageItem['isHidden']){ ?><img src="../plugin/page/other/bullet_orange.png" alt="icon" title="Cette page n'apparait pas dans le menu" /> <?php } ?></td>
 		<td><?php echo $pageItem['name']; ?></td>
-		<!--<td><?php echo $data['configSiteUrl']; ?>/index.php?p=page&id=<?php echo $pageItem['id']; ?></td>-->
-		<td><input type="text" value="<?php echo $data['configSiteUrl']; ?>/<?php echo rewriteUrl('page', array('name' => $pageItem['name'], 'id' => $pageItem['id'])); ?>" /></td>
+		<td><input type="text" value="<?php echo $coreConf['siteUrl']; ?>/<?php echo rewriteUrl('page', array('name' => $pageItem['name'], 'id' => $pageItem['id'])); ?>" /></td>
 		<td>
-			<a class="edit-btn" href="javascript:TINY.box.show({iframe:'<?php echo $data['configSiteUrl']; ?>/<?php echo rewriteUrl('page', array('name' => $pageItem['name'], 'id' => $pageItem['id'])); ?>',width:990,height:450})">Aperçu</a>
+			<a class="edit-btn" href="javascript:TINY.box.show({iframe:'<?php echo $coreConf['siteUrl']; ?>/<?php echo rewriteUrl('page', array('name' => $pageItem['name'], 'id' => $pageItem['id'])); ?>',width:990,height:450})">Aperçu</a>
 			<a class="edit-btn" href="index.php?p=page&action=edit&id=<?php echo $pageItem['id']; ?>">éditer</a>
 			<?php if(!$pageItem['isHomepage']){ ?> <a class="del-btn" href="index.php?p=page&action=del&id=<?php echo $pageItem['id']; ?>&token=<?php echo $data['token']; ?>" onclick = "if(!confirm('Supprimer cette page ?')) return false;">supprimer</a><?php } ?>
 		</td>

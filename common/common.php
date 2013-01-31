@@ -41,6 +41,11 @@ $lang = array();
 
 // On charge la langue du core
 $lang['_default'] = utilReadJsonFile(ROOT.'common/lang/' .getCoreConf('siteLang'). '.json');
+$lang['theme'] = array();
+
+if (file_exists(ROOT.'theme/' .$coreConf['theme']. '/lang/' .getCoreConf('siteLang'). '.json')) {
+	$lang['theme'] = utilReadJsonFile(ROOT.'theme/' .$coreConf['theme']. '/lang/' .getCoreConf('siteLang'). '.json');
+}
 
 //constantes
 define('DEFAULT_PLUGIN', $coreConf['defaultPlugin']);

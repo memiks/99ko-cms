@@ -44,14 +44,14 @@ switch(ACTION){
 			die();
 		}
 		else{
-			$data['pageMsg'] = "Suppression impossible";
+			$data['pageMsg'] = lang('Can\t delete', 'page');
 			$data['pageMsgType'] = 'error';
 		}
 	default:
 		$pageItems = $page->getItems();
 		$data['pageMode'] = 'list';
 		if(!$page->createHomepage()){
-			$data['pageMsg'] = "Aucune page d'accueil n'est définie";
+			$data['pageMsg'] = lang('No homepage defined', 'page');
 			$data['pageMsgType'] = 'error';
 		}
 		$data['pageList'] = array();

@@ -1,3 +1,18 @@
 {
-	"Advanced configuration" : "Configuration avancée"
+	"Homepage" : "Page d'accueil",
+	"Name" : "Nom",
+	"New page" : "Ajouter",
+	"Preview" : "Aperçu",
+	"Edit" : "Éditer",
+	"Delete" : "Supprimer",
+	"Page title (Optional)" : "Titre de la page (Facultatif)",
+	"Meta description tag (Optional)" : "Balise meta description (facultatif)",
+	"Link position in the menu" : "Position du lien dans la navigation",
+	"Use as homepage" : "Utiliser comme page d'accueil",
+	"Don't display in the menu" : "Ne pas afficher de lien vers cette page dans le menu",
+	"Content" : "Contenu",
+	"Include a file instead of content (must be present in %s theme's folder)" : "Inclure un fichier à la place du contenu (doit être présent dans le dossier du thème %s)",
+	"Save" : "Enregistrer",
+	"No homepage defined" : "Aucune page d'accueil n'est définie",
+	"Can't delete" : "Suppression impossible"
 }

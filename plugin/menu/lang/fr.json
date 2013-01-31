@@ -1,3 +1,11 @@
 {
-	"Advanced configuration" : "Configuration avancée"
+	"New link" : "Ajouter un lien",
+	"Target" : "Cible",
+	"Current page" : "Fenêtre courante",
+	"New page" : "Nouvelle fenêtre",
+	"Up" : "Monter",
+	"Down" : "Descendre",
+	"Delete" : "Supprimer",
+	"Save" : "Enregistrer",
+	"Cancel modifications" : "Annuler les modifications"
 }

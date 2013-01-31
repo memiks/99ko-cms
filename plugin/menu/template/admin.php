@@ -1,15 +1,15 @@
 <?php include_once(ROOT.'admin/header.php'); ?>
 
 <?php if ($data['menuMode'] == 'list') { ?>
-<button class="btn" id="addLink" onclick="addLink()">Ajouter un lien</button>
+<button class="btn" id="addLink" onclick="addLink()"><?php echo lang('New link', 'menu'); ?></button>
 <form method="post" action="index.php?p=menu&action=save">
 	<?php showAdminTokenField(); ?>
 	<table id="linksList" class="table table-striped">
 		<thead>
 			<tr>
-				<th>Label</th>
-				<th>Url</th>
-				<th>Cible</th>
+				<th><?php echo lang('Label', 'menu'); ?></th>
+				<th><?php echo lang('Url', 'menu'); ?></th>
+				<th><?php echo lang('Target', 'menu'); ?></th>
 				<th></th>
 				<th></th>
 				<th></th>
@@ -39,27 +39,27 @@
 				<td class="target">
 					<?php if ($link->getPlugin() == 'menu') {?>
 						<select name="target<?php echo $position; ?>">
-							<option value="_self" <?php echo ($link->getTarget() == '_self' ? 'selected' : ''); ?>>Fenêtre courante</option>
-							<option value="_blank" <?php echo ($link->getTarget() == '_blank' ? 'selected' : ''); ?>>Nouvelle fenêtre</option>
+							<option value="_self" <?php echo ($link->getTarget() == '_self' ? 'selected' : ''); ?>><?php echo lang('Current page', 'menu'); ?></option>
+							<option value="_blank" <?php echo ($link->getTarget() == '_blank' ? 'selected' : ''); ?>><?php echo lang('New page', 'menu'); ?></option>
 						</select>
 					<?php } else { ?>
 						<input type="hidden" name="target<?php echo $position; ?>" value="<?php echo $link->getTarget(); ?>" />
-						<?php echo ($link->getTarget() == '_self' ? 'Fenêtre courante' : 'Nouvelle fenêtre'); ?>
+						<?php echo ($link->getTarget() == '_self' ? lang('Current page', 'menu') : lang('New page', 'menu')); ?>
 					<?php } ?>
 				</td>
 				<td class="up">
 					<?php if ($position > 0) {?>
-						<img src="<?php echo MENU_PLUGINPATH; ?>img/up.png" alt="monter" onclick="upLink(<?php echo $position; ?>)" />
+						<img src="<?php echo MENU_PLUGINPATH; ?>img/up.png" alt="<?php echo lang('Up', 'menu'); ?>" onclick="upLink(<?php echo $position; ?>)" />
 					<?php } ?>
 				</td>
 				<td class="down">
 					<?php if ($position < count($data['menuLinks']) - 1) {?>
-						<img src="<?php echo MENU_PLUGINPATH; ?>img/down.png" alt="descendre" onclick="downLink(<?php echo $position; ?>)" />
+						<img src="<?php echo MENU_PLUGINPATH; ?>img/down.png" alt="<?php echo lang('Down', 'menu'); ?>" onclick="downLink(<?php echo $position; ?>)" />
 					<?php } ?>
 				</td>
 				<td class="delete">
 					<?php if ($link->getPlugin() == 'menu') {?>
-						<img src="<?php echo MENU_PLUGINPATH; ?>img/delete.png" alt="supprimer" onclick="deleteLink(<?php echo $position; ?>)" />
+						<img src="<?php echo MENU_PLUGINPATH; ?>img/delete.png" alt="<?php echo lang('Delete', 'menu'); ?>" onclick="deleteLink(<?php echo $position; ?>)" />
 					<?php } ?>
 				</td>
 			</tr>
@@ -68,8 +68,8 @@
 	</table>
 	<input type="hidden" name="number" value="<?php echo count($data['menuLinks']); ?>" />
 	<div class="buttons">
-		<input type="submit" value="Enregistrer" />
-		<button class="btn" onclick="window.location.reload();return false;">Annuler les modifications</button>
+		<input type="submit" value="<?php echo lang('Save', 'menu'); ?>" />
+		<button class="btn" onclick="window.location.reload();return false;"><?php echo lang('Cancel modifications', 'menu'); ?></button>
 	</div>
 </form>
 <?php } ?>

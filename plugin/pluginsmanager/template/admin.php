@@ -7,26 +7,26 @@
 	<table class="table table-striped table-condensed">
 	  <thead>
 		<tr>
-			<th>Nom</th>
+			<th><?php echo lang('Name', 'pluginsmanager'); ?></th>
 			<th></th>
-			<th>Version</th>
-			<th>Priorité</th>
-			<th>Activer</th>
+			<th><?php echo lang('Version', 'pluginsmanager'); ?></th>
+			<th><?php echo lang('Priority', 'pluginsmanager'); ?></th>
+			<th><?php echo lang('Enable', 'pluginsmanager'); ?></th>
 		</tr>
 	  </thead>
 	  <tbody>			  	
 		<?php foreach($plugins as $k=>$v){ ?>
 		<tr>
 			<td>
-				<?php echo $v['name']; ?>
+				<?php echo lang($v['name'], $v['id']); ?>
 			</td>
 			<td>
-			<?php if($v['target'] && $v['activate']){ ?><a class="edit-btn" href="<?php echo $v['target']; ?>">Aller au plugin</a><?php } ?> 
-			<a class="edit-btn aboutPlugin" href="javascript:">A propos</a>
+			<?php if($v['target'] && $v['activate']){ ?><a class="edit-btn" href="<?php echo $v['target']; ?>"><?php echo lang('Go to plugin', 'pluginsmanager'); ?></a><?php } ?> 
+			<a class="edit-btn aboutPlugin" href="javascript:"><?php echo lang('About', 'pluginsmanager'); ?></a>
 			<span style="display:none;">
-			<b>Plugin <?php echo $v['name']; ?></b><br />
-			<?php echo $v['description']; ?><br /><br />
-			Auteur :<br />
+			<b>Plugin <?php echo lang($v['name'], $v['id']); ?></b><br />
+			<?php echo lang($v['description'], $v['id']); ?><br /><br />
+			<?php echo lang('Author', 'pluginsmanager'); ?> :<br />
 			<?php echo $v['author']; ?><br />
 			<?php echo $v['authorEmail']; ?><br />
 			<a href="<?php echo $v['authorWebsite']; ?>" target="_blank"><?php echo $v['authorWebsite']; ?></a>

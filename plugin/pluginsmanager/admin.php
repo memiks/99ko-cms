@@ -46,7 +46,7 @@ switch(ACTION){
 			$v->setConfigVal('priority', intval($_POST['priority'][$v->getName()]));
 			if(!$pluginsManager->savePluginConfig($v)){
 				$error = true;
-				$msg = "Une erreur est survenue lors de l'enregistrement des modifications.";
+				$msg = lang('An error occured while saving your modifications.', 'pluginsmanager');
 				$msgType = 'error';
 			}
 		}

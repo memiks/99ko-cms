@@ -36,7 +36,7 @@
 		<nav role="navigation">
 		   <ol>
 			<?php foreach($navigation as $k=>$v){ ?>
-			<li><a class="<?php if($v['isActive']){ ?>current<?php } ?>" href="<?php echo $v['url']; ?>"><?php echo $v['label']; ?></a></li>
+			<li><a class="<?php if($v['isActive']){ ?>current<?php } ?>" href="<?php echo $v['url']; ?>"><?php echo lang($v['label'], $v['name']); ?></a></li>
 			<?php } ?>
 		   </ol>
 	       &nbsp;<a class="btn" id="logout" href="index.php?action=logout&token=<?php echo $token; ?>"><?php echo lang('Logout'); ?></a>

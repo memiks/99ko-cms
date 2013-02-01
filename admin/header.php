@@ -8,9 +8,6 @@
 	<meta charset="utf-8">	
 	<title>99ko - Administration</title>
 	<!-- css -->
-	<!--<link rel="stylesheet" href="css/style.css" media="all">
-	<link rel="stylesheet" href="css/common.css" media="all">-->
-	<!-- css -->
 	<link rel="stylesheet" href="css/style.css" media="all">
 	<link rel="stylesheet" href="css/common.css" media="all">
 	<!-- Personnalisation des liens, sidebar, contenu -->	
@@ -19,31 +16,10 @@
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/html5.js"></script>
 	<![endif]-->
-	<script type="text/javascript" src="../common/jquery.js"></script>	
-	<script type="text/javascript" src="js/plugin-config.js"></script>	
-	<script type="text/javascript" src="js/tinybox2/packed.js"></script>
-	<!-- Personnalisation des liens, sidebar, contenus -->
-	<!--<style>
-		html{background-color:#FFFFFF;color:#383838;}
-		::-moz-selection{background:#DBE6EC;color:#111111;}
-		::selection{background:#DBE6EC;color:#111111;}
-		header #logo{background-image:url(images/logo.png);}
-		a{color:#A26F6F;}
-		hr{border-top:1px solid #D7E1E6;border-bottom:1px solid #EFFAFF;}
-		header, header > nav a{background-color:#77A2A8;color:#222222;}
-		header > nav a{-webkit-text-shadow:1px 1px 0px #DBE5E8;-moz-text-shadow:1px 1px 0px #DBE5E8;text-shadow:1px 1px 0px #DBE5E8;}
-		header > nav a:hover{background:#DBE6EC;color:#111111}
-		header > nav a.current{background:#DBE6EC;color:#111111}
-		#copyright{display:block !important;visibility:visible !important;}
-		#pluginConfigButton{border-color:#D7E1E6}
-	</style>-->
 	<?php showLinkTags(); ?>
 	<?php showScriptTags(); ?>
-	
-	<?php eval(callHook('endAdminHead')); ?>	
-
+	<?php eval(callHook('endAdminHead')); ?>		
 </head>
-
 <body>
 
 	<header role="banner">
@@ -63,7 +39,6 @@
 		   Just using <a target="_blank" href="http://99ko.tuxfamily.org/"><b>99ko</b></a> <span class="version"><?php echo $version; ?></span>.
 		</div>
 	</header>
-
 
 <section id="content" class="<?php echo $pluginName; ?>-admin">
 	<h2><?php echo $pageTitle; ?></h2>

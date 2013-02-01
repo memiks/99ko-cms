@@ -149,7 +149,7 @@ if (isset($_GET['updateto'])) {
 		$data['msg'] = "Problème lors de l'installation";
 		$data['msgType'] = "error";
 	} else {
-		$data['msg'] = "99ko est installé\nLe mot de passe admin par défaut est : $mdp\nModifiez-le dès votre première connexion\nSupprimez également le fichier install.php";
+		$data['msg'] = "99ko est installé\nLe mot de passe admin par défaut est : <span class='pwd'>$mdp</span>\nModifiez-le dès votre première connexion\nSupprimez également le fichier install.php";
 		$data['msgType'] = "success";
 		eval(callHook('installSuccess'));
 

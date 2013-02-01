@@ -4,20 +4,13 @@
 <form id="configForm" method="post" action="index.php?p=configmanager&action=save">
 	<?php showMsg($msg, 'error'); ?>
 	<?php showAdminTokenField(); ?>
-	<p><a href="javascript:" class="btn" id="advancedConfigurationButton">Configuration avançée</a></p>
-	<div id="advancedConfiguration">
-		<?php showMsg("Ne modifiez pas les paramètres avancés si vous n'êtes pas sur de ce que vous faites. ", "error"); ?>
-		<p><label>URL du site (sans slash final)</label><br />
-		<input type="text" name="siteUrl" value="<?php echo $config['siteUrl']; ?>" /></p>
-		<p><label>Réécriture d'URL</label><br />
-		<input id="urlRewriting" type="checkbox" onclick="updateHtaccess('<?php echo $rewriteBase; ?>');" <?php if($config['urlRewriting']){ ?>checked<?php } ?> name="urlRewriting" /> Activer
-		</p>
-		<p><label>.htaccess</label><br />
-		<textarea id="htaccess" name="htaccess"><?php echo $htaccess; ?></textarea>
-		</p>
-		<p><input type="submit" value="Enregistrer" /></p>
-		<hr class="notop">
-	</div>
+ <article id="tabs">	
+		<ul class="tabs">
+			<li><a href="#general">Configuration Général</a></li>
+			<li><a href="#advanced">Configuration avançée</a></li>
+		</ul>
+		<div class="tab" id="general">
+			<h3>Configuration Général</h3>
 	<p><label>Nom du site</label><br />
 	<input type="text" name="siteName" value="<?php echo $config['siteName']; ?>" /></p>
 	<p><label>Description du site</label><br />
@@ -47,6 +40,24 @@
 	<p><label>confirmation</label><br />
 	<input type="password" name="adminPwd2" value="" /></p>
 	<p><input type="submit" value="Enregistrer" /></p>
+
+		</div>
+		
+		<div class="tab" id="advanced">
+			<h3>Configuration avançée</h3>
+		<?php showMsg("Ne modifiez pas les paramètres avancés si vous n'êtes pas sur de ce que vous faites. ", "error"); ?>
+		<p><label>URL du site (sans slash final)</label><br />
+		<input type="text" name="siteUrl" value="<?php echo $config['siteUrl']; ?>" /></p>
+		<p><label>Réécriture d'URL</label><br />
+		<input id="urlRewriting" type="checkbox" onclick="updateHtaccess('<?php echo $rewriteBase; ?>');" <?php if($config['urlRewriting']){ ?>checked<?php } ?> name="urlRewriting" /> Activer
+		</p>
+		<p><label>.htaccess</label><br />
+		<textarea id="htaccess" name="htaccess"><?php echo $htaccess; ?></textarea>
+		</p>
+		<p><input type="submit" value="Enregistrer" /></p>
+		
+		</div>
+ </article>		
 </form>
 
 <?php include_once(ROOT.'admin/footer.php') ?>

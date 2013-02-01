@@ -10,7 +10,7 @@
 		html{background-color:#FFFFFF;color:#383838;}
 		::-moz-selection{background:#DBE6EC;color:#111111;}
 		::selection{background:#DBE6EC;color:#111111;}
-		a{color:#A26F6F;} /*#6F6F6F*/
+		a{color:#A26F6F;}
 		hr{border-top:1px solid #D7E1E6;border-bottom:1px solid #EFFAFF;}
 		header, header > nav a{background-color:#77A2A8;color:#222222;}
 		header > nav a{-webkit-text-shadow:1px 1px 0px #DBE5E8;-moz-text-shadow:1px 1px 0px #DBE5E8;text-shadow:1px 1px 0px #DBE5E8;}
@@ -18,3 +18,4 @@
 		header > nav a.current{background:#DBE6EC;color:#111111}
 		#copyright a{color:rgba(255,255,255,1)}
 		#pluginConfigButton{border-color:#D7E1E6}
+		.tabs a.active{background:#77A2A8; color: #213433;-webkit-text-shadow:1px 1px 0px #DBE5E8;-moz-text-shadow:1px 1px 0px #DBE5E8;text-shadow:1px 1px 0px #DBE5E8;}

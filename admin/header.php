@@ -8,10 +8,9 @@
 	<meta charset="utf-8">	
 	<title>99ko - Administration</title>
 	<!-- css -->
-	<link rel="stylesheet" href="css/style.css" media="all">
-	<link rel="stylesheet" href="css/common.css" media="all">
-	<!-- Personnalisation des liens, sidebar, contenu -->	
-	<link rel="stylesheet" href="css/style/defaut.css" />
+	<link rel="stylesheet" href="css/style.css" media="all" />
+	<link rel="stylesheet" href="css/common.css" media="all" />	
+	<link rel="stylesheet" href="css/defaut.css" />
 	<link rel="stylesheet" href="js/tinybox2/style.css" />
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/html5.js"></script>
@@ -31,8 +30,8 @@
 			<li><a class="<?php if($v['isActive']){ ?>current<?php } ?>" href="<?php echo $v['url']; ?>"><?php echo $v['label']; ?></a></li>
 			<?php } ?>
 		   </ol>
-	       &nbsp;<a class="btn" id="logout" href="index.php?action=logout&token=<?php echo $token; ?>">Se déconnecter</a>
-	       <a target="_blank" class="btn" id="showSite" href="../">Voir le site</a>	      	   		
+	       &nbsp;<a class="btn" href="index.php?action=logout&token=<?php echo $token; ?>">Se déconnecter</a>
+	       <a target="_blank" class="btn" href="../">Voir le site</a>   	   		
 		</nav>
 		
 		<div id="copyright">		

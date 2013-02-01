@@ -7,6 +7,7 @@
 <head>
 	<meta charset="utf-8">	
 	<title>99ko - Administration</title>
+	<meta name="viewport" content="width=device-width, user-scalable=yes" />
 	<!-- css -->
 	<link rel="stylesheet" href="css/style.css" media="all" />
 	<link rel="stylesheet" href="css/common.css" media="all" />	

@@ -49,36 +49,10 @@ pre{background-image:url(../images/pre_bg.png) !important; line-height:19px}
 /**
  * Onglets
 */
-#tabs div.tab{margin: 0;color: #777;padding-left: 15px;
-	font-family: Cambria, Georgia, serif;
-	border-left: 8px solid rgba(63,148,148, 0.1);
-}
+article#tabs{margin:40px 0; width:80%}
+article#tabs h3{margin:20px 0 40px}
 .tabs li{list-style:none; display:inline}
-.tabs a{display:inline-block;margin:0 0 20px 0;
-background: #666;
-	font-size: 11px;
-	line-height: 30px;
-	height: 30px;
-	position: relative;
-	padding: 0 10px;
-	color: #fff;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	text-align: center;
-	text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
-    border-radius: 3px 3px 0 0;
-    box-shadow: 2px 0 2px rgba(0,0,0,0.1), -2px 0 2px rgba(0,0,0,0.1);	
-    text-decoration: none;
-}
-.tabs a:after {
-    content: '';
-	background: #fff;
-	position: absolute;
-	bottom: -2px;
-	left: 0;
-	width: 100%;
-	height: 2px;
-	display: block;
-}
-.tabs a{-webkit-text-shadow:none; -moz-text-shadow:none; text-shadow:none}
+.tabs a{display:inline-block; background:#666; font-size:11px; line-height:30px; height:30px; position:relative; padding:0 10px; color:#fff; letter-spacing:1px; text-transform:uppercase; text-align:center; text-shadow:1px 1px 1px rgba(255,255,255,0.3);  border-radius:3px 3px 0 0;  box-shadow:2px 0 2px rgba(0,0,0,0.1),-2px 0 2px rgba(0,0,0,0.1);  text-decoration:none}
 
+.tabs a{-webkit-text-shadow:none; -moz-text-shadow:none; text-shadow:none}
+#tabs div.tab{ margin-top:-16px;  padding:15px; font-family:Cambria,Georgia,serif; border-top-right-radius: 8px; border-bottom-right-radius: 8px}

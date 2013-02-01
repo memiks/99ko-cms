@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="css/style.css" media="all">
 	<link rel="stylesheet" href="css/common.css" media="all">
 	<!-- Personnalisation des liens, sidebar, contenu -->	
-	<link rel="stylesheet" href="css/color_defaut.css" />
+	<link rel="stylesheet" href="css/style/defaut.css" />
 	<link rel="stylesheet" href="js/tinybox2/style.css" />
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/html5.js"></script>
@@ -32,10 +32,10 @@
 			<?php } ?>
 		   </ol>
 	       &nbsp;<a class="btn" id="logout" href="index.php?action=logout&token=<?php echo $token; ?>">Se déconnecter</a>
-	       <a target="_blank" class="btn" id="showSite" href="../">Voir le site</a>		   		
+	       <a target="_blank" class="btn" id="showSite" href="../">Voir le site</a>	      	   		
 		</nav>
 		
-		<div id="copyright">
+		<div id="copyright">		
 		   Just using <a target="_blank" href="http://99ko.tuxfamily.org/"><b>99ko</b></a> <span class="version"><?php echo $version; ?></span>.
 		</div>
 	</header>

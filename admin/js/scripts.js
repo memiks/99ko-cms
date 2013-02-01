@@ -28,3 +28,12 @@
 					});
 				});
 			});
+			// Style Switcher
+			/* Défaut */
+			$('#defaut').click(function (){
+               $('link[href="css/style/grey.css"]').attr('href','css/style/defaut.css');
+            });
+            /* Grey */
+            $('#grey').click(function (){
+               $('link[href="css/style/defaut.css"]').attr('href','css/style/grey.css');
+            });

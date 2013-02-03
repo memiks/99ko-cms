@@ -1,0 +1,29 @@
+/*!
+ * 99Ko
+ * http://www.99ko.org
+ *
+ * Thème administration (Color Scheme)
+ * Copyright 2011-2013, Frédéric Kaplon
+ *
+ */
+	    /*** Style par défaut ***/
+	    /* Couleur du fond et de la police */
+		html {background-color:#FFFFFF; color:#383838}  
+		/* Couleur de selection du texte */
+		::-moz-selection {background:#DBE6EC; color:#111111}
+		::selection {background:#DBE6EC; color:#111111}
+		/* Liens généraux */
+		a {color:#A26F6F}
+		/* élément de séparation */
+		hr {border-top:3px solid #D7E1E6;border-bottom:1px solid #EFFAFF; border-radius: 2px}
+		/* Liens du menu de navigation */
+		header, header > nav a {background-color:#77A2A8;color:#222222; -webkit-text-shadow:1px 1px 0px #DBE5E8;-moz-text-shadow:1px 1px 0px #DBE5E8;text-shadow:1px 1px 0px #DBE5E8;}
+		header > nav a:hover {background:#DBE6EC;color:#111111}
+		header > nav a.current {background:#DBE6EC;color:#111111}
+		/* Lien du texte de 99ko */
+		#copyright a {color:rgba(255,255,255,1)}
+		/* Bouton des plugins */
+		#pluginConfigButton {border-color:#D7E1E6}
+		/* Onglets des plugins */
+		.tabs a.active {background:#77A2A8; color: #213433;-webkit-text-shadow:1px 1px 0px #DBE5E8;-moz-text-shadow:1px 1px 0px #DBE5E8;text-shadow:1px 1px 0px #DBE5E8}
+		#tabs div.tab {margin-top: -16px; color: #777; padding: 15px; font-family: Cambria, Georgia, serif; border-left: 8px solid rgba(63,148,148, 0.1); background: rgba(63,148,148, 0.1)}

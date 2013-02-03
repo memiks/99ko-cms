@@ -12,8 +12,7 @@
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit; vertical-align:baseline}
 html{font-size:101%; font-family:Arial,verdana,arial,sans-serif; font-size:12px; -webkit-text-size-adjust:none; color:#6F6F6F; background-color:#efefef}
 body{min-height:100%; height:auto; width:100%}
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section{display:block}
+footer, header, section{display:block}
 a{text-decoration:none; cursor:pointer}
 a:hover{text-decoration:underline}
 p, ul, ol{margin:18px 0; line-height:1.5em}
@@ -21,15 +20,18 @@ li{list-style:none}
 li.placeholder{height:70px; width:100%; font-size:16px}
 hr{display:block; height:0px; line-height:0px; border:0; border-top:1px solid #ddd; border-bottom:1px solid #aaa; margin:16px 0; padding:0}
 strong{font-weight:700}
-img{border:0}
 no script{display:block; position:absolute; top:238px; margin:0 auto; width:800px; bottom:0; z-index:20}
 noscript p{width:800px; font-size:20px; padding-top:20px; margin:0 auto; color:#4D4D4D}
 .small{font-size:10px; letter-spacing:0}
-
+img {border:0; max-width: 100%; height: auto}
+@media \0screen {
+  img { width: auto /* for ie 8 */}
+}
 /* === HEADER & NAVIGATION === */
+header{-moz-box-shadow:0 0 6px rgba(3,3,3,0.6); -webkit-box-shadow:0 0 6px rgba(3,3,3,0.6); box-shadow:0 0 6px rgba(3,3,3,0.6); position:fixed; left:0; width:200px; height:100%; min-height:100%; z-index:100}
 header[role=banner] #logo{background:url(../images/logo.png) no-repeat center center; display:block; height:185px; max-height:200px; min-height:70px; width:200px; opacity:0.8}
 header[role=banner] #logo:hover{opacity:1}
-header{-moz-box-shadow:0 0 6px rgba(3,3,3,0.6); -webkit-box-shadow:0 0 6px rgba(3,3,3,0.6); box-shadow:0 0 6px rgba(3,3,3,0.6); position:fixed; left:0; width:200px; height:100%; min-height:100%; z-index:100}
+
 header a{position:relative; z-index:100; text-indent: -1000px}
 /* menu */
 nav[role="navigation"] > ol{font-size:12px; font-weight:700; min-height:150px; height:75%; overflow:auto}
@@ -79,25 +81,3 @@ table thead:first-child tr:first-child td{ border-top:0}
 table tbody+tbody{ border-top:2px solid #ddd}
 table tbody tr:hover td, 
 table tbody tr:hover th{ background-color:#f5f5f5}
-
-/* === STYLE IMPRESSION === */
-@media print{ *{background:transparent !important; color:black !important; text-shadow:none !important; filter:none !important; -ms-filter:none !important}
-pre, block quote{border:1px solid #999; page-break-inside:avoid}
-thead{display:table-header-group}/* css-discuss.incutio.com/wiki/Printing_Tables */
-
-tr, img{page-break-inside:avoid}
-@page{margin:0.5cm}
-p, h2, h3{orphans:3; widows:3}
-h2, h3{page-break-after:avoid}
-hr{border-top:1px solid #000 !important; border-bottom:0 !important}
-header{-moz-box-shadow:none; -webkit-box-shadow:none; box-shadow:none; position:absolute; left:10px; top:0; width:100%; margin-top:500px}
-nav[role="navigation"] > ol:before{content:"Table of Contents"}
-nav[role="navigation"] > ol{border:0 !important}
-nav[role="navigation"] > ol li{border:0 !important; text-align:left}
-nav[role="navigation"] > ol li a{border:0 !important; text-align:left; padding:4px}
-nav[role="navigation"] > ol li a:hover{border:0 !important}
-header #logo{display:none}
-header #copyright{display:none}
-#content{left:10px}
-#home{margin-bottom:300px}
-}

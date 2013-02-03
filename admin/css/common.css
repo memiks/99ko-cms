@@ -2,7 +2,7 @@
  * 99Ko
  * http://www.99ko.org
  *
- * Thème administration (Formulaires)
+ * Thème administration (Formulaires & Onglets)
  * Copyright 2011-2013, Frédéric Kaplon
  *
  */
@@ -16,9 +16,9 @@ select{font-family:Verdana,'Helvetica Neue',Helvetica,Arial,Geneva,sans-serif; f
 
 input[type=text],
 input[type=mail],
-input[type=password],textarea{width: 50% }
+input[type=password]{width: 50%; min-width: 140px; max-width: 40% }
 
-textarea{ height: 300px; }
+textarea{ max-height: 300px; width: 70%; min-width: 200px; max-width: 80% }
 
 input[type=text]:focus, 
 input[type=mail]:focus,
@@ -26,9 +26,10 @@ input[type=password]:focus,
 textarea:focus, 
 select:focus{ border:1px solid #80bfff;   -moz-box-shadow:0 0 3px #80bfff,0 1px 2px rgba(0,0,0,.15) inset;  -webkit-box-shadow:0 0 3px #80bfff,0 1px 2px rgba(0,0,0,.15) inset;  box-shadow:0 0 3px #80bfff,0 1px 2px rgba(0,0,0,.15) inset}
 /* === BOUTTONS === */
-a.btn, input[type=submit]{ cursor:pointer;background:#e3e3e3;  border:1px solid #bbb;  -webkit-border-radius:3px;  -moz-border-radius:3px;  -ms-border-radius:3px;  -o-border-radius:3px;  border-radius:3px;  -webkit-box-shadow:inset 0 0 1px 1px #f6f6f6;  -moz-box-shadow:inset 0 0 1px 1px #f6f6f6;  -ms-box-shadow:inset 0 0 1px 1px #f6f6f6;  -o-box-shadow:inset 0 0 1px 1px #f6f6f6;  box-shadow:inset 0 0 1px 1px #f6f6f6;  color:#333; line-height:1;  padding:5px 9px;  text-align:center;  text-shadow:0 1px 0 #fff;  width:150px}
-a.btn:hover,input[type=submit]:hover{ background:#d9d9d9;  -webkit-box-shadow:inset 0 0 1px 1px #eaeaea;  -moz-box-shadow:inset 0 0 1px 1px #eaeaea;  -ms-box-shadow:inset 0 0 1px 1px #eaeaea;  -o-box-shadow:inset 0 0 1px 1px #eaeaea;  box-shadow:inset 0 0 1px 1px #eaeaea;  color:#222; cursor:pointer; text-decoration: none}
-a.btn:active, input[type=submit]:active{ background:#d0d0d0;  -webkit-box-shadow:inset 0 0 1px 1px #e3e3e3;  -moz-box-shadow:inset 0 0 1px 1px #e3e3e3;  -ms-box-shadow:inset 0 0 1px 1px #e3e3e3;  -o-box-shadow:inset 0 0 1px 1px #e3e3e3;  box-shadow:inset 0 0 1px 1px #e3e3e3;  color:#000}
+a.btn, input[type=submit], button{ cursor:pointer; background:#e3e3e3;  border:1px solid #bbb;  -webkit-border-radius:3px;  -moz-border-radius:3px;  -ms-border-radius:3px;  -o-border-radius:3px;  border-radius:3px;  -webkit-box-shadow:inset 0 0 1px 1px #f6f6f6;  -moz-box-shadow:inset 0 0 1px 1px #f6f6f6;  -ms-box-shadow:inset 0 0 1px 1px #f6f6f6;  -o-box-shadow:inset 0 0 1px 1px #f6f6f6;  box-shadow:inset 0 0 1px 1px #f6f6f6;  color:#333; line-height:1;  padding:5px 9px;  text-align:center;  text-shadow:0 1px 0 #fff; margin:2px}
+a.btn:hover,input[type=submit]:hover, button:hover{ background:#d9d9d9;  -webkit-box-shadow:inset 0 0 1px 1px #eaeaea;  -moz-box-shadow:inset 0 0 1px 1px #eaeaea;  -ms-box-shadow:inset 0 0 1px 1px #eaeaea;  -o-box-shadow:inset 0 0 1px 1px #eaeaea;  box-shadow:inset 0 0 1px 1px #eaeaea;  color:#222; cursor:pointer; text-decoration: none}
+a.btn:active, input[type=submit]:active, button:active{ background:#d0d0d0;  -webkit-box-shadow:inset 0 0 1px 1px #e3e3e3;  -moz-box-shadow:inset 0 0 1px 1px #e3e3e3;  -ms-box-shadow:inset 0 0 1px 1px #e3e3e3;  -o-box-shadow:inset 0 0 1px 1px #e3e3e3;  box-shadow:inset 0 0 1px 1px #e3e3e3;  color:#000}
+input[type=submit], .large{padding: 15px 20px !important; font-size:larger}
 /**
  * Taille des champs
 */
@@ -46,3 +47,13 @@ input.large{width: 80%}
 .failure { background: #fccac1 url(../images/exclamation.png) no-repeat 15px center; border: 1px solid #e18b7c; color: #AC260F; }
 .information { background: #d1e4f3 url(../images/information.png) no-repeat 15px center; border: 1px solid #99c4ea; color: #235685; }
 pre{background-image:url(../images/pre_bg.png) !important; line-height:19px}
+/**
+ * Onglets
+*/
+article#tabs{margin:40px 0; width:80%}
+article#tabs h3{margin:20px 0 40px}
+.tabs li{list-style:none; display:inline}
+.tabs a{display:inline-block; background:#666; font-size:11px; line-height:30px; height:30px; position:relative; padding:0 10px; color:#fff; letter-spacing:1px; text-transform:uppercase; text-align:center; text-shadow:1px 1px 1px rgba(255,255,255,0.3);  border-radius:3px 3px 0 0;  box-shadow:2px 0 2px rgba(0,0,0,0.1),-2px 0 2px rgba(0,0,0,0.1);  text-decoration:none}
+
+.tabs a{-webkit-text-shadow:none; -moz-text-shadow:none; text-shadow:none}
+#tabs div.tab{ margin-top:-16px;  padding:15px; font-family:Cambria,Georgia,serif; border-top-right-radius: 8px; border-bottom-right-radius: 8px}

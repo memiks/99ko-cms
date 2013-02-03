@@ -4,21 +4,13 @@
 <form id="configForm" method="post" action="index.php?p=configmanager&action=save">
 	<?php showMsg($msg, 'error'); ?>
 	<?php showAdminTokenField(); ?>
-	<p><a href="javascript:" class="btn" id="advancedConfigurationButton"><?php echo lang('Advanced configuration', 'configmanager'); ?></a></p>
-	<div id="advancedConfiguration">
-		<?php showMsg(lang('Do not change advanced settings if you\'re not on what you\'re doing.', 'configmanager'), "error"); ?>
-		<p><label><?php echo lang('URL of the site (no trailing slash)', 'configmanager'); ?></label><br />
-		<input type="text" name="siteUrl" value="<?php echo $config['siteUrl']; ?>" /></p>
-		<p><label><?php echo lang('URL rewriting', 'configmanager'); ?></label><br />
-		<input id="urlRewriting" type="checkbox" onclick="updateHtaccess('<?php echo $rewriteBase; ?>');" 
-			<?php if($coreConf['urlRewriting']){ ?>checked<?php } ?> name="urlRewriting" /> <?php echo lang('Enable', 'configmanager'); ?>
-		</p>
-		<p><label><?php echo lang('.htaccess', 'configmanager'); ?></label><br />
-		<textarea id="htaccess" name="htaccess"><?php echo $htaccess; ?></textarea>
-		</p>
-		<p><input type="submit" value="<?php echo lang('Save', 'configmanager'); ?>" /></p>
-		<hr class="notop">
-	</div>
+ <article id="tabs">	
+		<ul class="tabs">
+			<li><a href="#general"><?php echo lang('General configuration', 'configmanager'); ?></a></li>
+			<li><a href="#advanced"><?php echo lang('Advanced configuration', 'configmanager'); ?></a></li>
+		</ul>
+		<div class="tab" id="general">
+			<h3><?php echo lang('General configuration', 'configmanager'); ?></h3>
 	<p><label><?php echo lang('Site Name', 'configmanager'); ?></label><br />
 	<input type="text" name="siteName" value="<?php echo $config['siteName']; ?>" /></p>
 	<p><label><?php echo lang('Site Description', 'configmanager'); ?></label><br />
@@ -60,6 +52,24 @@
 	<p><label><?php echo lang('Confirm', 'configmanager'); ?></label><br />
 	<input type="password" name="adminPwd2" value="" /></p>
 	<p><input type="submit" value="<?php echo lang('Save', 'configmanager'); ?>" /></p>
+
+		</div><!-- /GENERAL CONFIG -->
+		
+		<div class="tab" id="advanced">
+			<h3><?php echo lang('Advanced configuration', 'configmanager'); ?></h3>
+		<?php showMsg(lang('Do not change advanced settings if you\'re not on what you\'re doing.', 'configmanager'), "error"); ?>
+		<p><label><?php echo lang('URL of the site (no trailing slash)', 'configmanager'); ?></label><br />
+		<input type="text" name="siteUrl" value="<?php echo $config['siteUrl']; ?>" /></p>
+		<p><label><?php echo lang('URL rewriting', 'configmanager'); ?></label><br />
+		<input id="urlRewriting" type="checkbox" onclick="updateHtaccess('<?php echo $rewriteBase; ?>');" <?php if($config['urlRewriting']){ ?>checked<?php } ?> name="urlRewriting" /> <?php echo lang('Enable', 'configmanager'); ?>
+		</p>
+		<p><label><?php echo lang('.htaccess', 'configmanager'); ?></label><br />
+		<textarea id="htaccess" name="htaccess"><?php echo $htaccess; ?></textarea>
+		</p>
+		<p><input type="submit" value="<?php echo lang('Save', 'configmanager'); ?>" /></p>
+		
+		</div><!-- /ADVANCED -->
+ </article>		
 </form>
 
 <?php include_once(ROOT.'admin/footer.php') ?>

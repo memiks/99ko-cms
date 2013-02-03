@@ -11,25 +11,20 @@
 	<link rel="stylesheet" href="css/common.css" media="all">
 </head>
 <body>
-	<?php if (isset($_SESSION['msg_install'])) { ?>
-	<div id="content">      
-		<section id="home">
-		       <?php showMsg($_SESSION['msg_install'], 'success'); ?>
-		</section>
-		<br />
-	</div>
+	<?php if (isset($_SESSION['msg_install'])) { ?>    
+	<section id="install">
+		   <?php showMsg($_SESSION['msg_install'], 'success'); ?>
+	</section>
 	<?php } ?>
-
-	<section id="login">
-		<!--<h2>Connexion</h2>-->
-    
+	
+	<section id="login">   
 		<div id="login_panel">
 			<?php showMsg($msg, 'error'); ?>
 			<form method="post" action="index.php?action=login">
 				<div class="login_fields">			
 					<div class="field">
 					    <?php showAdminTokenField(); ?>
-					<label for="adminPwd"><?php echo lang('Password'); ?><!-- <small><a href="#GetPassword" class="openModal">Mot de Passe oublié ?</a></small>--></label>
+					<label for="adminPwd"><?php echo lang('Password'); ?></label>
 						<input type="password" name="adminPwd" id="adminPwd" tabindex="1" />			
 					</div>
 				</div> <!-- login_fields -->
@@ -39,22 +34,8 @@
 				<em><?php echo lang('Just using'); ?> <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/">99ko</a></em>
 				</div>
 			</form>
-		</div> <!-- #login_panel -->		
+		</div> <!-- #login_panel -->			
 	</section> <!-- #login -->
 
-<!-- Modal  -->
-	<!--<aside id="GetPassword" class="modal">
-		<div>
-			<h2>Récupération du mot de passe</h2>
-			<form>
-			   <label for="getpass">E-mail: </label>
-			   <input type="mail" name="getpass" id="getpass" tabindex="1" placeholder="Insérez votre mail" />
-			   <button type="submit" class="btn" tabindex="2">Envoyer</button>
-			</form>
-			<a href="#close" title="Fermer">Fermer</a>
-		</div>
-	</aside>
-	
-</div>-->
 </body>
 </html>

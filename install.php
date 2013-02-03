@@ -160,9 +160,8 @@ if (isset($_GET['updateto'])) {
 		$data['msg'] = lang('Problem when installing');
 		$data['msgType'] = "error";
 	} else {
-		$data['msg'] = lang('99ko is installed') . '<br />' . lang('The default admin password is : ') . '<b>' . $mdp . '</b><br />'.
-										lang('Change it at your first connection') . '<br />' . lang('Also, delete the install.php file') . '<br /><br />'.
-										'<a class="btn" href="index.php">' . lang('Back to website').'</a><a class="btn" href="admin/">' . lang('Backend') . '</a>';
+		$data['msg'] = lang('99ko is installed') . '<br />' . lang('The default admin password is : ') . '<span class="pwd">'.$mdp.'</span><br />'.
+					   lang('Change it at your first connection') . '<br />' . lang('Also, delete the install.php file');
 		$data['msgType'] = "success";
 		eval(callHook('installSuccess'));
 
@@ -171,26 +170,3 @@ if (isset($_GET['updateto'])) {
 	}
 }
 ?>
-<!doctype html>  
-<!--[if IE 6 ]><html lang="<?php echo $language; ?>" class="ie6"> <![endif]-->
-<!--[if IE 7 ]><html lang="<?php echo $language; ?>" class="ie7"> <![endif]-->
-<!--[if IE 8 ]><html lang="<?php echo $language; ?>" class="ie8"> <![endif]-->
-<!--[if (gt IE 7)|!(IE)]><!-->
-<html lang="<?php echo $language; ?>"><!--<![endif]-->
-<head>
-     <meta charset="utf-8">  
-     <title>99ko - <?php echo lang('Installation'); ?></title>
-	<!-- css -->
-     <link rel="stylesheet" href="admin/css/install.css" media="all">
-	 <!--[if lt IE 9]>
-		<script type="text/javascript" src="admin/js/html5.js"></script>
-	 <![endif]-->	       
-</head>
-<body>	    
-     <div id="container">              
-        <section id="home">
-           <?php showMsg($data['msg'], $data['msgType']); ?>
-        </section>
-     </div>
-</body>
-</html>

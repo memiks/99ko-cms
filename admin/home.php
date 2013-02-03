@@ -1,6 +1,8 @@
 <?php include_once(ROOT.'admin/header.php') ?>
 
 
+	<!--<h3>Bienvenue dans 99ko</h3>
+	<hr>-->
 	<?php showMsg($msg, 'error'); ?>
 	<p><?php echo lang('You are using <b>99ko</b> Version %s', $version); ?></p>
     <p><?php echo lang('Download a more recent version, plugins and themes on the site official.'); ?><br />

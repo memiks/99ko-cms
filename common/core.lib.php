@@ -2,6 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
+# Copyright (c) 2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
 # Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
@@ -110,6 +111,11 @@ function getThemeInfos($name) {
 	return $data;
 }
 
+/*
+** Génère une URL réécrite ou standard
+** @param : $plugin (id plugin), $params (tableau de paramètres)
+** @return : URL (string)
+*/
 function rewriteUrl($plugin, $params = array()) {
 	if (getCoreConf('urlRewriting')) {
 		$url = $plugin.'/';
@@ -129,6 +135,11 @@ function rewriteUrl($plugin, $params = array()) {
 	return $url;
 }
 
+/*
+** Retourne les paramètres de l'URL dans un array
+** @param : string (nom du thème)
+** @return : array
+*/
 function getUrlParams() {
 	$data = array();
 	if (getCoreConf('urlRewriting')) {
@@ -141,6 +152,9 @@ function getUrlParams() {
 	return $data;
 }
 
+/*
+** hash
+*/
 function encrypt($data) {
 	return hash_hmac('sha1', $data, KEY);
 }
@@ -165,4 +179,22 @@ function lang($text, $namespace = '_default') {
 
 	return vsprintf($text, array_slice($argList, $offset));
 }
+
+
+
+// DEV CACHE
+
+function delCurrentFileCache(){
+	global $cacheFile;
+	unlink('data/cache/'.$cacheFile);
+}
+
+function delCacheFiles($plugin){
+	$files = utilScanDir('data/cache/');
+	foreach($files['file'] as $file){
+		$temp = substr($file, 0, mb_strlen($plugin));
+		if($temp == $plugin) unlink('data/cache/'.$file);
+	}
+}
+
 ?>

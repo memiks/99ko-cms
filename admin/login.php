@@ -11,27 +11,36 @@
 	<link rel="stylesheet" href="css/common.css" media="all">
 </head>
 <body>
-<section id="login">
-	<!--<h2>Connexion</h2>-->
+	<?php if (isset($_SESSION['msg_install'])) { ?>
+	<div id="content">      
+		<section id="home">
+		       <?php showMsg($_SESSION['msg_install'], 'success'); ?>
+		</section>
+		<br />
+	</div>
+	<?php } ?>
+
+	<section id="login">
+		<!--<h2>Connexion</h2>-->
     
-	<div id="login_panel">
-		<?php showMsg($msg, 'error'); ?>
-		<form method="post" action="index.php?action=login">
-			<div class="login_fields">			
-				<div class="field">
-				    <?php showAdminTokenField(); ?>
+		<div id="login_panel">
+			<?php showMsg($msg, 'error'); ?>
+			<form method="post" action="index.php?action=login">
+				<div class="login_fields">			
+					<div class="field">
+					    <?php showAdminTokenField(); ?>
 					<label for="adminPwd"><?php echo lang('Password'); ?><!-- <small><a href="#GetPassword" class="openModal">Mot de Passe oublié ?</a></small>--></label>
-					<input type="password" name="adminPwd" id="adminPwd" tabindex="1" />			
-				</div>
-			</div> <!-- login_fields -->
-			
-			<div class="login_actions">
+						<input type="password" name="adminPwd" id="adminPwd" tabindex="1" />			
+					</div>
+				</div> <!-- login_fields -->
+				
+				<div class="login_actions">
 				<input type="submit" class="btn" tabindex="2" value="<?php echo lang('Go'); ?>" />
 				<em><?php echo lang('Just using'); ?> <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/">99ko</a></em>
-			</div>
-		</form>
-	</div> <!-- #login_panel -->		
-</section> <!-- #login -->
+				</div>
+			</form>
+		</div> <!-- #login_panel -->		
+	</section> <!-- #login -->
 
 <!-- Modal  -->
 	<!--<aside id="GetPassword" class="modal">

@@ -8,7 +8,7 @@
 	<div id="advancedConfiguration">
 		<?php showMsg(lang('Do not change advanced settings if you\'re not on what you\'re doing.', 'configmanager'), "error"); ?>
 		<p><label><?php echo lang('URL of the site (no trailing slash)', 'configmanager'); ?></label><br />
-		<input type="text" name="siteUrl" value="<?php echo $coreConf['siteUrl']; ?>" /></p>
+		<input type="text" name="siteUrl" value="<?php echo $config['siteUrl']; ?>" /></p>
 		<p><label><?php echo lang('URL rewriting', 'configmanager'); ?></label><br />
 		<input id="urlRewriting" type="checkbox" onclick="updateHtaccess('<?php echo $rewriteBase; ?>');" 
 			<?php if($coreConf['urlRewriting']){ ?>checked<?php } ?> name="urlRewriting" /> <?php echo lang('Enable', 'configmanager'); ?>
@@ -20,11 +20,11 @@
 		<hr class="notop">
 	</div>
 	<p><label><?php echo lang('Site Name', 'configmanager'); ?></label><br />
-	<input type="text" name="siteName" value="<?php echo $coreConf['siteName']; ?>" /></p>
+	<input type="text" name="siteName" value="<?php echo $config['siteName']; ?>" /></p>
 	<p><label><?php echo lang('Site Description', 'configmanager'); ?></label><br />
-	<input type="text" name="siteDescription" value="<?php echo $coreConf['siteDescription']; ?>" /></p>
+	<input type="text" name="siteDescription" value="<?php echo $config['siteDescription']; ?>" /></p>
 	<p><label><?php echo lang('Admin Mail', 'configmanager'); ?></label><br />
-	<input type="text" name="adminEmail" value="<?php echo $coreConf['adminEmail']; ?>" /></p>
+	<input type="text" name="adminEmail" value="<?php echo $config['adminEmail']; ?>" /></p>
 	<p><label><?php echo lang('Template', 'configmanager'); ?></label><br />
 		<?php foreach($themes as $k=>$v){ ?>
 		<input type="radio" name="theme" <?php if($v['selected']){ ?>checked<?php } ?> value="<?php echo $k; ?>" /> 

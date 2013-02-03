@@ -1,4 +1,11 @@
 <?php
+##########################################################################################################
+# 99ko http://99ko.tuxfamily.org/
+#
+# Copyright (c) 2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
+# Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
+# Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
+##########################################################################################################
 // on declare ROOT
 define('ROOT', '../');
 // on inclu le fichier common
@@ -16,7 +23,7 @@ $data['msg'] = ''; // retro compatibilité
 $version = VERSION;
 $token = $_SESSION['token'];
 $data['token'] = $token; // retro compatibilité
-$pluginName = $runPlugin->getInfoVal('name');
+$pluginName = $runPlugin->getName();
 $data['pluginName'] = $pluginName; // retro compatibilité
 $navigation[-1]['label'] = lang('Home');
 $navigation[-1]['url'] = './';
@@ -28,11 +35,13 @@ foreach($pluginsManager->getPlugins() as $k=>$v) if($v->getConfigVal('activate')
 	$navigation[$k]['name'] = $v->getName();
 	$navigation[$k]['isActive'] = (isset($_GET['p']) && $_GET['p'] == $v->getName()) ? true : false;
 }
-
 $pluginConfigTemplate = (!isset($_GET['p'])) ? false :$runPlugin->getConfigTemplate();
 $pageTitle = (!isset($_GET['p'])) ? lang('Welcome to 99ko') : $runPlugin->getInfoVal('name');
 // Actions
 if(ACTION == 'login'){
+	if (isset($_SESSION['msg_install'])) {
+		unset($_SESSION['msg_install']);
+	}
 	$loginAttempt = (isset($_SESSION['loginAttempt'])) ? $_SESSION['loginAttempt'] : 0;
 	$loginAttempt++;
 	$_SESSION['loginAttempt'] = $loginAttempt;

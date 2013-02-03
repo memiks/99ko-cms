@@ -2,6 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
+# Copyright (c) 2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
 # Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
@@ -313,12 +314,6 @@ class plugin{
 		$val = trim($val);
 		$this->mainTitle = $val;
 	}
-	/*public function setPlublicTemplate($fileName){
-		$this->publicTemplate = ROOT.'plugin/'.$this->name.'/template/'.$fileName.'.php';
-	}
-	public function setAdminTemplate($fileName){
-		$this->adminTemplate = ROOT.'plugin/'.$this->name.'/template/'.$fileName.'.php';
-	}*/
 
 	/*
 	** Ajoute un élément au fil d'Ariane

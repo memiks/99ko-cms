@@ -9,7 +9,7 @@ switch(ACTION){
 		$plugins = array();
 		foreach($pluginsManager->getPlugins() as $k=>$v){
 			$plugins[$k]['id'] = $v->getName();
-			$plugins[$k]['locked'] = ($v->getIsDefaultPlugin() || $v->getName() == 'pluginsmanager' || $v->getName() == 'configmanager') ? true : false;
+			$plugins[$k]['locked'] = ($v->getIsDefaultPlugin() || $v->getName() == 'pluginsmanager') ? true : false;
 			$plugins[$k]['name'] = $v->getInfoVal('name');
 			$plugins[$k]['description'] = $v->getInfoVal('description');
 			$plugins[$k]['target'] = ($v->getAdminFile() && $v->getName() != 'pluginsmanager') ? 'index.php?p='.$v->getName() : false;

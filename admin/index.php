@@ -2,7 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
+# Copyright (c) 2013 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
 # Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
@@ -14,7 +14,7 @@ include_once(ROOT.'common/common.php');
 // on genere le jeton
 if(!isset($_SESSION['token'])) $_SESSION['token'] = uniqid();
 // on check le jeton
-if(in_array(ACTION, array('save', 'del', 'saveconfig', 'saveplugins', 'login', 'logout')) && $_REQUEST['token'] != $_SESSION['token']){	
+if(in_array(ACTION, array('delinstallfile', 'save', 'del', 'saveconfig', 'saveplugins', 'login', 'logout')) && $_REQUEST['token'] != $_SESSION['token']){	
 	include_once('login.php');
 	die();
 }
@@ -36,6 +36,12 @@ foreach($pluginsManager->getPlugins() as $k=>$v) if($v->getConfigVal('activate')
 }
 $pluginConfigTemplate = (!isset($_GET['p'])) ? false :$runPlugin->getConfigTemplate();
 $pageTitle = (!isset($_GET['p'])) ? 'Bienvenue dans 99ko' : $runPlugin->getInfoVal('name');
+$tabs = array();
+foreach($runPlugin->getAdminTabs() as $k=>$v){
+	$tabs[$k]['label'] = $v;
+	$tabs[$k]['url'] = '#tab-'.$k;
+}
+if(count($tabs) == 0) $tabs = false;
 // Actions
 if(ACTION == 'login'){
 	if (isset($_SESSION['msg_install'])) {
@@ -68,6 +74,9 @@ elseif(ACTION == 'logout'){
 	header('location:index.php');
 	die();
 }
+elseif(ACTION == 'delinstallfile'){
+	@unlink('../install.php');
+}
 // Login mode
 if(!isset($_SESSION['admin']) || $_SESSION['admin'] != $coreConf['adminPwd']){
 	include_once('login.php');
@@ -75,7 +84,7 @@ if(!isset($_SESSION['admin']) || $_SESSION['admin'] != $coreConf['adminPwd']){
 // Homepage mode
 elseif(!isset($_GET['p'])){
 	if(!file_exists('../.htaccess')) $msg.= "Le fichier .htaccess est manquant !\n";
-	if(file_exists('../install.php')) $msg.= "Le fichier install.php doit être supprimé !\n";
+	if(file_exists('../install.php')) $msg.= "Le fichier install.php doit être supprimé : <a href=\"index.php?action=delinstallfile&token=".$token."\">Supprimer maintenant</a>\n";
 	include_once('home.php');
 }
 // Plugin mode
@@ -83,7 +92,19 @@ elseif(isset($_GET['p']) && $runPlugin->getAdminFile()){
 	// hook
 	eval(callHook('startAdminIncludePluginFile'));
 	include($runPlugin->getAdminFile());
-	include($runPlugin->getAdminTemplate());
+	// mode standard
+	if(!is_array($runPlugin->getAdminTemplate())) include($runPlugin->getAdminTemplate());
+	// mode tabs
+	if(is_array($runPlugin->getAdminTemplate())){
+		include_once(ROOT.'admin/header.php');
+		foreach($runPlugin->getAdminTemplate() as $k=>$v){
+			echo '<div class="tab" id="tab-'.$k.'">';
+			echo '<h3>'.$tabs[$k]['label'].'</h3>';
+			include_once($v);
+			echo '</div>';
+		}
+		include_once(ROOT.'admin/footer.php');
+	}
 	// hook
 	eval(callHook('endAdminIncludePluginFile'));
 }

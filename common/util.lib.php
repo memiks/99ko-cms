@@ -2,7 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
+# Copyright (c) 2013 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
 # Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
@@ -81,7 +81,6 @@ function utilIsEmail($email) {
 function utilSendEmail($from, $reply, $to, $subject, $msg) {
 	$headers = "From: ".$from."\r\n";
 	$headers.= "Reply-To: ".$reply."\r\n";
-	//$headers.= "Return-Path: ".$this->emailReturn."\r\n";
 	$headers.= "X-Mailer: PHP/".phpversion()."\r\n";
 	$headers.= 'Content-Type: text/plain; charset="utf-8"'."\r\n";
 	$headers.= 'Content-Transfer-Encoding: 8bit';

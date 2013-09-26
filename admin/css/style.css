@@ -79,6 +79,17 @@ table tbody+tbody{ border-top:2px solid #ddd}
 table tbody tr:hover td, 
 table tbody tr:hover th{ background-color:#f5f5f5}
 
+/**
+ * Onglets
+*/
+#tabs{margin:40px 0; width:80%}
+#tabs h3{margin:20px 0 40px}
+.tabs li{list-style:none; display:inline}
+.tabs a{display:inline-block; background:#666; font-size:11px; line-height:30px; height:30px; position:relative; padding:0 10px; color:#fff; letter-spacing:1px; text-transform:uppercase; text-align:center; text-shadow:1px 1px 1px rgba(255,255,255,0.3);  border-radius:3px 3px 0 0;  box-shadow:2px 0 2px rgba(0,0,0,0.1),-2px 0 2px rgba(0,0,0,0.1);  text-decoration:none}
+.tabs a{-webkit-text-shadow:none; -moz-text-shadow:none; text-shadow:none}
+#tabs div.tab{ margin-top:-16px;  padding:15px; font-family:Cambria,Georgia,serif; border-top-right-radius: 8px; border-bottom-right-radius: 8px}
+.tabs a.active {background:#77A2A8; color: #213433;-webkit-text-shadow:1px 1px 0px #DBE5E8;-moz-text-shadow:1px 1px 0px #DBE5E8;text-shadow:1px 1px 0px #DBE5E8}
+#tabs div.tab {margin-top: -16px; color: #777; padding: 15px; font-family: Cambria, Georgia, serif; border-left: 8px solid rgba(63,148,148, 0.1); background: rgba(63,148,148, 0.1)}
 /* === STYLE IMPRESSION === */
 @media print{ *{background:transparent !important; color:black !important; text-shadow:none !important; filter:none !important; -ms-filter:none !important}
 pre, block quote{border:1px solid #999; page-break-inside:avoid}

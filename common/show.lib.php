@@ -2,7 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
+# Copyright (c) 2013 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
 # Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
@@ -38,7 +38,6 @@ function showLinkTags($format = '<link href="[file]" rel="stylesheet" type="text
 	global $pluginsManager, $coreConf;
 	$data = '';
 	eval(callHook('startShowLinkTags'));
-	if(ROOT == './') $data.= str_replace('[file]', ROOT.'common/normalize.css', $format);
 	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
 		if ($plugin->getConfigVal('activate') && $plugin->getCssFile()){
 			$data.= str_replace('[file]', $plugin->getCssFile(), $format);
@@ -57,7 +56,6 @@ function showScriptTags($format = '<script type="text/javascript" src="[file]"><
 	global $pluginsManager, $coreConf;
 	$data = '';
 	eval(callHook('startShowScriptTags'));
-	$data = str_replace('[file]', ROOT.'common/jquery.js', $format);
 	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
 		if ($plugin->getConfigVal('activate') && $plugin->getJsFile()){
 			$data.= str_replace('[file]', $plugin->getJsFile(), $format);

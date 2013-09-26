@@ -2,16 +2,13 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8" />
-	<title><?php showTitleTag(); ?></title>
+	    <title><?php showTitleTag(); ?></title>
         <meta name="description" content="<?php showMetaDescriptionTag(); ?>" />
-	<meta name="viewport" content="initial-scale=1.0" />
-	<base href="<?php showSiteUrl(); ?>/" />
-        <!--[if lt IE 9]>
-        <script src="theme/defaulthtml5/html5.js"></script>
-        <![endif]-->
-	<?php showLinkTags(); ?>
-	<?php showScriptTags(); ?>
-	<?php eval(callHook('endFrontHead')); ?>
+	    <meta name="viewport" content="initial-scale=1.0" />
+	    <base href="<?php showSiteUrl(); ?>/" />
+	    <?php showLinkTags(); ?>
+	    <?php showScriptTags(); ?>
+	    <?php eval(callHook('endFrontHead')); ?>
     </head>
     <body>
         <div id="container">

@@ -19,42 +19,24 @@
 		<br />
 	</div>
 	<?php } ?>
-
 	<section id="login">
-		<!--<h2>Connexion</h2>-->
-
 		<div id="login_panel">
 			<?php showMsg($msg, 'error'); ?>
 			<form method="post" action="index.php?action=login">
 				<div class="login_fields">			
 					<div class="field">
 					    <?php showAdminTokenField(); ?>
-						<label for="adminPwd">Mot de passe<!-- <small><a href="#GetPassword" class="openModal">Mot de Passe oublié ?</a></small>--></label>
+						<label for="adminPwd">Mot de passe</label>
 						<input type="password" name="adminPwd" id="adminPwd" tabindex="1" />			
 					</div>
-				</div> <!-- login_fields -->
+				</div>
 				
 				<div class="login_actions">
 					<input type="submit" class="btn" tabindex="2" value="Valider" />
 					<em>Just using <a target="_blank" title="CMS sans base de données" href="http://99ko.tuxfamily.org/">99ko</a></em>
 				</div>
 			</form>
-		</div> <!-- #login_panel -->		
-	</section> <!-- #login -->
-
-<!-- Modal  -->
-	<!--<aside id="GetPassword" class="modal">
-		<div>
-			<h2>Récupération du mot de passe</h2>
-			<form>
-			   <label for="getpass">E-mail: </label>
-			   <input type="mail" name="getpass" id="getpass" tabindex="1" placeholder="Insérez votre mail" />
-			   <button type="submit" class="btn" tabindex="2">Envoyer</button>
-			</form>
-			<a href="#close" title="Fermer">Fermer</a>
-		</div>
-	</aside>
-	
-</div>-->
+		</div>		
+	</section>
 </body>
 </html>

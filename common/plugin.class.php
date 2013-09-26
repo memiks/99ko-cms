@@ -2,7 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
+# Copyright (c) 2013 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
 # Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
@@ -183,6 +183,7 @@ class plugin{
 	private $configTemplate;
 	private $initConfig;
 	private $navigation;
+	private $adminTabs;
 
 	/*
 	** Constructeur
@@ -204,15 +205,25 @@ class plugin{
 		$this->addToBreadcrumb($infos['name'], 'index.php?p='.$this->name);
 		if($this->isDefaultPlugin) $this->initBreadcrumb();
 		$this->dataPath = (is_dir(ROOT.'data/plugin/'.$this->name)) ? ROOT.'data/plugin/'.$this->name.'/' : false;
-		//$this->setPlublicTemplate('public');
 		if(file_exists('theme/'.getCoreConf('theme').'/'.$this->name.'.php')) $this->publicTemplate = 'theme/'.getCoreConf('theme').'/'.$this->name.'.php';
 		elseif(file_exists(ROOT.'plugin/'.$this->name.'/template/public.php')) $this->publicTemplate = ROOT.'plugin/'.$this->name.'/template/public.php';
 		else $this->publicTemplate = false;
-		//$this->setAdminTemplate('admin');
 		$this->adminTemplate = (file_exists(ROOT.'plugin/'.$this->name.'/template/admin.php')) ? ROOT.'plugin/'.$this->name.'/template/admin.php' : false;
 		$this->configTemplate = (file_exists(ROOT.'plugin/'.$this->name.'/template/config.php')) ? ROOT.'plugin/'.$this->name.'/template/config.php': false;
 		$this->initConfig = $initConfig;
 		$this->navigation = array();
+		// tabs
+		$this->adminTabs = array();
+		if(isset($this->config['adminTabs']) && $this->config['adminTabs'] != ''){
+			$this->adminTabs = explode(',', $this->config['adminTabs']);
+		}
+		// admin multi templates (tabs)
+		foreach($this->adminTabs as $k=>$v){
+			if(file_exists(ROOT.'plugin/'.$this->name.'/template/admin-tab-'.$k.'.php')){
+				if(!is_array($this->adminTemplate)) $this->adminTemplate = array();
+				$this->adminTemplate[] = ROOT.'plugin/'.$this->name.'/template/admin-tab-'.$k.'.php';
+			}
+		}
 	}
 
 	/*
@@ -280,6 +291,9 @@ class plugin{
 	}
 	public function getNavigation(){
 		return $this->navigation;
+	}
+	public function getAdminTabs(){
+		return $this->adminTabs;
 	}
 
 	/*

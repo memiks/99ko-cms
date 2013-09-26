@@ -2,7 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
+# Copyright (c) 2013 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
 # Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
@@ -23,7 +23,7 @@ if(!file_exists(ROOT.'data/config.txt')){
 	die();
 }
 // constantes
-define('VERSION', '1.2.6.3');
+define('VERSION', '1.2.7');
 define('ACTION', ((isset($_GET['action'])) ? $_GET['action'] : '')); // inutile : voir $urlParams
 include(ROOT.'data/key.php');
 // tableau des hooks
@@ -41,6 +41,25 @@ define('DEFAULT_PLUGIN', $coreConf['defaultPlugin']);
 define('PLUGIN', ((isset($_GET['p'])) ? $_GET['p'] : DEFAULT_PLUGIN)); // inutile : voir $runPlugin
 // fix magic quotes
 utilSetMagicQuotesOff();
+
+/*
+ * Cache
+*/
+
+$readCache = false;
+if(!strrchr($_SERVER['SCRIPT_NAME'], 'admin')){
+	if(count($_POST) == 0 && getCoreConf('useCache') > 0){
+		$cacheFile = PLUGIN.'-';
+		foreach($urlParams as $k=>$v) $cacheFile.= $k.'-'.$v.'-';
+		$cacheFile = trim($cacheFile, '-');
+		if(file_exists('data/cache/'.$cacheFile) && ((time()-((60*15)*getCoreConf('useCache'))) < filemtime('data/cache/'.$cacheFile))){
+			$readCache = true;
+			include 'data/cache/'.$cacheFile;
+			exit();
+		}
+		ob_start();
+	}
+}
 
 
 /*

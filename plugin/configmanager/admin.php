@@ -40,6 +40,7 @@ switch(ACTION){
 			'theme' => $_POST['theme'],
 			'defaultPlugin' => $_POST['defaultPlugin'],
 			'urlRewriting' => (isset($_POST['urlRewriting'])) ? '1' : '0',
+			'useCache' => (isset($_POST['useCache'])) ? '1' : '0',
 		);
 		if(trim($_POST['adminPwd']) != ''){
 			if(trim($_POST['adminPwd']) == trim($_POST['adminPwd2'])) {
@@ -54,7 +55,7 @@ switch(ACTION){
 			$msg = "Une erreur est survenue lors de l'enregistrement des modifications.";
 			$error = true;
 		}
-		@file_put_contents(ROOT.'.htaccess', str_replace('¶', '&', $_POST['htaccess']));
+		@file_put_contents(ROOT.'.htaccess', str_replace('¶m', '&param', $_POST['htaccess']));
 		if(!$error){
 			header('location:index.php?p=configmanager');
 			die();

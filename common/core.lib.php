@@ -2,7 +2,7 @@
 ##########################################################################################################
 # 99ko http://99ko.tuxfamily.org/
 #
-# Copyright (c) 2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
+# Copyright (c) 2013 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com) / Frédéric Kaplon
 # Copyright (c) 2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (j.coulet@gmail.com)
 # Copyright (c) 2010 Jonathan Coulet (j.coulet@gmail.com)
 ##########################################################################################################
@@ -151,18 +151,19 @@ function encrypt($data){
 
 
 
-// DEV CACHE
-
+/*
+** Cache
+*/
 function delCurrentFileCache(){
 	global $cacheFile;
 	unlink('data/cache/'.$cacheFile);
 }
 
 function delCacheFiles($plugin){
-	$files = utilScanDir('data/cache/');
+	$files = utilScanDir(ROOT.'data/cache/');
 	foreach($files['file'] as $file){
 		$temp = substr($file, 0, mb_strlen($plugin));
-		if($temp == $plugin) unlink('data/cache/'.$file);
+		if($temp == $plugin) unlink(ROOT.'data/cache/'.$file);
 	}
 }
 

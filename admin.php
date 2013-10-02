@@ -5,6 +5,6 @@ include('core/configItem.class.php');
 include('core/article.class.php');
 include('core/menuItem.class.php');
 include('core/manager.class.php');
-include('core/publicControleur.class.php');
-new publicControleur();
+include('core/adminControleur.class.php');
+new adminControleur();
 ?>

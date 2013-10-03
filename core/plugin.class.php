@@ -18,6 +18,10 @@ class plugin{
     public function get($p){
         return $this->$p;
     }
+	
+	public function install(){
+		call_user_func($this->id.'_install');
+	}
     
     public function getConfigArray(){
         return $temp = call_user_func($this->id.'_config');

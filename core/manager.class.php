@@ -11,9 +11,10 @@ class manager{
         // chargement des plugins
         $dir = utilScanDir('plugin/');
         foreach($dir['dir'] as $file){
-            include('plugin/'.$file.'/'.$file.'.php');
+            include_once('plugin/'.$file.'/'.$file.'.php');
             $plugin = new plugin();
             $plugin->set('id', $file);
+			$plugin->install();
             $temp = $plugin->getConfigArray();
             $plugin->set('name', $temp['name']);
             $plugin->set('version', $temp['version']);
@@ -50,14 +51,14 @@ class manager{
         }
         // chargement des items config
         $this->configItems = array();
-        $temp = utilReadJsonFile('data/config/core.json');
+        $temp = utilReadJsonFile('data/core.json');
         foreach($temp as $k=>$v){
             $item = new configItem();
             $item->set('key', $k);
             $item->set('val', $v);
             $this->configItems[] = $item;
         }
-        // chargement des fichiers lang
+        // chargement des fichiers langue core
         // todo : gestion des langues a revoir ?
         $this->langs = array();
         $dir = utilScanDir('core/lang/');
@@ -66,6 +67,16 @@ class manager{
             $k = substr($file, 0, 2);
             $this->langs[$k] = $temp;
         }
+		// chargement des fichiers langue plugins
+		foreach($this->plugins as $plugin){
+			$dir = utilScanDir('plugin/'.$plugin->get('id').'/lang/');
+			foreach($dir['file'] as $file){
+				$temp = utilReadJsonFile('plugin/'.$plugin->get('id').'/lang/'.$file);
+				$k = substr($file, 0, 2);
+				// merge
+				$this->langs[$k] = array_merge($this->langs[$k], $temp);
+			}
+		}
         $_SESSION['lang'] = $this->langs[$k];
         // hook
         eval(callHook('managerConstruct'));
@@ -80,8 +91,6 @@ class manager{
     // todo : renommer en listLangsArray ?
     public function listLangs(){
         $langs = $this->langs;
-        // hook
-        eval(callHook('managerListLangs'));
         return $langs;
     }
     
@@ -91,8 +100,6 @@ class manager{
         foreach($this->configItems as $item){
             if($key == $item->get('key')) break;
         }
-        // hook
-        eval(callHook('managerGetConfigItems'));
         return $item->get('val');
     }
     
@@ -107,7 +114,7 @@ class manager{
             }
             $data[$item->get('key')] = $item->get('val');
         }
-        utilWriteJsonFile('data/config/core.json', $data);
+        utilWriteJsonFile('data/core.json', $data);
     }
     
     // liste les plugins
@@ -115,8 +122,6 @@ class manager{
         foreach($this->plugins as $k=>$plugin){
             if($activateOnly && $plugin->get('activate') == 0) unset($this->plugins[$k]);
         }
-        // hook
-        eval(callHook('managerListPlugins'));
         return $this->plugins;
     }
     
@@ -125,8 +130,6 @@ class manager{
         foreach($this->listPlugins() as $plugin){
             if($plugin->get('id') == $id) break;
         }
-        // hook
-        eval(callHook('managerGetPlugin'));
         return $article;
     }
     
@@ -135,8 +138,6 @@ class manager{
         foreach($this->articles as $k=>$article){
             if($byType && $byType != $article->get('type')) unset($this->articles[$k]);
         }
-        // hook
-        eval(callHook('managerListArticles'));
         return $this->articles;
     }
     
@@ -145,8 +146,6 @@ class manager{
         foreach($this->listArticles() as $article){
             if($article->get('id') == $id) break;
         }
-        // hook
-        eval(callHook('managerGetArticle'));
         return $article;
     }
     
@@ -155,16 +154,12 @@ class manager{
         foreach($this->listArticles() as $article){
             if($article->get('homepage')) break;
         }
-        // hook
-        eval(callHook('managerGetArticleHomepage'));
         return $article;
     }
     
     // liste les items menu
     public function listMenuItems(){
         $items = $this->menuItems;
-        // hook
-        eval(callHook('managerListMenuItems'));
         return $items;
     }
     
@@ -173,8 +168,6 @@ class manager{
         foreach($this->listMenuItems() as $item){
             if($item->get('id') == $id) break;
         }
-        // hook
-        eval(callHook('managerGetMenuItem'));
         return $item;
     }
     
@@ -193,8 +186,6 @@ class manager{
             if($i > 0) $data.= '</ul>';
         }
         $data.= "</ul>";
-        // hook
-        eval(callHook('managerMenuHtml'));
         return $data;
     }
     
@@ -203,14 +194,14 @@ class manager{
         mkdir('data/');
         mkdir('data/article/');
         mkdir('data/menu/');
-        mkdir('data/config/');
+		mkdir('data/plugin/');
         $config = array(
             'name' => 'Démo',
             'theme' => 'default',
             'url' => getSiteUrl(),
             'lang' => 'fr',
         );
-        utilWriteJsonFile('data/config/core.json', $config);
+        utilWriteJsonFile('data/core.json', $config);
         $time = time();
         $article = array(
             'id' => $time,

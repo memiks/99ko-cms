@@ -63,6 +63,17 @@ class publicControleur{
         eval(callHook('publicControleurNewsList'));
         include('theme/'.$this->manager->getConfigItem('theme').'/'.$this->template.'.php');
     }
+	
+	// affiche la page d'un plugin
+    public function plugin(){
+        // version de 99ko
+        $version = $this->manager->getVersion();
+        // url du site
+        $url = $this->manager->getConfigItem('url');
+        // menu
+        $menuHtml = $this->manager->menuHtml();
+        include('plugin/'.$_GET['id'].'/public.php');
+    }
     
 }
 ?>

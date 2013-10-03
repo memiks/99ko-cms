@@ -12,8 +12,8 @@
 	<ul>
 	    <li><a href="admin.php"><?php echo lang('Home'); ?> </a></li>
 	    <li><a href="admin.php?p=configuration"><?php echo lang('Configuration'); ?> </a></li>
+		<li><a href="admin.php?p=menu"><?php echo lang('Menu'); ?> </a></li>
 	    <li><a href="admin.php?p=articles"><?php echo lang('Articles'); ?> </a></li>
-	    <li><a href="admin.php?p=menu"><?php echo lang('Menu'); ?> </a></li>
 	    <?php foreach($plugins as $plugin) if($plugin->adminPage()){ ?>
 	    <li><a href="admin.php?p=plugin&id=<?php echo $plugin->get('id'); ?>"><?php echo $plugin->get('name'); ?> </a></li>
 	    <?php } ?>

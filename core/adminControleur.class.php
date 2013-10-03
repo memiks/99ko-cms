@@ -52,6 +52,16 @@ class adminControleur{
         $langs = $this->manager->listLangs();
         include('theme/admin/'.$this->template.'.php');
     }
+	
+	public function menu(){
+		// version de 99ko
+        $version = $this->manager->getVersion();
+        // plugins
+        $plugins = $this->manager->listPlugins();
+		// items menu
+		$items = $this->manager->listMenuItems();
+        include('theme/admin/'.$this->template.'.php');
+	}
     
     // affiche la page d'un plugin
     public function plugin(){

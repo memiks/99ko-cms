@@ -13,6 +13,13 @@
     "Website URL" : "URL du site",
     "Website lang" : "Langue du site",
     "Save" : "Enregistrer",
-	"Management menu" : "Gestion du menu",
+    "Management menu" : "Gestion du menu",
+    "Edit" : "Editer",
+    "Add item to" : "Ajouter un item vers",
+    "URL" : "URL",
+    "News" : "News",
+    "Label" : "Libélé",
+    "Parent" : "Parent",
+    "None" : "Aucun",
     "" : ""
 }

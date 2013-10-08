@@ -15,6 +15,8 @@ class menuItem{
     }
     
     public function set($attr, $val){
+        // todo : gestion des ID par $manager->saveMenuItem ???
+        if($attr == 'id' && $val == '') $val = uniqid();
         $this->$attr = $val;
     }
     

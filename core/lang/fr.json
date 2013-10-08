@@ -21,5 +21,14 @@
     "Label" : "Libélé",
     "Parent" : "Parent",
     "None" : "Aucun",
+    "Delete" : "Supprimer",
+    "Management articles" : "Gestion des articles",
+    "Page" : "Page",
+    "Add article" : "Ajouter un article",
+    "Title" : "Titre",
+    "Content" : "Content",
+    "Yes" : "Oui",
+    "No" : "Non",
+    "Homepage" : "Page d'accueil",
     "" : ""
 }

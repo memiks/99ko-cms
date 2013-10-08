@@ -13,6 +13,8 @@ class article{
     }
     
     public function set($p, $v){
+        // todo : gestion des ID par $manager->saveArticle ???
+        if($p == 'id' && $v == '') $v = uniqid();
         $this->$p = $v;
     }
     

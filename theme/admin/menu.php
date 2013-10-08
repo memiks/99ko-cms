@@ -3,6 +3,7 @@
 <h1><?php echo lang('Management menu'); ?></h1>
 <?php if($edit){ ?>
 <form method="post" action="admin.php?p=menu">
+	<input type="hidden" name="id" value="<?php echo $item->get('id'); ?>" />
 	<p>
 		<label><?php echo lang('Label'); ?></label><br>
 		<input type="text" name="name" value="<?php echo $item->get('name'); ?>" />
@@ -20,6 +21,7 @@
 			<?php } ?>
 		</select>
 	</p>
+	<p><input type="submit" value="<?php echo lang('Save'); ?>" /></p>
 </form>
 <?php } else{ ?>
 <form name="menu" method="post" action="admin.php?p=menu&edit=0">
@@ -35,13 +37,13 @@
 	<ul>
 		<?php foreach($itemsLevel1 as $item){ ?>
 		<?php if($item->get('idParent') == 0){ ?>
-		<li><?php echo $item->get('name'); ?> <a href="admin.php?p=menu&up=<?php echo $item->get('id'); ?>">up</a> <a href="admin.php?p=menu&down=<?php echo $item->get('id'); ?>">down</a> <a href="admin.php?p=menu&edit=<?php echo $item->get('id'); ?>"><?php echo lang('Edit'); ?></a></li>
+		<li><?php echo $item->get('name'); ?> <a href="admin.php?p=menu&up=<?php echo $item->get('id'); ?>">up</a> <a href="admin.php?p=menu&down=<?php echo $item->get('id'); ?>">down</a> <a href="admin.php?p=menu&edit=<?php echo $item->get('id'); ?>"><?php echo lang('Edit'); ?></a> <a href="admin.php?p=menu&del=<?php echo $item->get('id'); ?>"><?php echo lang('Delete'); ?></a>
 		<?php } ?>
 		<ul>
 			<?php foreach($itemsLevel2[$item->get('id')] as $item2){ ?>
-			<li><?php echo $item2->get('name'); ?> <a href="admin.php?p=menu&up=<?php echo $item2->get('id'); ?>">up</a> <a href="admin.php?p=menu&down=<?php echo $item2->get('id'); ?>">down</a> <a href="admin.php?p=menu&edit=<?php echo $item2->get('id'); ?>"><?php echo lang('Edit'); ?></a></li>
+			<li><?php echo $item2->get('name'); ?> <a href="admin.php?p=menu&up=<?php echo $item2->get('id'); ?>">up</a> <a href="admin.php?p=menu&down=<?php echo $item2->get('id'); ?>">down</a> <a href="admin.php?p=menu&edit=<?php echo $item2->get('id'); ?>"><?php echo lang('Edit'); ?></a> <a href="admin.php?p=menu&del=<?php echo $item2->get('id'); ?>"><?php echo lang('Delete'); ?></li>
 			<?php } ?>
-		</ul>
+		</ul></li>
 		<?php } ?>
 	</ul>
 </form>

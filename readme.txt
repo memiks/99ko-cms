@@ -5,11 +5,11 @@
 - login admin (multiusers)
 - admin filemanager
 - admin pluginsmanager
-- admin articles
-- admin configuration => en cours
-- admin menu => en cours
+- admin articles => EN COURS
+- admin configuration => OK
+- admin menu => OK
 
-- plugin d'exemple (jquery) => en cours
+- plugin d'exemple (jquery) => OK
 
 ############### HOOKS
 

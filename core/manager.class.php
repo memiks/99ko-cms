@@ -163,10 +163,11 @@ class manager{
     
     // liste les articles
     public function listArticles($byType = false){
-        foreach($this->articles as $k=>$article){
-            if($byType && $byType != $article->get('type')) unset($this->articles[$k]);
+        $data = $this->articles;
+        foreach($data as $k=>$article){
+            if($byType && $byType != $article->get('type')) unset($data[$k]);
         }
-        return $this->articles;
+        return $data;
     }
     
     // retourne un article
@@ -185,6 +186,17 @@ class manager{
         return $article;
     }
     
+    // sauvegarde un article
+    public function saveArticle($article){
+        $data['id'] = $article->get('id');
+        $data['name'] = $article->get('name');
+        $data['content'] = $article->get('content');
+        $data['date'] = $article->get('date');
+        $data['homepage'] = $article->get('homepage');
+        $data['type'] = $article->get('type');
+        utilWriteJsonFile('data/article/'.$article->get('id').'.json', $data);
+    }
+    
     // liste les items menu
     public function listMenuItems($level = 'level1'){
         $items = $this->menuItems[$level];
@@ -194,13 +206,12 @@ class manager{
     // retourne un item menu
     public function getMenuItem($id){
         foreach($this->listMenuItems() as $item){
-            if($item->get('id') == $id) break;
+            if($item->get('id') == $id) return $item;
             $temp = $this->listMenuItems('level2');
             foreach($temp[$item->get('id')] as $item){
-                if($item->get('id') == $id) break;
+                if($item->get('id') == $id) return $item;
             }
         }
-        return $item;
     }
     
     // sauvegarde un item menu
@@ -211,6 +222,12 @@ class manager{
         $data['url'] = $item->get('url');
         $data['position'] = $item->get('position');
         utilWriteJsonFile('data/menu/'.$item->get('id').'.json', $data);
+    }
+    
+    // supprime un item menu
+    // todo : supression des items enfants (supression propre)
+    public function delMenuItem($item){
+        unlink('data/menu/'.$item->get('id').'.json');
     }
     
     // cree les fichiers necessaires

@@ -27,22 +27,16 @@ class publicControleur{
         $this->manager->install();
     }
     
-    // affiche un article
     public function article(){
-        // get article
         if(isset($_GET['article'])) $article = $this->manager->getArticle($_GET['article']);
         else $article = $this->manager->getArticleHomepage();
-        // version de 99ko
         $version = $this->manager->getVersion();
-        // url du site
         $url = $this->manager->getConfigItem('url');
-        // items menu
         $itemsLevel1 = $this->manager->listMenuItems();
         foreach($itemsLevel1 as $item){
             $temp = $this->manager->listMenuItems('level2');
             $itemsLevel2[$item->get('id')] = $temp[$item->get('id')];
         }
-        // metas
         $metaTitle = $article->get('name').' - '.$this->manager->getConfigItem('name');
         $metaDescription = '';
         // hook
@@ -50,21 +44,15 @@ class publicControleur{
         include('theme/'.$this->manager->getConfigItem('theme').'/'.$this->template.'.php');
     }
     
-    // affiche le listing des articles de type "news"
     public function newsList(){
-        // get news
         $newsList = $this->manager->listArticles('news');
-        // version de 99ko
         $version = $this->manager->getVersion();
-        // url du site
         $url = $this->manager->getConfigItem('url');
-        // items menu
         $itemsLevel1 = $this->manager->listMenuItems();
         foreach($itemsLevel1 as $item){
             $temp = $this->manager->listMenuItems('level2');
             $itemsLevel2[$item->get('id')] = $temp[$item->get('id')];
         }
-        // metas
         $metaTitle = 'News - '.$this->manager->getConfigItem('name');
         $metaDescription = '';
         // hook
@@ -72,13 +60,10 @@ class publicControleur{
         include('theme/'.$this->manager->getConfigItem('theme').'/'.$this->template.'.php');
     }
 	
-	// affiche la page d'un plugin
+    // affiche la page public d'un plugin
     public function plugin(){
-        // version de 99ko
         $version = $this->manager->getVersion();
-        // url du site
         $url = $this->manager->getConfigItem('url');
-        // items menu
         $itemsLevel1 = $this->manager->listMenuItems();
         foreach($itemsLevel1 as $item){
             $temp = $this->manager->listMenuItems('level2');

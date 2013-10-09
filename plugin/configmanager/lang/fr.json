@@ -1,0 +1,19 @@
+{
+	"The password is different from his confirmation." : "Le mot de passe est différent de sa confirmation.",
+	"An error occurred while saving the changes" : "Une erreur est survenue lors de l'enregistrement des modifications",
+	"Do not change advanced settings if you're not on what you're doing." : "Ne modifiez pas les paramètres avancés si vous n'êtes pas sur de ce que vous faites.",
+	"URL of the site (no trailing slash)" : "URL du site (sans slash final)",
+	"Enable" : "Activer",
+	"Save" : "Enregistrer",
+	"Site name" : "Nom du site",
+	"Site description" : "Description du site",
+	"Admin mail" : "Email admin",
+	"Theme" : "Thème",
+	"Lang" : "Langue",
+	"About" : "À propos",
+	"Author" : "Auteur",
+	"Default plugin" : "Plugin par défaut",
+	"New admin password" : "Nouveau mot de passe admin",
+	"Confirm" : "Confirmation",
+        "HTML cache" : "Cache HTML"
+}

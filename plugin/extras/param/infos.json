@@ -1,0 +1,8 @@
+{
+    "name" : "Extras",
+    "description" : "Add jQuery, Normalize.css, HTML5.js and Tinybox 2",
+    "author" : "Jonathan Coulet",
+    "authorEmail" : "j.coulet@gmail.com",
+    "authorWebsite" : "http://99ko.tuxfamily.org",
+    "version" : "2.3.10"
+}

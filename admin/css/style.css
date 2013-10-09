@@ -1,0 +1,113 @@
+@charset "UTF-8";
+/*!
+ * 99Ko
+ * http://www.99ko.org
+ *
+ * Thème administration
+ * Copyright 2011-2013, Frédéric Kaplon
+ * Last Update 21/01/2013
+ *
+ */
+ /* === RESET === */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit; vertical-align:baseline}
+html{font-size:101%; font-family:Arial,verdana,arial,sans-serif; font-size:12px; -webkit-text-size-adjust:none; color:#6F6F6F; background-color:#efefef}
+body{min-height:100%; height:auto; width:100%}
+footer, header, section{display:block}
+a{text-decoration:none; cursor:pointer}
+a:hover{text-decoration:underline}
+p, ul, ol{margin:18px 0; line-height:1.5em}
+li{list-style:none}
+li.placeholder{height:70px; width:100%; font-size:16px}
+hr{display:block; height:0px; line-height:0px; border:0; border-top:1px solid #ddd; border-bottom:1px solid #aaa; margin:16px 0; padding:0}
+strong{font-weight:700}
+img{border:0}
+no script{display:block; position:absolute; top:238px; margin:0 auto; width:800px; bottom:0; z-index:20}
+noscript p{width:800px; font-size:20px; padding-top:20px; margin:0 auto; color:#4D4D4D}
+.small{font-size:10px; letter-spacing:0}
+
+/* === HEADER & NAVIGATION === */
+header[role=banner] #logo{background:url(../images/logo.png) no-repeat center center; display:block; height:185px; max-height:200px; min-height:70px; width:200px;/* opacity:0.8*/}
+/*header[role=banner] #logo:hover{opacity:1}*/
+header{-moz-box-shadow:0 0 6px rgba(3,3,3,0.6); -webkit-box-shadow:0 0 6px rgba(3,3,3,0.6); box-shadow:0 0 6px rgba(3,3,3,0.6); position:fixed; left:0; width:200px; height:100%; min-height:100%; z-index:100}
+header a{position:relative; z-index:100; text-indent: -1000px}
+/* menu */
+nav[role="navigation"] > ol{font-size:12px; font-weight:700; min-height:150px; height:75%; overflow:auto}
+nav[role="navigation"] > ol li{text-align:right; padding:0;margin-bottom:1px;}
+nav[role="navigation"] > ol a{display:block;padding:6px 15px 7px 0; text-align:right}
+nav[role="navigation"] > ol a:hover, nav[role="navigation"] > ol a.current{-webkit-text-shadow:none; -moz-text-shadow:none; text-shadow:none; text-decoration:none}
+nav[role="navigation"] > ol li ol{border-top:0; font-size:10px; min-height:10px; height:auto; overflow:auto; margin:0; display:none}
+nav[role="navigation"] > ol li ol li a{display:block; padding:4px 15px 5px 0; text-align:right}
+
+/* === CONTENU === */
+#home{padding-top:180px !important}
+section#content{position:absolute; right:18px; left:218px; padding-left:10px;  min-height:100%; height:auto; z-index:1}
+section#content h1{font-size:30px; font-weight:700}
+section#content h2{font-size:26px; margin:18px 0 0; font-weight:100}
+section#content h3{font-size:20px; margin-bottom:18px; font-weight:100}
+section#content p{margin:18px 0}
+section#content ol li{list-style:decimal; /*margin-left:36px*/}
+section#content ul li{list-style:square; /*margin-left:36px*/}
+section#content table{border-collapse:collapse}
+section#content table th{font-weight:700}
+section#content table th, section#content table td{padding:3px; text-align:left}
+section#content code, section#content pre{font-family:"Courier New",Courier,monospace; font-size:12px}
+section#content pre{background-image:url(imgages/pre_bg.png); line-height:19px}
+
+/* === PLUGINS === */
+#pluginConfigButton{float:right; margin-top:-20px;font-size:10px;}
+#pluginConfigButton:hover{cursor:pointer}
+#pluginConfig{display:none}
+
+/* === FOOTER & COPYRIGHT === */
+#copyright{ padding:5px 10px; background:rgba(0,0,0,0.2); text-shadow:rgba(0,0,0,0.4) 0 1px 0; -webkit-border-radius:20px; -moz-border-radius:20px; -ms-border-radius:20px; -o-border-radius:20px; border-radius:20px; -webkit-box-shadow:rgba(0,0,0,0.2) 0 1px 2px inset,rgba(255,255,255,0.4) 0 1px 0; -moz-box-shadow:rgba(0,0,0,0.2) 0 1px 2px inset,rgba(255,255,255,0.4) 0 1px 0; box-shadow:rgba(0,0,0,0.2) 0 1px 2px inset,rgba(255,255,255,0.4) 0 1px 0; max-width:270px; line-height:25px; background:rgba(0,0,0,0.1); -webkit-border-radius:6px; -moz-border-radius:6px; -ms-border-radius:6px; -o-border-radius:6px; border-radius:6px; text-align:center; position:absolute;bottom:10px;font-size:11px;text-transform:uppercase;width:150px;left:15px;text-align:center;z-index:1;display:block !important;visibility:visible !important}
+
+/* === BOUTTONS === */
+a.del-btn{ text-decoration: none; font-size:12px;  margin-left:10px;  padding-left:10px;  padding-bottom:2px;  padding-right:10px;  padding-top:2px;  text-decoration:none;  background-color:#A26F6F;  color:white;  -webkit-border-radius:3px;  -moz-border-radius:3px;  border-radius:3px}
+a.del-btn:hover{ background-color:#ef8888; color:black}
+a.edit-btn{ text-decoration: none; font-size:12px;  margin-left:10px;  padding-left:10px;  padding-bottom:2px;  padding-right:10px;  padding-top:2px;  text-decoration:none;  background-color:#77A2A8;  color:white;  -webkit-border-radius:3px;  -moz-border-radius:3px;  border-radius:3px}
+a.edit-btn:hover{ background-color:#57dfef; color:black}
+
+/* === TABLES === */
+table{ max-width:100%;  border-collapse:collapse;  border-spacing:0;  background-color:transparent; width:100%;  margin-bottom:18px; border-radius: 4px}
+table th, 
+table td{ padding:8px;  line-height:18px;  text-align:left;  vertical-align:top;  border-top:1px solid #ddd}
+table th{ font-weight:bold}
+table thead th{ vertical-align:bottom}
+table thead:first-child tr:first-child th, 
+table thead:first-child tr:first-child td{ border-top:0}
+table tbody+tbody{ border-top:2px solid #ddd}
+table tbody tr:hover td, 
+table tbody tr:hover th{ background-color:#f5f5f5}
+
+/**
+ * Onglets
+*/
+#tabs{margin:40px 0; width:80%}
+#tabs h3{margin:20px 0 40px}
+.tabs li{list-style:none; display:inline}
+.tabs a{display:inline-block; background:#666; font-size:11px; line-height:30px; height:30px; position:relative; padding:0 10px; color:#fff; letter-spacing:1px; text-transform:uppercase; text-align:center; text-shadow:1px 1px 1px rgba(255,255,255,0.3);  border-radius:3px 3px 0 0;  box-shadow:2px 0 2px rgba(0,0,0,0.1),-2px 0 2px rgba(0,0,0,0.1);  text-decoration:none}
+.tabs a{-webkit-text-shadow:none; -moz-text-shadow:none; text-shadow:none}
+#tabs div.tab{ margin-top:-16px;  padding:15px; font-family:Cambria,Georgia,serif; border-top-right-radius: 8px; border-bottom-right-radius: 8px}
+.tabs a.active {background:#77A2A8; color: #213433;-webkit-text-shadow:1px 1px 0px #DBE5E8;-moz-text-shadow:1px 1px 0px #DBE5E8;text-shadow:1px 1px 0px #DBE5E8}
+#tabs div.tab {margin-top: -16px; color: #777; padding: 15px; font-family: Cambria, Georgia, serif; border-left: 8px solid rgba(63,148,148, 0.1); background: rgba(63,148,148, 0.1)}
+/* === STYLE IMPRESSION === */
+@media print{ *{background:transparent !important; color:black !important; text-shadow:none !important; filter:none !important; -ms-filter:none !important}
+pre, block quote{border:1px solid #999; page-break-inside:avoid}
+thead{display:table-header-group}/* css-discuss.incutio.com/wiki/Printing_Tables */
+
+tr, img{page-break-inside:avoid}
+@page{margin:0.5cm}
+p, h2, h3{orphans:3; widows:3}
+h2, h3{page-break-after:avoid}
+hr{border-top:1px solid #000 !important; border-bottom:0 !important}
+header{-moz-box-shadow:none; -webkit-box-shadow:none; box-shadow:none; position:absolute; left:10px; top:0; width:100%; margin-top:500px}
+nav[role="navigation"] > ol:before{content:"Table of Contents"}
+nav[role="navigation"] > ol{border:0 !important}
+nav[role="navigation"] > ol li{border:0 !important; text-align:left}
+nav[role="navigation"] > ol li a{border:0 !important; text-align:left; padding:4px}
+nav[role="navigation"] > ol li a:hover{border:0 !important}
+header #logo{display:none}
+header #copyright{display:none}
+#content{left:10px}
+#home{margin-bottom:300px}
+}

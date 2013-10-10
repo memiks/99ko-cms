@@ -24,8 +24,8 @@
 			<?php if($v['target'] && $v['activate']){ ?><a class="edit-btn" href="<?php echo $v['target']; ?>"><?php echo lang("Go to plugin"); ?></a><?php } ?> 
 			<a class="edit-btn aboutPlugin" href="javascript:"><?php echo lang("About"); ?></a>
 			<span style="display:none;">
-			<b><?php echo lang("Plugin"); ?> : <?php echo $v['name']; ?></b><br />
-			<?php echo $v['description']; ?><br /><br />
+			<b><?php echo lang("Plugin"); ?> : <?php echo lang($v['name']); ?></b><br />
+			<?php echo lang($v['description']); ?><br /><br />
 			<?php echo lang("Author"); ?> :<br />
 			<?php echo $v['author']; ?><br />
 			<?php echo $v['authorEmail']; ?><br />

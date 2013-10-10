@@ -201,7 +201,7 @@ class plugin{
 		$this->setMainTitle($infos['name']);
 		$this->libFile = (file_exists(ROOT.'plugin/'.$this->name.'/'.$this->name.'.php')) ? ROOT.'plugin/'.$this->name.'/'.$this->name.'.php' : false;
 		$this->langFile = (file_exists(ROOT.'plugin/'.$this->name.'/lang/'.getCoreConf('siteLang').'.json')) ? ROOT.'plugin/'.$this->name.'/lang/'.getCoreConf('siteLang').'.json' : false;
-		$this->lang = $this->langFile ? utilReadJsonFile($this->langFile) : array();
+		$this->lang = ($this->langFile) ? utilReadJsonFile($this->langFile) : array();
 		$this->publicFile = (file_exists(ROOT.'plugin/'.$this->name.'/public.php')) ? ROOT.'plugin/'.$this->name.'/public.php' : false;
 		$this->adminFile = (file_exists(ROOT.'plugin/'.$this->name.'/admin.php')) ? ROOT.'plugin/'.$this->name.'/admin.php' : false;
 		$this->cssFile = (file_exists(ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.css')) ? ROOT.'plugin/'.$this->name.'/other/'.$this->name.'.css' : false;

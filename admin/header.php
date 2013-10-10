@@ -20,7 +20,7 @@
 		<nav role="navigation">
 		   <ol>
 			<?php foreach($navigation as $k=>$v){ ?>
-			<li><a class="<?php if($v['isActive']){ ?>current<?php } ?>" href="<?php echo $v['url']; ?>"><?php echo $v['label']; ?></a></li>
+			<li><a class="<?php if($v['isActive']){ ?>current<?php } ?>" href="<?php echo $v['url']; ?>"><?php echo lang($v['label']); ?></a></li>
 			<?php } ?>
 			<li><a href="index.php?action=logout&token=<?php echo $token; ?>"><?php echo lang('Logout'); ?></a></li>
 			<li><a href="../"><?php echo lang('Back to website'); ?></a></li>
@@ -33,10 +33,7 @@
 		</div>
 	</header>
 	<section id="content" class="<?php echo $pluginName; ?>-admin">
-		<h2><?php echo $pageTitle; ?></h2>
-		<?php if($pluginConfigTemplate){ ?>
-			<a href="javascript:" class="btn" id="pluginConfigButton">Configuration du plugin</a>
-		<?php } ?>
+		<h2><?php echo lang($pageTitle); ?></h2>
 		<hr class="notop">
 		<?php if($pluginConfigTemplate){ ?>
 			<div id="pluginConfig">
@@ -48,7 +45,7 @@
 		<div id="tabs">
 		<ul class="tabs">
 			<?php foreach($tabs as $k=>$v){ ?>
-			<li><a href="<?php echo $v['url']; ?>"><?php echo $v['label']; ?></a></li>
+			<li><a href="<?php echo $v['url']; ?>"><?php echo lang($v['label']); ?></a></li>
 			<?php } ?>
 		</ul>
 		<?php } ?>

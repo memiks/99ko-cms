@@ -99,7 +99,7 @@ elseif(isset($_GET['p']) && $runPlugin->getAdminFile()){
 		include_once(ROOT.'admin/header.php');
 		foreach($runPlugin->getAdminTemplate() as $k=>$v){
 			echo '<div class="tab" id="tab-'.$k.'">';
-			echo '<h3>'.$tabs[$k]['label'].'</h3>';
+			echo '<h3>'.lang($tabs[$k]['label']).'</h3>';
 			include_once($v);
 			echo '</div>';
 		}

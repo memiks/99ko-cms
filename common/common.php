@@ -23,7 +23,7 @@ if(!file_exists(ROOT.'data/config.txt')){
 	die();
 }
 // constantes
-define('VERSION', '1.3.10.9 b');
+define('VERSION', '1.3.10.10 b');
 define('ACTION', ((isset($_GET['action'])) ? $_GET['action'] : '')); // inutile : voir $urlParams
 include(ROOT.'data/key.php');
 // tableau des hooks
@@ -62,7 +62,7 @@ foreach($pluginsManager->getPlugins() as $plugin){
 	// on inclu la librairie
 	include_once($plugin->getLibFile());
 	// on inclu la langue
-	$lang = array_merge($lang, $plugin->getLang());
+	if($plugin->getLang() != false) $lang = array_merge($lang, $plugin->getLang());
 	// installation
 	if(!$plugin->isInstalled()) $pluginsManager->installPlugin($plugin->getName());
 	// on update le tableau des hooks

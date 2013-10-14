@@ -25,6 +25,11 @@
 				<div class="login_fields">			
 					<div class="field">
 					    <?php showAdminTokenField(); ?>
+						<label for="adminEmail"><?php echo lang('Email'); ?></label>
+						<input type="text" name="adminEmail" id="adminEmail" tabindex="1" />			
+					</div>
+					<div class="field">
+					    <?php showAdminTokenField(); ?>
 						<label for="adminPwd"><?php echo lang('Password'); ?></label>
 						<input type="password" name="adminPwd" id="adminPwd" tabindex="1" />			
 					</div>

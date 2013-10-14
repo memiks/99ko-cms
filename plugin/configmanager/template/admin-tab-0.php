@@ -12,8 +12,6 @@
     <input type="text" name="siteName" value="<?php echo $config['siteName']; ?>" /></p>
     <p><label><?php echo lang("Site description"); ?></label><br />
     <input type="text" name="siteDescription" value="<?php echo $config['siteDescription']; ?>" /></p>
-    <p><label><?php echo lang("Admin mail"); ?></label><br />
-    <input type="text" name="adminEmail" value="<?php echo $config['adminEmail']; ?>" /></p>
     <p><label><?php echo lang("Theme"); ?></label><br />
 	    <?php foreach($themes as $k=>$v){ ?>
 	    <input type="radio" name="theme" <?php if($v['selected']){ ?>checked<?php } ?> value="<?php echo $k; ?>" /> <?php echo $v['name']; ?> <a class="edit-btn aboutTheme" href="javascript:"><?php echo lang("About"); ?></a>
@@ -32,6 +30,8 @@
 	    <option <?php if($v['isDefaultPlugin']){ ?>selected<?php } ?> value="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></option>
 	    <?php } ?>
     </select></p>
+    <p><label><?php echo lang("Admin mail"); ?></label><br />
+    <input type="text" name="adminEmail" value="<?php echo $config['adminEmail']; ?>" /></p>
     <p><label><?php echo lang("New admin password"); ?></label><br />
     <input type="password" name="adminPwd" value="" /></p>
     <p><label><?php echo lang("Confirmation"); ?></label><br />

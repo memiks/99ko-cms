@@ -1,5 +1,6 @@
 {
 	"Login" : "Connexion",
+	"Email" : "Email",
 	"Password" : "Mot de passe",
 	"Go" : "Valider",
 	"Just using" : "Just using",
@@ -28,6 +29,7 @@
 	"Problem when installing" : "Problème lors de l'installation",
 	"99ko is installed" : "99ko est installé",
 	"The default admin password is : " : "Le mot de passe admin par défaut est : ",
+	"The default admin email is : " : "L'email admin par défaut est : ",
 	"Change it at your first connection" : "Modifiez-le dès votre première connexion",
 	"Also, delete the install.php file" : "Supprimez également le fichier install.php",
 	"Done" : "Terminée"

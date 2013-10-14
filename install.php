@@ -61,6 +61,7 @@ if($error){
 }
 else{
 	$data['msg'] = lang('99ko is installed') . '<br />' . lang('The default admin password is : ') . '<span class="pwd">'.$mdp.'</span><br />'.
+	lang('The default admin email is : ') . '<span class="pwd">you@domain.com</span><br />'.
 	lang('Change it at your first connection') . '<br />' . lang('Also, delete the install.php file');
 	$data['msgType'] = "success";
 	eval(callHook('installSuccess'));

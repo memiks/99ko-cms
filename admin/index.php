@@ -44,28 +44,25 @@ foreach($runPlugin->getAdminTabs() as $k=>$v){
 if(count($tabs) == 0 || !isset($_GET['p'])) $tabs = false;
 // Actions
 if(ACTION == 'login'){
-	if (isset($_SESSION['msg_install'])) {
-		unset($_SESSION['msg_install']);
-	}
+	// hook
+	eval(callHook('startAdminLogin'));
+	if(isset($_SESSION['msg_install'])) unset($_SESSION['msg_install']);
 	$loginAttempt = (isset($_SESSION['loginAttempt'])) ? $_SESSION['loginAttempt'] : 0;
 	$loginAttempt++;
 	$_SESSION['loginAttempt'] = $loginAttempt;
-	if($loginAttempt > 4 || !isset($_SESSION['loginAttempt'])){
-		$msg = lang('Please wait before retrying');
-	}
+	if($loginAttempt > 4 || !isset($_SESSION['loginAttempt'])) $msg = lang('Please wait before retrying');
 	else{
-		$pwd = $coreConf['adminPwd'];
-		if(encrypt(trim($_POST['adminPwd'])) == $pwd){
-			$_SESSION['admin'] = $pwd;
+		if(encrypt(trim($_POST['adminPwd'])) == $coreConf['adminPwd'] && $_POST['adminEmail'] == $coreConf['adminEmail']){
+			$_SESSION['admin'] = $coreConf['adminPwd'];
 			$_SESSION['loginAttempt'] = 0;
 			$_SESSION['token'] = uniqid();
 			header('location:index.php');
 			die();
 		}
-		else{
-			$msg = lang('Incorrect password');
-		}
+		else $msg = lang('Incorrect password');
 	}
+	// hook
+	eval(callHook('endAdminLogin'));
 }
 elseif(ACTION == 'logout'){
 	unset($_SESSION['admin']);
@@ -74,9 +71,7 @@ elseif(ACTION == 'logout'){
 	header('location:index.php');
 	die();
 }
-elseif(ACTION == 'delinstallfile'){
-	@unlink('../install.php');
-}
+elseif(ACTION == 'delinstallfile') @unlink('../install.php');
 // Login mode
 if(!isset($_SESSION['admin']) || $_SESSION['admin'] != $coreConf['adminPwd']){
 	include_once('login.php');

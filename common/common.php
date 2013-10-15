@@ -23,7 +23,7 @@ if(!file_exists(ROOT.'data/config.txt')){
 	die();
 }
 // constantes
-define('VERSION', '1.3.10.14 b');
+define('VERSION', '1.3.10.15 b');
 define('ACTION', ((isset($_GET['action'])) ? $_GET['action'] : '')); // inutile : voir $urlParams
 include(ROOT.'data/key.php');
 // tableau des hooks

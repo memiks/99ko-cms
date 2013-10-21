@@ -117,10 +117,14 @@ function showMetaDescriptionTag() {
 /*
 ** Affiche le titre H1
 */
-function showMainTitle() {
+function showMainTitle($format = '<h1>[mainTitle]</h1>') {
 	global $runPlugin;
 	eval(callHook('startShowMainTitle'));
-	$data = $runPlugin->getMainTitle();
+	if($runPlugin->getMainTitle() != ''){
+		$data = $format;
+		$data = str_replace('[mainTitle]', $runPlugin->getMainTitle(), $data);
+	}
+	else $data = '';
 	eval(callHook('endShowMainTitle'));
 	echo $data;
 }

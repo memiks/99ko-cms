@@ -2,16 +2,31 @@
 
 /* HTML */
 
-html{
-    background-color: #f3f3f3;
-    background-image: url(1337.png);
-    background-attachment: fixed;
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    max-width: 100%;
 }
 
 body{
     font-family: arial;
-    font-size: 14px;
+    font-size: 16px;
     color: #928c8c;
+    padding: 50px;
+    background-image: linear-gradient(bottom, rgb(252,252,252) 10%, rgb(242,242,242) 69%);
+    background-image: -o-linear-gradient(bottom, rgb(252,252,252) 10%, rgb(242,242,242) 69%);
+    background-image: -moz-linear-gradient(bottom, rgb(252,252,252) 10%, rgb(242,242,242) 69%);
+    background-image: -webkit-linear-gradient(bottom, rgb(252,252,252) 10%, rgb(242,242,242) 69%);
+    background-image: -ms-linear-gradient(bottom, rgb(252,252,252) 10%, rgb(242,242,242) 69%);
+    background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(0.1, rgb(252,252,252)),
+            color-stop(0.69, rgb(242,242,242))
+    );
 }
 
 a, a:hover, a:active, a:visited{
@@ -102,9 +117,10 @@ code{
 
 div#container{
     display: block;
-    width: 940px;
+    width: 100%;
+    max-width: 940px;
     border: 3px solid #e9e9e9;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 5px;
     background: #fff;
     -moz-border-radius: 10px;
@@ -121,14 +137,14 @@ header#main{
 section#sidebar{
     margin-bottom: 50px;
     float: left;
-    width: 185px;
+    width: 25%;
     padding: 0 15px;
 }
 
 section#content{
     margin-bottom: 50px;
     float: right;
-    width: 670px;
+    width: 75%;
     padding: 0 15px;
 }
 
@@ -144,7 +160,6 @@ footer#main{
 
 nav#main ul{
     color: #a26f6f;
-    font-size: 12px;
 }
 
 nav#main li{
@@ -172,10 +187,6 @@ section#sidebar .item{
 section#sidebar .item .title{
     font-weight: bold;
     margin-top: 0;
-}
-
-section#sidebar .item *{
-    font-size: 12px;
 }
 
 /* BREADCRUMB */
@@ -231,7 +242,7 @@ section#sidebar .item *{
     padding: 5px;
     text-decoration: none;
     display: block;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 footer#main a{
@@ -242,12 +253,11 @@ footer#main a{
 
 @media only screen and (max-width: 640px){
     
-    img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, video{
-        max-width: 97%;
+    body{
+        padding: 0;
     }
     
     div#container{
-        width: 100%;
         padding: 0;
         border: 0;
         -moz-border-radius: 0;
@@ -257,29 +267,29 @@ footer#main a{
     }
     
     header#main{
-        padding: 5%;
+        padding: 15px;
         margin: 0;
     }
     
     section#sidebar{
-        width: 90%;
-        padding: 5%;
+        width: 100%;
+        padding: 15px;
         clear: both;
         margin: 0;
     }
     
     section#content{
         float: left;
-        width: 90%;
-        padding: 5%;
+        width: 100%;
+        padding: 15px;
         clear: both;
         margin: 0;
     }
     
     footer{
         clear: both;
-        padding: 5%;
-        width: 90%;
+        padding: 15px;
+        width: 100%;
         margin: 0;
     }
 

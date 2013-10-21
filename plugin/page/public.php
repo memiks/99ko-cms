@@ -4,8 +4,8 @@ $id = (isset($urlParams[1])) ? $urlParams[1] : false;
 if(!$id) $pageItem = $page->createHomepage();
 elseif($pageItem = $page->create($id)){}
 else error404();
-$hideTitles = $runPlugin->getConfigVal('hideTitles');
-$runPlugin->setMainTitle(($pageItem->getMainTitle() != '') ? $pageItem->getMainTitle() : $pageItem->getName());
+if($runPlugin->getConfigVal('hideTitles')) $runPlugin->setMainTitle('');
+else $runPlugin->setMainTitle(($pageItem->getMainTitle() != '') ? $pageItem->getMainTitle() : $pageItem->getName());
 if($pageItem->getMetaDescriptionTag() != '') $runPlugin->setMetaDescriptionTag($pageItem->getMetaDescriptionTag());
 elseif($pageItem->getMetaDescriptionTag() == '' && $pageItem->getIsHomepage() && $runPlugin->getIsDefaultPlugin()) $runPlugin->setMetaDescriptionTag($coreConf['siteDescription']);
 $pageTitleTag = $pageItem->getName();

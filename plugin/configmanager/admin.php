@@ -41,6 +41,7 @@ switch(ACTION){
 			'defaultPlugin' => $_POST['defaultPlugin'],
 			'urlRewriting' => (isset($_POST['urlRewriting'])) ? '1' : '0',
 			'siteLang' => $_POST['lang'],
+			'hideTitles' => (isset($_POST['hideTitles'])) ? '1' : '0',
 		);
 		if(trim($_POST['adminPwd']) != ''){
 			if(trim($_POST['adminPwd']) == trim($_POST['adminPwd2'])) {

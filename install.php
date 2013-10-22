@@ -44,6 +44,7 @@ $config = array(
 	'defaultPlugin' => 'page',
 	'urlRewriting' => '0',
 	'siteLang' => 'fr',
+	'hideTitles' => '0',
 );
 if(!@file_put_contents(ROOT.'data/config.txt', json_encode($config)) ||	!@chmod('data/config.txt', 0666)) $error = true;
 foreach($pluginsManager->getPlugins() as $plugin){

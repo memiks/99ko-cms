@@ -22,7 +22,8 @@
 		    <?php echo $v['authorEmail']; ?><br />
 		    <a href="<?php echo $v['authorWebsite']; ?>" target="_blank"><?php echo $v['authorWebsite']; ?></a>
 	    </span><br />
-	    <?php } ?>
+	    <?php } ?><br />
+	    <input <?php if($config['hideTitles']){ ?>checked<?php } ?> type="checkbox" name="hideTitles" /> <?php echo lang("Hide pages titles"); ?>
     </p>
     <p><label><?php echo lang("Default plugin"); ?></label><br />
     <select name="defaultPlugin">

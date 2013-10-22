@@ -36,7 +36,7 @@ define('PAGE_DATAPATH', ROOT.'data/plugin/page/');
 $page = new page();
 
 foreach($page->getItems() as $k=>$pageItem) if(!$pageItem->getIsHidden()){
-	$temp = ($coreConf['defaultPlugin'] == 'page' && $pageItem->getIsHomepage()) ? $coreConf['siteUrl'] : rewriteUrl('page', array('name' => $pageItem->getName(), 'id' => $pageItem->getId()));
+	$temp = (getCoreConf('defaultPlugin') == 'page' && $pageItem->getIsHomepage()) ? getCoreConf('siteUrl') : rewriteUrl('page', array('name' => $pageItem->getName(), 'id' => $pageItem->getId()));
 	$pluginsManager->getPlugin('page')->addToNavigation($pageItem->getName(), $temp);
 }
 

@@ -41,9 +41,9 @@ $langs = listLangs();
 $lang = array();
 // On charge la langue du core
 $lang = utilReadJsonFile(ROOT.'common/lang/' .getCoreConf('siteLang'). '.json');
-if(file_exists(ROOT.'theme/' .$coreConf['theme']. '/lang/' .getCoreConf('siteLang'). '.json')) $lang = array_merge($lang, utilReadJsonFile(ROOT.'theme/' .$coreConf['theme']. '/lang/' .getCoreConf('siteLang'). '.json'));
+if(file_exists(ROOT.'theme/' .getCoreConf('theme'). '/lang/' .getCoreConf('siteLang'). '.json')) $lang = array_merge($lang, utilReadJsonFile(ROOT.'theme/' .getCoreConf('theme'). '/lang/' .getCoreConf('siteLang'). '.json'));
 //constantes
-define('DEFAULT_PLUGIN', $coreConf['defaultPlugin']);
+define('DEFAULT_PLUGIN', getCoreConf('defaultPlugin'));
 define('PLUGIN', ((isset($_GET['p'])) ? $_GET['p'] : DEFAULT_PLUGIN)); // inutile : voir $runPlugin
 // fix magic quotes
 utilSetMagicQuotesOff();

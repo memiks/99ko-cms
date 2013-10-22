@@ -17,5 +17,5 @@ if($runPlugin->getIsDefaultPlugin() && $pageItem->getIsHomepage()) $runPlugin->i
 $data['pageId'] = $pageItem->getId();
 $data['pageName'] = $pageItem->getName();
 $data['pageContent'] = $pageItem->getContent();
-$data['pageFile'] = ($pageItem->getFile()) ? ROOT.'theme/'.$coreConf['theme'].'/'.$pageItem->getFile() : false;
+$data['pageFile'] = ($pageItem->getFile()) ? ROOT.'theme/'.getCoreConf('theme').'/'.$pageItem->getFile() : false;
 ?>

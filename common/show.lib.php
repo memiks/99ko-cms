@@ -33,13 +33,13 @@ function showMsg($msg, $type) {
 ** @param : $format (format)
 */
 function showLinkTags($format = '<link href="[file]" rel="stylesheet" type="text/css" />'){
-	global $pluginsManager, $coreConf;
+	global $pluginsManager;
 	$data = '';
 	eval(callHook('startShowLinkTags'));
 	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
 		if($plugin->getConfigVal('activate') && $plugin->getCssFile()) $data.= str_replace('[file]', $plugin->getCssFile(), $format);
 	}
-	if(ROOT == './') $data.= str_replace('[file]', ROOT.'theme/'.$coreConf['theme'].'/styles.css', $format);
+	if(ROOT == './') $data.= str_replace('[file]', ROOT.'theme/'.getCoreConf('theme').'/styles.css', $format);
 	eval(callHook('endShowLinkTags'));
 	echo $data;
 }
@@ -49,13 +49,13 @@ function showLinkTags($format = '<link href="[file]" rel="stylesheet" type="text
 ** @param : $format (format)
 */
 function showScriptTags($format = '<script type="text/javascript" src="[file]"></script>') {
-	global $pluginsManager, $coreConf;
+	global $pluginsManager;
 	$data = '';
 	eval(callHook('startShowScriptTags'));
 	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
 		if($plugin->getConfigVal('activate') && $plugin->getJsFile()) $data.= str_replace('[file]', $plugin->getJsFile(), $format);
 	}
-	if(ROOT == './') $data.= str_replace('[file]', ROOT.'theme/'.$coreConf['theme'].'/scripts.js', $format);
+	if(ROOT == './') $data.= str_replace('[file]', ROOT.'theme/'.getCoreConf('theme').'/scripts.js', $format);
 	eval(callHook('endShowScriptTags'));
 	echo $data;
 }
@@ -118,9 +118,9 @@ function showMetaDescriptionTag() {
 ** Affiche le titre H1
 */
 function showMainTitle($format = '<h1>[mainTitle]</h1>') {
-	global $runPlugin, $coreConf;
+	global $runPlugin;
 	eval(callHook('startShowMainTitle'));
-	if($coreConf['hideTitles'] == 0 && $runPlugin->getMainTitle() != ''){
+	if(getCoreConf('hideTitles') == 0 && $runPlugin->getMainTitle() != ''){
 		$data = $format;
 		$data = str_replace('[mainTitle]', $runPlugin->getMainTitle(), $data);
 	}
@@ -133,9 +133,8 @@ function showMainTitle($format = '<h1>[mainTitle]</h1>') {
 ** Affiche le nom du site
 */
 function showSiteName() {
-	global $coreConf;
 	eval(callHook('startShowSiteName'));
-	$data = $coreConf['siteName'];
+	$data = getCoreConf('siteName');
 	eval(callHook('endShowSiteName'));
 	echo $data;
 }
@@ -144,9 +143,8 @@ function showSiteName() {
 ** Affiche la description du site
 */
 function showSiteDescription() {
-	global $coreConf;
 	eval(callHook('startShowSiteDescription'));
-	$data = $coreConf['siteDescription'];
+	$data = getCoreConf('siteDescription');
 	eval(callHook('endShowSiteDescription'));
 	echo $data;
 }
@@ -155,9 +153,8 @@ function showSiteDescription() {
 ** Affiche l'url du site
 */
 function showSiteUrl() {
-	global $coreConf;
 	eval(callHook('startShowSiteUrl'));
-	$data = $coreConf['siteUrl'];
+	$data = getCoreConf('siteUrl');
 	eval(callHook('endShowSiteUrl'));
 	echo $data;
 }
@@ -166,9 +163,8 @@ function showSiteUrl() {
 ** Affiche la langue du site
 */
 function showSiteLang() {
-	global $coreConf;
 	eval(callHook('startShowSiteLang'));
-	$data = $coreConf['siteLang'];
+	$data = getCoreConf('siteLang');
 	eval(callHook('endShowSiteLang'));
 	echo $data;
 }
@@ -209,11 +205,11 @@ function showMainNavigation($format = '<li><a target="[targetAttribut]" href="[t
 ** Affiche le fil d'Ariane
 */
 function showBreadcrumb() {
-	global $runPlugin, $coreConf;
+	global $runPlugin;
 	$data = '';
 	eval(callHook('startShowBreadcrumb'));
 	if(count($runPlugin->getBreadcrumb()) > 0) {
-		$data.= '<p id="breadcrumb"><a href="'.$coreConf['siteUrl'].'">Accueil</a>';
+		$data.= '<p id="breadcrumb"><a href="'.getCoreConf('siteUrl').'">Accueil</a>';
 		foreach($runPlugin->getBreadcrumb() as $item) $data.= ' >> <a href="'.$item['target'].'">'.$item['label'].'</a>';
 		$data.= '</p>';
 	}
@@ -225,12 +221,12 @@ function showBreadcrumb() {
 ** Affiche le nom du thème
 */
 function showTheme($format = '<a target="_blank" href="[authorWebsite]">[name]</a>') {
-	global $themes, $coreConf;
+	global $themes;
 	eval(callHook('startShowTheme'));
 	$data = $format;
-	$data = str_replace('[authorWebsite]', $themes[$coreConf['theme']]['authorWebsite'], $data);
-	$data = str_replace('[author]', $themes[$coreConf['theme']]['author'], $data);
-	$data = str_replace('[name]', $themes[$coreConf['theme']]['name'], $data);
+	$data = str_replace('[authorWebsite]', $themes[getCoreConf('theme')]['authorWebsite'], $data);
+	$data = str_replace('[author]', $themes[getCoreConf('theme')]['author'], $data);
+	$data = str_replace('[name]', $themes[getCoreConf('theme')]['name'], $data);
 	eval(callHook('endShowTheme'));
 	echo $data;
 }

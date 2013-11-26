@@ -16,7 +16,5 @@
                 <p id="siteName"><a title="<?php showSiteDescription(); ?>" href="<?php showSiteUrl(); ?>"><?php showSiteName(); ?></a></p>
             </header>
             <section id="content" class="<?php showPluginId(); ?>">
-		<header>
-			<?php showBreadcrumb(); ?>
-			<h1><?php showMainTitle(); ?></h1>
-		</header>
+		<?php showBreadcrumb(); ?>
+		<?php showMainTitle(); ?>

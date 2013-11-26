@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
 	<title><?php showTitleTag(); ?></title>
         <meta name="description" content="<?php showMetaDescriptionTag(); ?>" />
-	<meta name="viewport" content="initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 	<base href="<?php showSiteUrl(); ?>/" />
 	<?php showLinkTags(); ?>
 	<?php showScriptTags(); ?>
@@ -12,7 +12,7 @@
     </head>
     <body>
         <div id="container">
-            <header id="main">
+            <header id="header">
                 <p id="siteName"><a title="<?php showSiteDescription(); ?>" href="<?php showSiteUrl(); ?>"><?php showSiteName(); ?></a></p>
             </header>
             <section id="content" class="<?php showPluginId(); ?>">

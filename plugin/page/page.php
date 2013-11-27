@@ -16,10 +16,19 @@ function pageInstall(){
 	$page = new page();
 	if(count($page->getItems()) < 1){
 		$pageItem = new pageItem();
-		$pageItem->setName('Page 1');
+		$pageItem->setName('Accueil');
 		$pageItem->setPosition(1);
 		$pageItem->setIsHomepage(1);
-		$pageItem->setContent('<p>Atque, ut Tullius ait, ut etiam ferae fame monitae plerumque ad eum locum ubi aliquando pastae sunt revertuntur, ita homines instar turbinis degressi montibus impeditis et arduis loca petivere mari confinia, per quae viis latebrosis sese convallibusque occultantes cum appeterent noctes luna etiam tum cornuta ideoque nondum solido splendore fulgente nauticos observabant quos cum in somnum sentirent effusos per ancoralia, quadrupedo gradu repentes seseque suspensis passibus iniectantes in scaphas eisdem sensim nihil opinantibus adsistebant et incendente aviditate saevitiam ne cedentium quidem ulli parcendo obtruncatis omnibus merces opimas velut viles nullis repugnantibus avertebant. haecque non diu sunt perpetrata.</p>');
+		$pageItem->setContent("<p style='text-align:center'><img alt='99ko' src='admin/images/logo.png' /></p><p>Merci d'avoir téléchargé 99ko. L'installation s'est déroulée avec succès.<br>Vous pouvez maintenant vous connecter à l'administration en utilisant le lien en bas de page et les informations de connexion qui vous ont été communiqués lors de l'installation.</p><p>N'oubliez pas de modifier vos informations de connexion et de supprimer le fichier install de votre FTP.</p>");
+		$pageItem->setIsHidden(0);
+		$pageItem->setFile('');
+		$page->save($pageItem);
+		$page = new page();
+		$pageItem = new pageItem();
+		$pageItem->setName('Page 2');
+		$pageItem->setPosition(2);
+		$pageItem->setIsHomepage(0);
+		$pageItem->setContent("<p>Iamque lituis cladium concrepantibus internarum non celate ut antea turbidum saeviebat ingenium a veri consideratione detortum et nullo inpositorum vel conpositorum fidem sollemniter inquirente nec discernente a societate noxiorum insontes velut exturbatum e iudiciis fas omne discessit, et causarum legitima silente defensione carnifex rapinarum sequester et obductio capitum et bonorum ubique multatio versabatur per orientales provincias, quas recensere puto nunc oportunum absque Mesopotamia digesta, cum bella Parthica dicerentur, et Aegypto, quam necessario aliud reieci ad tempus.</p><p>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.</p>");
 		$pageItem->setIsHidden(0);
 		$pageItem->setFile('');
 		$page->save($pageItem);

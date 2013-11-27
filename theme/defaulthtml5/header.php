@@ -13,8 +13,11 @@
     <body>
         <div id="container">
             <header id="header">
-                <p id="siteName"><a title="<?php showSiteDescription(); ?>" href="<?php showSiteUrl(); ?>"><?php showSiteName(); ?></a></p>
-            </header>
-            <section id="content" class="<?php showPluginId(); ?>">
-		<?php showBreadcrumb(); ?>
-		<?php showMainTitle(); ?>
+		<div id="header_content">
+		    <p id="siteName"><a title="<?php showSiteDescription(); ?>" href="<?php showSiteUrl(); ?>"><?php showSiteName(); ?></a></p>
+		</div>
+	    </header>
+	    <div id="body">
+		<section id="content" class="<?php showPluginId(); ?>">
+		    <?php showBreadcrumb(); ?>
+		    <?php showMainTitle(); ?>

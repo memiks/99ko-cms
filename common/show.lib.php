@@ -39,7 +39,7 @@ function showLinkTags($format = '<link href="[file]" rel="stylesheet" type="text
 	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
 		if($plugin->getConfigVal('activate') && $plugin->getCssFile()) $data.= str_replace('[file]', $plugin->getCssFile(), $format);
 	}
-	if(ROOT == './') $data.= str_replace('[file]', ROOT.'theme/'.getCoreConf('theme').'/styles.css', $format);
+	if(ROOT == './') $data.= str_replace('[file]', getCoreConf('siteUrl').'/'.'theme/'.getCoreConf('theme').'/styles.css', $format);
 	eval(callHook('endShowLinkTags'));
 	echo $data;
 }
@@ -55,7 +55,7 @@ function showScriptTags($format = '<script type="text/javascript" src="[file]"><
 	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
 		if($plugin->getConfigVal('activate') && $plugin->getJsFile()) $data.= str_replace('[file]', $plugin->getJsFile(), $format);
 	}
-	if(ROOT == './') $data.= str_replace('[file]', ROOT.'theme/'.getCoreConf('theme').'/scripts.js', $format);
+	if(ROOT == './') $data.= str_replace('[file]', getCoreConf('siteUrl').'/'.'theme/'.getCoreConf('theme').'/scripts.js', $format);
 	eval(callHook('endShowScriptTags'));
 	echo $data;
 }

@@ -23,7 +23,7 @@ function extrasStartShowLinkTags(){
 
 function extrasStartShowScriptTags(){
     $temp = "\$data.= str_replace('[file]', ROOT.'plugin/extras/other/html5.js', \$format);";
-    $temp.= "\$data.= str_replace('[file]', 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', \$format);";
+    $temp.= "\$data.= str_replace('[file]', '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', \$format);";
     $temp.= "\$data.= str_replace('[file]', ROOT.'plugin/extras/other/tinybox2/packed.js', \$format);";
     return $temp;
 }
